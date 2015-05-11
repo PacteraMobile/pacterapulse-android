@@ -1,0 +1,754 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C28F54C1AE8D5B700457923 /* PlotItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C28F5491AE8D5B700457923 /* PlotItem.m */; };
+		3C28F5641AE8DC5C00457923 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C28F5631AE8DC5C00457923 /* Accelerate.framework */; };
+		3C7AF0121AE9EBC600106662 /* PPLSummaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7AF0111AE9EBC600106662 /* PPLSummaryData.m */; };
+		6CC95B8C1AE883C10036447F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CC95B8A1AE883C10036447F /* Main.storyboard */; };
+		6CC95B911AE883C10036447F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CC95B8F1AE883C10036447F /* LaunchScreen.xib */; };
+		6CC95BEF1AEE05C60036447F /* PPLSummaryBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC95BEE1AEE05C60036447F /* PPLSummaryBarViewController.m */; };
+		6CC95BF31AEE05E80036447F /* PPLColoredBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC95BF21AEE05E80036447F /* PPLColoredBarChart.m */; };
+		700DE18B1AEDC1AE00CBF19F /* PPLVoteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 700DE18A1AEDC1AE00CBF19F /* PPLVoteData.m */; };
+		709441761AF04C6E006C30EB /* PPLVoteRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 709441751AF04C6E006C30EB /* PPLVoteRow.m */; };
+		70C5FDB61AE8B3C0003C006C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDB01AE8B3C0003C006C /* AppDelegate.m */; };
+		70C5FDB81AE8B3C0003C006C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDB21AE8B3C0003C006C /* main.m */; };
+		70C5FDBC1AE8B42F003C006C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C5FDBB1AE8B42F003C006C /* Images.xcassets */; };
+		70C5FDC41AE8B59B003C006C /* PPLLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDBF1AE8B59B003C006C /* PPLLaunchTests.m */; };
+		70C5FDC81AE8B620003C006C /* PPLVoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDC71AE8B620003C006C /* PPLVoteTests.m */; };
+		70C5FDCA1AE8B62B003C006C /* PPLSummaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDC91AE8B62B003C006C /* PPLSummaryTests.m */; };
+		70C5FDD71AE8B892003C006C /* PPLLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDD61AE8B892003C006C /* PPLLaunchViewController.m */; };
+		70C5FDDD1AE8B8BE003C006C /* PPLVoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDDC1AE8B8BE003C006C /* PPLVoteViewController.m */; };
+		70C5FDE01AE8BA87003C006C /* PPLVoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C5FDDF1AE8BA87003C006C /* PPLVoteTableViewCell.m */; };
+		70F49CB11AE9D49600815ED9 /* PPLNetworkingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F49CB01AE9D49600815ED9 /* PPLNetworkingHelper.m */; };
+		70F49CB41AE9D8D000815ED9 /* PPLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F49CB31AE9D8D000815ED9 /* PPLUtils.m */; };
+		9764110E91ACF6BDB1E8A114 /* libPods-PacteraPulse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F371AA3DE3BA2C20878160A4 /* libPods-PacteraPulse.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6CC95B971AE883C10036447F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CC95B751AE883C10036447F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CC95B7C1AE883C10036447F;
+			remoteInfo = PacteraPulse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3C28F5481AE8D5B700457923 /* PlotItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotItem.h; sourceTree = "<group>"; };
+		3C28F5491AE8D5B700457923 /* PlotItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotItem.m; sourceTree = "<group>"; };
+		3C28F5631AE8DC5C00457923 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		3C7AF0101AE9EBC600106662 /* PPLSummaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLSummaryData.h; sourceTree = "<group>"; };
+		3C7AF0111AE9EBC600106662 /* PPLSummaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLSummaryData.m; sourceTree = "<group>"; };
+		3CD1A45D1AEDF772006A8875 /* libPods-PacteraPulse-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PacteraPulse-AFNetworking.a"; path = "Pods/../build/Debug-iphoneos/libPods-PacteraPulse-AFNetworking.a"; sourceTree = "<group>"; };
+		3CD1A45F1AEDF776006A8875 /* libPods-PacteraPulse-CorePlot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PacteraPulse-CorePlot.a"; path = "Pods/../build/Debug-iphoneos/libPods-PacteraPulse-CorePlot.a"; sourceTree = "<group>"; };
+		3CD1A4611AEDF77D006A8875 /* libPods-PacteraPulse-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-PacteraPulse-MBProgressHUD.a"; path = "Pods/../build/Debug-iphoneos/libPods-PacteraPulse-MBProgressHUD.a"; sourceTree = "<group>"; };
+		6CC95B7D1AE883C10036447F /* PacteraPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PacteraPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CC95B8B1AE883C10036447F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6CC95B901AE883C10036447F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6CC95B961AE883C10036447F /* PacteraPulseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PacteraPulseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CC95B9B1AE883C10036447F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CC95BED1AEE05C60036447F /* PPLSummaryBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLSummaryBarViewController.h; sourceTree = "<group>"; };
+		6CC95BEE1AEE05C60036447F /* PPLSummaryBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLSummaryBarViewController.m; sourceTree = "<group>"; };
+		6CC95BF01AEE05DA0036447F /* PPLSummaryGenerals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLSummaryGenerals.h; sourceTree = "<group>"; };
+		6CC95BF11AEE05E80036447F /* PPLColoredBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLColoredBarChart.h; sourceTree = "<group>"; };
+		6CC95BF21AEE05E80036447F /* PPLColoredBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLColoredBarChart.m; sourceTree = "<group>"; };
+		700DE1891AEDC1AE00CBF19F /* PPLVoteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLVoteData.h; sourceTree = "<group>"; };
+		700DE18A1AEDC1AE00CBF19F /* PPLVoteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLVoteData.m; sourceTree = "<group>"; };
+		709441741AF04C6E006C30EB /* PPLVoteRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLVoteRow.h; sourceTree = "<group>"; };
+		709441751AF04C6E006C30EB /* PPLVoteRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLVoteRow.m; sourceTree = "<group>"; };
+		70C5FDAF1AE8B3C0003C006C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		70C5FDB01AE8B3C0003C006C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		70C5FDB11AE8B3C0003C006C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70C5FDB21AE8B3C0003C006C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		70C5FDBB1AE8B42F003C006C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		70C5FDBF1AE8B59B003C006C /* PPLLaunchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLLaunchTests.m; sourceTree = "<group>"; };
+		70C5FDC71AE8B620003C006C /* PPLVoteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLVoteTests.m; sourceTree = "<group>"; };
+		70C5FDC91AE8B62B003C006C /* PPLSummaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLSummaryTests.m; sourceTree = "<group>"; };
+		70C5FDD51AE8B892003C006C /* PPLLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLLaunchViewController.h; sourceTree = "<group>"; };
+		70C5FDD61AE8B892003C006C /* PPLLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLLaunchViewController.m; sourceTree = "<group>"; };
+		70C5FDDB1AE8B8BE003C006C /* PPLVoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLVoteViewController.h; sourceTree = "<group>"; };
+		70C5FDDC1AE8B8BE003C006C /* PPLVoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLVoteViewController.m; sourceTree = "<group>"; };
+		70C5FDDE1AE8BA87003C006C /* PPLVoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLVoteTableViewCell.h; sourceTree = "<group>"; };
+		70C5FDDF1AE8BA87003C006C /* PPLVoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLVoteTableViewCell.m; sourceTree = "<group>"; };
+		70F49CAF1AE9D49600815ED9 /* PPLNetworkingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLNetworkingHelper.h; sourceTree = "<group>"; };
+		70F49CB01AE9D49600815ED9 /* PPLNetworkingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLNetworkingHelper.m; sourceTree = "<group>"; };
+		70F49CB21AE9D8D000815ED9 /* PPLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLUtils.h; sourceTree = "<group>"; };
+		70F49CB31AE9D8D000815ED9 /* PPLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPLUtils.m; sourceTree = "<group>"; };
+		E1EDC960493E970912F1755B /* Pods-PacteraPulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacteraPulse.release.xcconfig"; path = "Pods/Target Support Files/Pods-PacteraPulse/Pods-PacteraPulse.release.xcconfig"; sourceTree = "<group>"; };
+		E5DD1173EDFF0C0D7DE09D19 /* Pods-PacteraPulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacteraPulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PacteraPulse/Pods-PacteraPulse.debug.xcconfig"; sourceTree = "<group>"; };
+		F371AA3DE3BA2C20878160A4 /* libPods-PacteraPulse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PacteraPulse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6CC95B7A1AE883C10036447F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C28F5641AE8DC5C00457923 /* Accelerate.framework in Frameworks */,
+				9764110E91ACF6BDB1E8A114 /* libPods-PacteraPulse.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CC95B931AE883C10036447F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6CC95B741AE883C10036447F = {
+			isa = PBXGroup;
+			children = (
+				6CC95B7F1AE883C10036447F /* PacteraPulse */,
+				6CC95B991AE883C10036447F /* PacteraPulseTests */,
+				6CC95B7E1AE883C10036447F /* Products */,
+				B6A7EEE0AFE90D71366AAFFB /* Pods */,
+				90EEEA7B195BF10F37665F50 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6CC95B7E1AE883C10036447F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CC95B7D1AE883C10036447F /* PacteraPulse.app */,
+				6CC95B961AE883C10036447F /* PacteraPulseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CC95B7F1AE883C10036447F /* PacteraPulse */ = {
+			isa = PBXGroup;
+			children = (
+				70F49CAC1AE9D47C00815ED9 /* Helpers */,
+				70C5FDB91AE8B42F003C006C /* Resources */,
+				70C5FDAE1AE8B3C0003C006C /* Others */,
+				70C5FDB31AE8B3C0003C006C /* PPLLaunch */,
+				70C5FDB41AE8B3C0003C006C /* PPLSummary */,
+				70C5FDB51AE8B3C0003C006C /* PPLVote */,
+			);
+			path = PacteraPulse;
+			sourceTree = "<group>";
+		};
+		6CC95B991AE883C10036447F /* PacteraPulseTests */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDBE1AE8B59B003C006C /* PPLLaunchTests */,
+				70C5FDC01AE8B59B003C006C /* PPLSummaryTests */,
+				70C5FDC21AE8B59B003C006C /* PPLVoteTests */,
+				6CC95B9A1AE883C10036447F /* Supporting Files */,
+			);
+			path = PacteraPulseTests;
+			sourceTree = "<group>";
+		};
+		6CC95B9A1AE883C10036447F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CC95B9B1AE883C10036447F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		70C5FDAE1AE8B3C0003C006C /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				6CC95B8F1AE883C10036447F /* LaunchScreen.xib */,
+				6CC95B8A1AE883C10036447F /* Main.storyboard */,
+				70C5FDAF1AE8B3C0003C006C /* AppDelegate.h */,
+				70C5FDB01AE8B3C0003C006C /* AppDelegate.m */,
+				70C5FDB11AE8B3C0003C006C /* Info.plist */,
+				70C5FDB21AE8B3C0003C006C /* main.m */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		70C5FDB31AE8B3C0003C006C /* PPLLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDCC1AE8B6E1003C006C /* Controller */,
+			);
+			path = PPLLaunch;
+			sourceTree = "<group>";
+		};
+		70C5FDB41AE8B3C0003C006C /* PPLSummary */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDCF1AE8B6ED003C006C /* Controller */,
+				70C5FDD01AE8B6ED003C006C /* Model */,
+				70C5FDD11AE8B6ED003C006C /* View */,
+			);
+			path = PPLSummary;
+			sourceTree = "<group>";
+		};
+		70C5FDB51AE8B3C0003C006C /* PPLVote */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDD21AE8B6F9003C006C /* Controller */,
+				70C5FDD31AE8B6F9003C006C /* Model */,
+				70C5FDD41AE8B6F9003C006C /* View */,
+			);
+			path = PPLVote;
+			sourceTree = "<group>";
+		};
+		70C5FDB91AE8B42F003C006C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDBA1AE8B42F003C006C /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		70C5FDBA1AE8B42F003C006C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDBB1AE8B42F003C006C /* Images.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		70C5FDBE1AE8B59B003C006C /* PPLLaunchTests */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDBF1AE8B59B003C006C /* PPLLaunchTests.m */,
+			);
+			path = PPLLaunchTests;
+			sourceTree = "<group>";
+		};
+		70C5FDC01AE8B59B003C006C /* PPLSummaryTests */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDC91AE8B62B003C006C /* PPLSummaryTests.m */,
+			);
+			path = PPLSummaryTests;
+			sourceTree = "<group>";
+		};
+		70C5FDC21AE8B59B003C006C /* PPLVoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDC71AE8B620003C006C /* PPLVoteTests.m */,
+			);
+			path = PPLVoteTests;
+			sourceTree = "<group>";
+		};
+		70C5FDCC1AE8B6E1003C006C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDD51AE8B892003C006C /* PPLLaunchViewController.h */,
+				70C5FDD61AE8B892003C006C /* PPLLaunchViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		70C5FDCF1AE8B6ED003C006C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6CC95BED1AEE05C60036447F /* PPLSummaryBarViewController.h */,
+				6CC95BEE1AEE05C60036447F /* PPLSummaryBarViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		70C5FDD01AE8B6ED003C006C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6CC95BF01AEE05DA0036447F /* PPLSummaryGenerals.h */,
+				3C7AF0101AE9EBC600106662 /* PPLSummaryData.h */,
+				3C7AF0111AE9EBC600106662 /* PPLSummaryData.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		70C5FDD11AE8B6ED003C006C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6CC95BF11AEE05E80036447F /* PPLColoredBarChart.h */,
+				6CC95BF21AEE05E80036447F /* PPLColoredBarChart.m */,
+				3C28F5481AE8D5B700457923 /* PlotItem.h */,
+				3C28F5491AE8D5B700457923 /* PlotItem.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		70C5FDD21AE8B6F9003C006C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDDB1AE8B8BE003C006C /* PPLVoteViewController.h */,
+				70C5FDDC1AE8B8BE003C006C /* PPLVoteViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		70C5FDD31AE8B6F9003C006C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				700DE1891AEDC1AE00CBF19F /* PPLVoteData.h */,
+				700DE18A1AEDC1AE00CBF19F /* PPLVoteData.m */,
+				709441741AF04C6E006C30EB /* PPLVoteRow.h */,
+				709441751AF04C6E006C30EB /* PPLVoteRow.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		70C5FDD41AE8B6F9003C006C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70C5FDDE1AE8BA87003C006C /* PPLVoteTableViewCell.h */,
+				70C5FDDF1AE8BA87003C006C /* PPLVoteTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		70F49CAC1AE9D47C00815ED9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				70F49CAF1AE9D49600815ED9 /* PPLNetworkingHelper.h */,
+				70F49CB01AE9D49600815ED9 /* PPLNetworkingHelper.m */,
+				70F49CB21AE9D8D000815ED9 /* PPLUtils.h */,
+				70F49CB31AE9D8D000815ED9 /* PPLUtils.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		90EEEA7B195BF10F37665F50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CD1A4611AEDF77D006A8875 /* libPods-PacteraPulse-MBProgressHUD.a */,
+				3CD1A45F1AEDF776006A8875 /* libPods-PacteraPulse-CorePlot.a */,
+				3CD1A45D1AEDF772006A8875 /* libPods-PacteraPulse-AFNetworking.a */,
+				3C28F5631AE8DC5C00457923 /* Accelerate.framework */,
+				F371AA3DE3BA2C20878160A4 /* libPods-PacteraPulse.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6A7EEE0AFE90D71366AAFFB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E5DD1173EDFF0C0D7DE09D19 /* Pods-PacteraPulse.debug.xcconfig */,
+				E1EDC960493E970912F1755B /* Pods-PacteraPulse.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6CC95B7C1AE883C10036447F /* PacteraPulse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CC95BA01AE883C10036447F /* Build configuration list for PBXNativeTarget "PacteraPulse" */;
+			buildPhases = (
+				1DF9E6DBBD69BCA130C26D84 /* Check Pods Manifest.lock */,
+				6CC95B791AE883C10036447F /* Sources */,
+				6CC95B7A1AE883C10036447F /* Frameworks */,
+				6CC95B7B1AE883C10036447F /* Resources */,
+				BFCA356B762A451432E49417 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PacteraPulse;
+			productName = PacteraPulse;
+			productReference = 6CC95B7D1AE883C10036447F /* PacteraPulse.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6CC95B951AE883C10036447F /* PacteraPulseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CC95BA31AE883C10036447F /* Build configuration list for PBXNativeTarget "PacteraPulseTests" */;
+			buildPhases = (
+				6CC95B921AE883C10036447F /* Sources */,
+				6CC95B931AE883C10036447F /* Frameworks */,
+				6CC95B941AE883C10036447F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CC95B981AE883C10036447F /* PBXTargetDependency */,
+			);
+			name = PacteraPulseTests;
+			productName = PacteraPulseTests;
+			productReference = 6CC95B961AE883C10036447F /* PacteraPulseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6CC95B751AE883C10036447F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Pactera;
+				TargetAttributes = {
+					6CC95B7C1AE883C10036447F = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 328F5U833R;
+					};
+					6CC95B951AE883C10036447F = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 328F5U833R;
+						TestTargetID = 6CC95B7C1AE883C10036447F;
+					};
+				};
+			};
+			buildConfigurationList = 6CC95B781AE883C10036447F /* Build configuration list for PBXProject "PacteraPulse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6CC95B741AE883C10036447F;
+			productRefGroup = 6CC95B7E1AE883C10036447F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6CC95B7C1AE883C10036447F /* PacteraPulse */,
+				6CC95B951AE883C10036447F /* PacteraPulseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6CC95B7B1AE883C10036447F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70C5FDBC1AE8B42F003C006C /* Images.xcassets in Resources */,
+				6CC95B8C1AE883C10036447F /* Main.storyboard in Resources */,
+				6CC95B911AE883C10036447F /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CC95B941AE883C10036447F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DF9E6DBBD69BCA130C26D84 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BFCA356B762A451432E49417 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PacteraPulse/Pods-PacteraPulse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CC95B791AE883C10036447F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CC95BEF1AEE05C60036447F /* PPLSummaryBarViewController.m in Sources */,
+				700DE18B1AEDC1AE00CBF19F /* PPLVoteData.m in Sources */,
+				70C5FDE01AE8BA87003C006C /* PPLVoteTableViewCell.m in Sources */,
+				3C28F54C1AE8D5B700457923 /* PlotItem.m in Sources */,
+				70F49CB41AE9D8D000815ED9 /* PPLUtils.m in Sources */,
+				70F49CB11AE9D49600815ED9 /* PPLNetworkingHelper.m in Sources */,
+				70C5FDB81AE8B3C0003C006C /* main.m in Sources */,
+				70C5FDD71AE8B892003C006C /* PPLLaunchViewController.m in Sources */,
+				70C5FDDD1AE8B8BE003C006C /* PPLVoteViewController.m in Sources */,
+				709441761AF04C6E006C30EB /* PPLVoteRow.m in Sources */,
+				3C7AF0121AE9EBC600106662 /* PPLSummaryData.m in Sources */,
+				70C5FDB61AE8B3C0003C006C /* AppDelegate.m in Sources */,
+				6CC95BF31AEE05E80036447F /* PPLColoredBarChart.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CC95B921AE883C10036447F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70C5FDC81AE8B620003C006C /* PPLVoteTests.m in Sources */,
+				70C5FDCA1AE8B62B003C006C /* PPLSummaryTests.m in Sources */,
+				70C5FDC41AE8B59B003C006C /* PPLLaunchTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CC95B981AE883C10036447F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CC95B7C1AE883C10036447F /* PacteraPulse */;
+			targetProxy = 6CC95B971AE883C10036447F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6CC95B8A1AE883C10036447F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CC95B8B1AE883C10036447F /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		6CC95B8F1AE883C10036447F /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CC95B901AE883C10036447F /* Base */,
+			);
+			name = LaunchScreen.xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6CC95B9E1AE883C10036447F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/PacteraPulse/ExternalLibraries/CorePlot/framework/**",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "44eb12fa-d1b3-4f55-99a0-41581c53d699";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6CC95B9F1AE883C10036447F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${PROJECT_DIR}/PacteraPulse/ExternalLibraries/CorePlot/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "44eb12fa-d1b3-4f55-99a0-41581c53d699";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6CC95BA11AE883C10036447F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5DD1173EDFF0C0D7DE09D19 /* Pods-PacteraPulse.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/PacteraPulse/Others/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		6CC95BA21AE883C10036447F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1EDC960493E970912F1755B /* Pods-PacteraPulse.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/PacteraPulse/Others/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		6CC95BA41AE883C10036447F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PacteraPulseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PacteraPulse.app/PacteraPulse";
+			};
+			name = Debug;
+		};
+		6CC95BA51AE883C10036447F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PacteraPulseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PacteraPulse.app/PacteraPulse";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CC95B781AE883C10036447F /* Build configuration list for PBXProject "PacteraPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CC95B9E1AE883C10036447F /* Debug */,
+				6CC95B9F1AE883C10036447F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CC95BA01AE883C10036447F /* Build configuration list for PBXNativeTarget "PacteraPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CC95BA11AE883C10036447F /* Debug */,
+				6CC95BA21AE883C10036447F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CC95BA31AE883C10036447F /* Build configuration list for PBXNativeTarget "PacteraPulseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CC95BA41AE883C10036447F /* Debug */,
+				6CC95BA51AE883C10036447F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6CC95B751AE883C10036447F /* Project object */;
+}

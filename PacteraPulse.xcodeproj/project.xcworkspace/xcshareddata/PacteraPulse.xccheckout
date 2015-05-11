@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6D96C9FD-8644-404D-A094-BFC17805DC7E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PacteraPulse</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6E2A2292E2CBC05BE24D08992FF5C667F93BDDE1</key>
+		<string>ssh://adt.pactera.com.au:7999/pas/pacterapulseopensourceios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PacteraPulse/PacteraPulse.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6E2A2292E2CBC05BE24D08992FF5C667F93BDDE1</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://adt.pactera.com.au:7999/pas/pacterapulseopensourceios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6E2A2292E2CBC05BE24D08992FF5C667F93BDDE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6E2A2292E2CBC05BE24D08992FF5C667F93BDDE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pacterapulseopensourceios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
