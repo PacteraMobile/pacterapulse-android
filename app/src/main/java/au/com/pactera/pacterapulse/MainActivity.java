@@ -15,16 +15,15 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.pactera.pacterapulseopensourceandroid.R;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 import au.com.pactera.pacterapulse.fragment.ResultFragment;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
-
 import io.fabric.sdk.android.Fabric;
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 /**
  *
