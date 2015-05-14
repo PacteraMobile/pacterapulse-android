@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment;
 
 
 import android.app.Activity;
@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.pactera.pacterapulseopensourceandroid.R;
-import com.pactera.pacterapulseopensourceandroid.chart.EmotionBarChartView;
-import com.pactera.pacterapulseopensourceandroid.helper.NetworkHelper;
-import com.pactera.pacterapulseopensourceandroid.model.Emotions;
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.chart.EmotionBarChartView;
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.model.Emotions;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -125,58 +125,46 @@ public class ResultFragment extends Fragment
 
 	private void getResultData()
 	{
-		NetworkHelper.getResult("24hours", new JsonHttpResponseHandler()
-		{
+		NetworkHelper.getResult("24hours", new JsonHttpResponseHandler() {
 			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-			{
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				Log.d("Voting result", response.toString());
 				// show emotions
-				try
-				{
+				try {
 					// TODO: The following code needs to be changed to handle all possible error.
 					// It is OK at the moment we have the protocol to make sure all JSON object are exist.
 					Emotions emotions = new Emotions(response.getJSONArray("emotionVotes"));
-					setEmotionResult(emotions.getHappy(),emotions.getSoso(),emotions.getSad());
-				}
-				catch (JSONException e)
-				{
+					setEmotionResult(emotions.getHappy(), emotions.getSoso(), emotions.getSad());
+				} catch (JSONException e) {
 					Log.w("JSON Exception", e.getMessage());
-				}
-				catch (Exception e)
-				{
+				} catch (Exception e) {
 					Log.w("Exception", e.getMessage());
 				}
 				OnResultInteractionListener listener = mListener.get();
 				Activity act = mWeakActivity.get();
-				if (listener != null && act != null)
-				{
+				if (listener != null && act != null) {
 					listener.onResultInteraction(RESULT_SUCCESS);
 				}
 			}
 
 			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-			{
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
 				super.onFailure(statusCode, headers, throwable, errorResponse);
 				OnResultInteractionListener listener = mListener.get();
 				Activity act = mWeakActivity.get();
-				if (listener != null && act != null)
-				{
+				if (listener != null && act != null) {
 					Toast.makeText(act, "Network error!", Toast.LENGTH_SHORT).show();
 					listener.onResultInteraction(RESULT_FAILURE);
 				}
 			}
 
 			@Override
-			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-			{
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
 				OnResultInteractionListener listener = mListener.get();
 				Activity act = mWeakActivity.get();
-				if (listener != null && act != null)
-				{
+				if (listener != null && act != null) {
 					Toast.makeText(act, "Network error!", Toast.LENGTH_SHORT).show();
 					listener.onResultInteraction(RESULT_FAILURE);
 				}

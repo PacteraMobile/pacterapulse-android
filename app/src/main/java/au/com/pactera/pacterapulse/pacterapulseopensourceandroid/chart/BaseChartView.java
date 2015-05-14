@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.chart;
+package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.chart;
 
 import android.content.Context;
 import android.util.AttributeSet;

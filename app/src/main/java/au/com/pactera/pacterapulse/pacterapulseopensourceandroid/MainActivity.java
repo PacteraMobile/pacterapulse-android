@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid;
+package au.com.pactera.pacterapulse.pacterapulseopensourceandroid;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.pactera.pacterapulseopensourceandroid.fragment.EmotionFragment;
-import com.pactera.pacterapulseopensourceandroid.fragment.IntroductionFragment;
-import com.pactera.pacterapulseopensourceandroid.fragment.ResultFragment;
-import com.pactera.pacterapulseopensourceandroid.helper.NetworkHelper;
+import com.pactera.pacterapulseopensourceandroid.R;
+
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment.EmotionFragment;
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment.IntroductionFragment;
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment.ResultFragment;
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.helper.NetworkHelper;
 
 import io.fabric.sdk.android.Fabric;
 import org.apache.http.Header;

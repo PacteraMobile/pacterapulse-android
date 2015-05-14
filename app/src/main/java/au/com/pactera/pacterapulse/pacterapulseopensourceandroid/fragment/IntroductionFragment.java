@@ -1,11 +1,10 @@
-package com.pactera.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 

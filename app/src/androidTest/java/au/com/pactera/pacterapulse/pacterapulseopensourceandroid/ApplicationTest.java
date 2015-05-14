@@ -1,9 +1,10 @@
-package com.pactera.pacterapulseopensourceandroid;
+package au.com.pactera.pacterapulse.pacterapulseopensourceandroid;
 
 import android.app.Application;
 import android.content.Intent;
-import android.os.Bundle;
 import android.test.ApplicationTestCase;
+
+import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.MainActivity;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>

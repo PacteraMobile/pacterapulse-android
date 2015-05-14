@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
