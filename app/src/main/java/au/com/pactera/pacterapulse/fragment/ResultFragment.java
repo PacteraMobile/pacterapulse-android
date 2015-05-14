@@ -1,4 +1,4 @@
-package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.fragment;
 
 
 import android.app.Activity;
@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.pactera.pacterapulseopensourceandroid.R;
-import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.chart.EmotionBarChartView;
-import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.helper.NetworkHelper;
-import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.model.Emotions;
+import au.com.pactera.pacterapulse.chart.EmotionBarChartView;
+import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.model.Emotions;
 
 import org.apache.http.Header;
 import org.json.JSONException;

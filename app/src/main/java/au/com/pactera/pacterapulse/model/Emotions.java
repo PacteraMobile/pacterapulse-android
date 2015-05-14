@@ -1,4 +1,4 @@
-package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.model;
+package au.com.pactera.pacterapulse.model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

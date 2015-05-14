@@ -1,4 +1,4 @@
-package au.com.pactera.pacterapulse.pacterapulseopensourceandroid;
+package au.com.pactera.pacterapulse;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
@@ -7,8 +7,6 @@ import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.ImageButton;
 
 import com.pactera.pacterapulseopensourceandroid.R;
-
-import au.com.pactera.pacterapulse.pacterapulseopensourceandroid.MainActivity;
 
 /**
  * Created by chanielyu on 1/05/2015.

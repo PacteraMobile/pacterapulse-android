@@ -1,4 +1,4 @@
-package au.com.pactera.pacterapulse.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.fragment;
 
 import android.app.ActionBar;
 import android.app.Activity;

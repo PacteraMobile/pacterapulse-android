@@ -11,7 +11,7 @@
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
 		<activity
-			android:name="au.com.pactera.pacterapulse.pacterapulseopensourceandroid.MainActivity"
+			android:name="au.com.pactera.pacterapulse.MainActivity"
 			android:label="@string/app_name"
 			android:screenOrientation="portrait">
 			<intent-filter>
