@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.pactera.pacterapulseopensourceandroid.R;
 
 import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
