@@ -20,7 +20,7 @@ android {
 	buildToolsVersion "21.1.2"
 
 	defaultConfig {
-		applicationId "com.pactera.pacterapulseopensourceandroid"
+		applicationId "au.com.pactera.pacterapulse"
 		minSdkVersion 14
 		targetSdkVersion 22
 		versionCode 1

@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.pactera.pacterapulseopensourceandroid.R;
+import au.com.pactera.pacterapulse.R;
 import au.com.pactera.pacterapulse.chart.EmotionBarChartView;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
 import au.com.pactera.pacterapulse.model.Emotions;

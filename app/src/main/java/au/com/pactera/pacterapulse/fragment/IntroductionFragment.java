@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pactera.pacterapulseopensourceandroid.R;
+import au.com.pactera.pacterapulse.R;
 
 /**
  * A simple {@link Fragment} subclass.
