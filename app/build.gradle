@@ -37,6 +37,7 @@ android {
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
 	compile files('libs/xcl-charts.jar')
+	compile 'joda-time:joda-time:2.7' // for joda
 	compile 'com.loopj.android:android-async-http:1.4.6'
     compile('com.crashlytics.sdk.android:crashlytics:2.2.3@aar') {
         transitive = true;
