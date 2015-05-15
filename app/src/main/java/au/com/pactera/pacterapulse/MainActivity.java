@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 import au.com.pactera.pacterapulse.fragment.ResultFragment;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
 
+import au.com.pactera.pacterapulse.helper.VoteManager;
 import io.fabric.sdk.android.Fabric;
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -42,6 +44,7 @@ public class MainActivity extends Activity implements
 	private Integer iHappy = 0;
 	private Integer iNeutral = 0;
 	private Integer iSad = 0;
+	private VoteManager voteManager;
 
 	private static ProgressDialog progressdlg = null;
 
@@ -49,6 +52,7 @@ public class MainActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		voteManager = new VoteManager(this);
 		Fabric.with(this, new Crashlytics());
 		setContentView(R.layout.activity_main);
 		// Use shared preference to identify if it is the first launch of this app after installed.
@@ -209,6 +213,13 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onEmotionInteraction(int id)
 	{
+		if(voteManager.hasVotedToday()){
+			Toast toast = Toast.makeText(this, "Thanks. You have voted today.", Toast.LENGTH_SHORT);
+			toast.setGravity(Gravity.CENTER,0,-100);
+			toast.show();
+			emotionToResult();
+			return;
+		}
 		NetworkHelper.postVote(id, this, new JsonHttpResponseHandler()
 		{
 			@Override
