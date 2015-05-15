@@ -77,7 +77,7 @@
             [NSString stringWithFormat:@"%@", [CPTGraphHostingView class]];
 
         // if( [subview isKindOfClass:[CPTGraphHostingView
-        // superclass]])//stupid, this doesn't work
+        // class]])//stupid, this doesn't work
         if ([subviewClass isEqualToString:coreplotClass])
         {
             testSucceed = true;
@@ -93,9 +93,9 @@
 {
     PPLSummaryBarViewController *viewController =
         [[PPLSummaryBarViewController alloc] init];
-    NSArray *viewArray = viewController.view.subviews;
-    bool testSucceed = false;
-    for (UIView *subview in viewArray)
+
+    bool alertShowed = false;
+    for (UIView *subview in viewController.view.subviews)
     {
 
         NSString *subviewClass =
@@ -103,17 +103,24 @@
         NSString *coreplotClass =
             [NSString stringWithFormat:@"%@", [CSNotificationView class]];
 
-        // if( [subview isKindOfClass:[CSNotificationView superclass]])//stupid,
+        // if( [subview isKindOfClass:[CSNotificationView class]])//stupid,
         // this doesn't work
         if ([subviewClass isEqualToString:coreplotClass])
         {
-            testSucceed = true;
+            alertShowed = true;
             NSLog(@"bar chat view shown");
             break;
         }
     }
 
-    XCTAssertTrue(testSucceed);
+    if(viewController.shouldShowAlert)
+    {
+        XCTAssertTrue(alertShowed);
+    }
+    else
+    {
+        XCTAssertTrue(!alertShowed);
+    }
 }
 
 @end

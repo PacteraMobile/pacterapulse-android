@@ -11,4 +11,6 @@
 
 @interface PPLSummaryBarViewController : UIViewController
 
+@property (assign,nonatomic) Boolean shouldShowAlert;
+
 @end

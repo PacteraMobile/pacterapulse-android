@@ -26,9 +26,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self showVotedNotification];
     [self setTitle:sPPLSummaryTilte];
     [self configureHost];
     [self fetchRemoteData];
+}
+
+- (void)showVotedNotification
+{
+    if(self.shouldShowAlert )
+    {
+        [CSNotificationView showInViewController:self
+                                       style:CSNotificationViewStyleError
+                                     message:sPPLSummaryVoteAgainAlert];
+    }
 }
 
 - (void)configureHost

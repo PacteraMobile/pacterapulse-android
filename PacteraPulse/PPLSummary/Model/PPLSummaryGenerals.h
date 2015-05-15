@@ -13,6 +13,8 @@ static NSString* const kEmotion = @"emotion";
 static NSString* const kEmotionValue = @"count";
 static NSString* const sBarchartTitle = @"Employees' Satisfaction is everything";
 static NSString* const sPPLSummaryTilte = @"24 Hours Results";
+
+static NSString* const sPPLSummaryVoteAgainAlert = @"Already voted, vote once per day only.";
 //This is used for locating space for title in barchart
 static const NSInteger iTitleSpace = 60;
 //This is used for locating space for label on the top of bar in barchart
