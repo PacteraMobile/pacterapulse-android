@@ -11,6 +11,7 @@
 #import "PPLSummaryData.h"
 #import "PPLSummaryGenerals.h"
 #import "MBProgressHUD.h"
+#import "CSNotificationView.h"
 
 @interface PPLSummaryBarViewController ()
 
