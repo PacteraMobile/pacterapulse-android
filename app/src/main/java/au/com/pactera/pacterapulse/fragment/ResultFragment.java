@@ -14,16 +14,17 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import au.com.pactera.pacterapulse.R;
-import au.com.pactera.pacterapulse.chart.EmotionBarChartView;
-import au.com.pactera.pacterapulse.helper.NetworkHelper;
-import au.com.pactera.pacterapulse.model.Emotions;
 
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+
+import au.com.pactera.pacterapulse.R;
+import au.com.pactera.pacterapulse.chart.EmotionBarChartView;
+import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.model.Emotions;
 
 /**
  * A simple {@link Fragment} subclass.
