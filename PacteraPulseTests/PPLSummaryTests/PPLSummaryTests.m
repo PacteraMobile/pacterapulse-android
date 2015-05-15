@@ -76,12 +76,10 @@
         NSString *coreplotClass =
             [NSString stringWithFormat:@"%@", [CPTGraphHostingView class]];
 
-        // if( [subview isKindOfClass:[CPTGraphHostingView
-        // class]])//stupid, this doesn't work
+        //if( [subview isKindOfClass:[CPTGraphHostingView class]])//stupid, this doesn't work
         if ([subviewClass isEqualToString:coreplotClass])
         {
             testSucceed = true;
-            NSLog(@"bar chat view shown");
             break;
         }
     }
@@ -103,12 +101,10 @@
         NSString *coreplotClass =
             [NSString stringWithFormat:@"%@", [CSNotificationView class]];
 
-        // if( [subview isKindOfClass:[CSNotificationView class]])//stupid,
-        // this doesn't work
+        //if( [subview isKindOfClass:[CSNotificationView class]])//stupid,this doesn't work
         if ([subviewClass isEqualToString:coreplotClass])
         {
             alertShowed = true;
-            NSLog(@"bar chat view shown");
             break;
         }
     }
