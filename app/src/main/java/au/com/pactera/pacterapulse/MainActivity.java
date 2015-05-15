@@ -219,59 +219,7 @@ public class MainActivity extends Activity implements
 			emotionToResult();
 			return;
 		}
-		NetworkHelper.postVote(id, this, new JsonHttpResponseHandler()
-		{
-			@Override
-			public void onStart()
-			{
-				super.onStart();
-				if (null != progressdlg)
-				{
-					progressdlg.show();
-				}
-			}
-
-			@Override
-			public void onFinish()
-			{
-				if (null != progressdlg)
-				{
-					progressdlg.dismiss();
-				}
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-			{
-				super.onSuccess(statusCode, headers, response);
-				Log.d("Voting result", response.toString());
-				// move to the result fragment
-				emotionToResult();
-			}
-
-			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-			{
-				super.onFailure(statusCode, headers, throwable, errorResponse);
-				Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-				if (null != progressdlg)
-				{
-					progressdlg.dismiss();
-				}
-			}
-
-			@Override
-			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-			{
-				super.onFailure(statusCode, headers, responseString, throwable);
-				Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-				if (null != progressdlg)
-				{
-					progressdlg.dismiss();
-				}
-			}
-		});
+		NetworkHelper.postVote(id, this, new PacteraPulseJsonHttpResponseHandler(id) );
 	}
 
 	@Override
@@ -322,4 +270,76 @@ public class MainActivity extends Activity implements
 			mActionBar.setHomeButtonEnabled(false);
 		}
 	}
+
+    class PacteraPulseJsonHttpResponseHandler extends JsonHttpResponseHandler
+{
+
+    private int lastVotedEmotion;
+
+    public PacteraPulseJsonHttpResponseHandler() {
+    }
+
+    public PacteraPulseJsonHttpResponseHandler(int votedEmotion) {
+        lastVotedEmotion = votedEmotion;
+    }
+
+    public PacteraPulseJsonHttpResponseHandler(String encoding) {
+        super(encoding);
+    }
+
+
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        if (null != progressdlg)
+        {
+            progressdlg.show();
+        }
+    }
+
+    @Override
+    public void onFinish()
+    {
+        if (null != progressdlg)
+        {
+            progressdlg.dismiss();
+        }
+        super.onFinish();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+    {
+        super.onSuccess(statusCode, headers, response);
+        Log.d("Voting result", response.toString());
+        // save the vote
+        voteManager.saveVote(lastVotedEmotion);
+        // move to the result fragment
+        emotionToResult();
+    }
+
+    @Override
+    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
+    {
+        super.onFailure(statusCode, headers, throwable, errorResponse);
+        Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+        if (null != progressdlg)
+        {
+            progressdlg.dismiss();
+        }
+    }
+
+    @Override
+    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
+    {
+        super.onFailure(statusCode, headers, responseString, throwable);
+        Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+        if (null != progressdlg)
+        {
+            progressdlg.dismiss();
+        }
+    }
+}
 }

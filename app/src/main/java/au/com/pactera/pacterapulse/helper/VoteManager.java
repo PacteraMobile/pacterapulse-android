@@ -28,7 +28,6 @@ public class VoteManager {
 
     public VoteManager(Context context) {
         this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     /**
@@ -37,10 +36,10 @@ public class VoteManager {
      */
     public void saveVote(int emotion){
         Date now = new Date();
-        sharedPreferences.edit().putString(VOTED_DATE, simpleDateFormat.format(now));
-        sharedPreferences.edit().putInt(VOTED_VALUE, emotion);
-        // Log.d("Date", now.toString());
-        sharedPreferences.edit().apply();
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences.edit().putString(VOTED_DATE, simpleDateFormat.format(now)).apply();
+        sharedPreferences.edit().putInt(VOTED_VALUE, emotion).apply();
+        Log.d("info","saved");
     }
 
     /**
@@ -48,6 +47,7 @@ public class VoteManager {
      * @return isVoted the boolean value
      */
     public boolean hasVotedToday(){
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String votedDayString = sharedPreferences.getString(VOTED_DATE, "01/01/2000");
         try {
             Date today = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
