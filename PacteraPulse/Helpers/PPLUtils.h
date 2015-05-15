@@ -22,4 +22,5 @@
  */
 -(NSString*)getUniqueId;
 
+-(NSUserDefaults *)getStandardUserDefaults;
 @end

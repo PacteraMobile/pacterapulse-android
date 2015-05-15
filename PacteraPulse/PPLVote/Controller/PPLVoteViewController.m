@@ -14,7 +14,8 @@
 #import "PPLLaunchViewController.h"
 #import "PPLVoteRow.h"
 #import "AppDelegate.h"
-
+#import "PPLVoteManagerClass.h"
+#import "PPLSummaryBarViewController.h"
 static NSString *kViewTitle = @"How Do You Feel Today?";
 
 @interface PPLVoteViewController ()
@@ -30,6 +31,13 @@ NSString *const kSummarySegueId = @"toSummary";
 NSString *const kCellId = @"voteCell";
 NSString *const kNavigationButtonTitle = @"Info";
 NSInteger const kPadding = 10;
+
+enum voteAction
+{
+    VOTE_NOT_SUBMITTED,
+    VOTE_SUBMITTED,
+    VOTE_NO_ACTION
+} voteState;
 
 - (void)viewDidLoad
 {
@@ -87,28 +95,41 @@ NSInteger const kPadding = 10;
     UIView *senderView = (UIView *)sender;
     NSInteger sourceTag = senderView.tag;
 
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    PPLVoteManagerClass *voteManager = [PPLVoteManagerClass sharedInstance];
+    
+    if ([voteManager checkIfVoteSubmittedToday])
+    {
+        voteState = VOTE_NOT_SUBMITTED;
+        [self performSegueWithIdentifier:kSummarySegueId sender:nil];
 
-    //Send the feedback via data model, we provide two callbacks one for success and one for failure
-    [[PPLVoteData shareInstance] sendFeedback:[NSString stringWithFormat:@"%ld", (long)sourceTag]
-                   callBack:^(BOOL status, NSString* serverResponse, NSError *error)
-     {
-         if (status) {
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-             [self performSegueWithIdentifier:kSummarySegueId sender:nil];
-         }
-         else
+    }
+    else
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        //Send the feedback via data model, we provide two callbacks one for success and one for failure
+        [[PPLVoteData shareInstance] sendFeedback:[NSString stringWithFormat:@"%ld", (long)sourceTag]
+                                         callBack:^(BOOL status, NSString* serverResponse, NSError *error)
          {
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:@"Issue submitting feedback to server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil];
-             [alert show];
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-         }
-         
-     }];
+             if (status) {
+                 voteState = VOTE_SUBMITTED;
+                 [voteManager recordVoteSubmission:[NSString stringWithFormat:@"%ld", (long)sourceTag]];
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 [self performSegueWithIdentifier:kSummarySegueId sender:nil];
+             }
+             else
+             {
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                 message:@"Issue submitting feedback to server"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                 [alert show];
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             }
+             
+         }];
+    }
 }
 
 #pragma mark -TableViewDelegate
@@ -132,6 +153,7 @@ NSInteger const kPadding = 10;
 #pragma mark - Navigation
 - (void)showResult:(id)sender
 {
+    voteState = VOTE_NO_ACTION;
     [self performSegueWithIdentifier:kSummarySegueId sender:nil];
 }
 /**
@@ -165,6 +187,35 @@ NSInteger const kPadding = 10;
     
     // After all the modifications (if done) go to the root controller
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+/**
+ *  Before showing the summary graph we need to show the destination controller
+ *  if on this screen the vote was submitted or not, or if its directly
+ *  navigating to the summary without voting, so it can show the alert
+ *  accordingly
+ *
+ *  @param segue  segue for finding destination
+ *  @param sender initiator of this segue
+ */
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kSummarySegueId]) {
+        
+        PPLSummaryBarViewController *destinationController =
+        (PPLSummaryBarViewController*)segue.destinationViewController;
+        
+        //Check the current vote state and set the variable for destination
+        switch (voteState) {
+            case VOTE_NOT_SUBMITTED:
+                destinationController.shouldShowAlert = YES;
+                break;
+            case VOTE_NO_ACTION:
+            case VOTE_SUBMITTED:
+                destinationController.shouldShowAlert = NO;
+                break;
+        }
+    }
+    
 }
 
 @end

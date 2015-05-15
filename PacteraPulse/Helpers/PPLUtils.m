@@ -38,4 +38,13 @@
     return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }
 
+-(PPLUtils *)sharedInstance
+{
+    return [PPLUtils sharedClient];
+}
+
+-(NSUserDefaults *)getStandardUserDefaults
+{
+    return [NSUserDefaults standardUserDefaults];
+}
 @end
