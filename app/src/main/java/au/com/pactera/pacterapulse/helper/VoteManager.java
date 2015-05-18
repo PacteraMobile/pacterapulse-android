@@ -60,7 +60,4 @@ public class VoteManager {
         }
         return false;
     }
-
-
-
 }

@@ -101,6 +101,7 @@ public class MainActivity extends Activity implements
 	{
 		progressdlg.dismiss();
 		progressdlg = null;
+		Crouton.cancelAllCroutons();
 		super.onDestroy();
 	}
 
