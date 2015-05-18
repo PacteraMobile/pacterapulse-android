@@ -6,8 +6,6 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.ImageButton;
 
-import com.pactera.pacterapulseopensourceandroid.R;
-
 /**
  * Created by chanielyu on 1/05/2015.
  */
