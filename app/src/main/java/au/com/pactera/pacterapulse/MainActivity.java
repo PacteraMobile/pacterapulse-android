@@ -17,15 +17,17 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 import au.com.pactera.pacterapulse.fragment.ResultFragment;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
-
 import au.com.pactera.pacterapulse.helper.VoteManager;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 /**
  *
@@ -105,6 +107,7 @@ public class MainActivity extends Activity implements
 
 	/**
 	 * Handle onCreateOptionsMenu
+	 *
 	 * @param menu the menu of this activity
 	 * @return true to show the menu otherwise the menu is invisable.
 	 */
@@ -143,6 +146,7 @@ public class MainActivity extends Activity implements
 
 	/**
 	 * Replace introduction fragment to emotion fragment and also save it into back stack.
+	 *
 	 * @return commitment ID.
 	 */
 	private int introToEmotion()
@@ -155,6 +159,7 @@ public class MainActivity extends Activity implements
 
 	/**
 	 * Replace emotion fragment to result fragment and also save it into back stack.
+	 *
 	 * @return commitment ID.
 	 */
 	private int emotionToResult()
@@ -175,6 +180,7 @@ public class MainActivity extends Activity implements
 
 	/**
 	 * Replace emotion fragment to introduction fragment and also save it into back stack.
+	 *
 	 * @return commitment ID.
 	 */
 	private int emotionToIntro()
@@ -212,20 +218,19 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onEmotionInteraction(int id)
 	{
-		if(voteManager.hasVotedToday()){
-			Toast toast = Toast.makeText(this, "Thanks. You have voted today.", Toast.LENGTH_SHORT);
-			toast.setGravity(Gravity.CENTER,0,-100);
-			toast.show();
+		if (voteManager.hasVotedToday())
+		{
+			Crouton.makeText(this, "Thanks. You have voted today.", Style.ALERT).show();
 			emotionToResult();
 			return;
 		}
-		NetworkHelper.postVote(id, this, new PacteraPulseJsonHttpResponseHandler(id) );
+		NetworkHelper.postVote(id, this, new PacteraPulseJsonHttpResponseHandler(id));
 	}
 
 	@Override
 	public void onResultInteraction(int id)
 	{
-		switch(id)
+		switch (id)
 		{
 		case ResultFragment.RESULT_SUCCESS:
 		case ResultFragment.RESULT_FAILURE:
@@ -241,7 +246,7 @@ public class MainActivity extends Activity implements
 			}
 			if (null != progressdlg)
 			{
-				if(!progressdlg.isShowing())
+				if (!progressdlg.isShowing())
 				{
 					progressdlg.show();
 				}
@@ -271,75 +276,77 @@ public class MainActivity extends Activity implements
 		}
 	}
 
-    class PacteraPulseJsonHttpResponseHandler extends JsonHttpResponseHandler
-{
+	class PacteraPulseJsonHttpResponseHandler extends JsonHttpResponseHandler
+	{
 
-    private int lastVotedEmotion;
+		private int lastVotedEmotion;
 
-    public PacteraPulseJsonHttpResponseHandler() {
-    }
+		public PacteraPulseJsonHttpResponseHandler()
+		{
+		}
 
-    public PacteraPulseJsonHttpResponseHandler(int votedEmotion) {
-        lastVotedEmotion = votedEmotion;
-    }
+		public PacteraPulseJsonHttpResponseHandler(int votedEmotion)
+		{
+			lastVotedEmotion = votedEmotion;
+		}
 
-    public PacteraPulseJsonHttpResponseHandler(String encoding) {
-        super(encoding);
-    }
+		public PacteraPulseJsonHttpResponseHandler(String encoding)
+		{
+			super(encoding);
+		}
 
 
+		@Override
+		public void onStart()
+		{
+			super.onStart();
+			if (null != progressdlg)
+			{
+				progressdlg.show();
+			}
+		}
 
-    @Override
-    public void onStart()
-    {
-        super.onStart();
-        if (null != progressdlg)
-        {
-            progressdlg.show();
-        }
-    }
+		@Override
+		public void onFinish()
+		{
+			if (null != progressdlg)
+			{
+				progressdlg.dismiss();
+			}
+			super.onFinish();
+		}
 
-    @Override
-    public void onFinish()
-    {
-        if (null != progressdlg)
-        {
-            progressdlg.dismiss();
-        }
-        super.onFinish();
-    }
+		@Override
+		public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+		{
+			super.onSuccess(statusCode, headers, response);
+			Log.d("Voting result", response.toString());
+			// save the vote
+			voteManager.saveVote(lastVotedEmotion);
+			// move to the result fragment
+			emotionToResult();
+		}
 
-    @Override
-    public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-    {
-        super.onSuccess(statusCode, headers, response);
-        Log.d("Voting result", response.toString());
-        // save the vote
-        voteManager.saveVote(lastVotedEmotion);
-        // move to the result fragment
-        emotionToResult();
-    }
+		@Override
+		public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
+		{
+			super.onFailure(statusCode, headers, throwable, errorResponse);
+			Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+			if (null != progressdlg)
+			{
+				progressdlg.dismiss();
+			}
+		}
 
-    @Override
-    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-    {
-        super.onFailure(statusCode, headers, throwable, errorResponse);
-        Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-        if (null != progressdlg)
-        {
-            progressdlg.dismiss();
-        }
-    }
-
-    @Override
-    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-    {
-        super.onFailure(statusCode, headers, responseString, throwable);
-        Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-        if (null != progressdlg)
-        {
-            progressdlg.dismiss();
-        }
-    }
-}
+		@Override
+		public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
+		{
+			super.onFailure(statusCode, headers, responseString, throwable);
+			Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+			if (null != progressdlg)
+			{
+				progressdlg.dismiss();
+			}
+		}
+	}
 }

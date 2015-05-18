@@ -7,6 +7,16 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+repositories {
+	mavenCentral()
+}
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
@@ -16,9 +26,16 @@ repositories {
 
 
 android {
+	signingConfigs {
+		Pactera {
+			keyPassword '1a2b3c4d5e'
+			storeFile file('/Users/chanielyu/Pactera/AndroidCert/Pactera.jks')
+			storePassword '1a2b3c4d5e'
+			keyAlias 'PacteraRelease'
+		}
+	}
 	compileSdkVersion 22
 	buildToolsVersion "21.1.2"
-
 	defaultConfig {
 		applicationId "au.com.pactera.pacterapulse"
 		minSdkVersion 14
@@ -30,15 +47,21 @@ android {
 		release {
 			minifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.Pactera
 		}
 	}
 }
 
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
-	compile 'joda-time:joda-time:2.7' // for joda
+	compile 'joda-time:joda-time:2.7'
+	// for joda
 	compile 'com.loopj.android:android-async-http:1.4.6'
-    compile('com.crashlytics.sdk.android:crashlytics:2.2.3@aar') {
-        transitive = true;
-    }
+	compile('com.crashlytics.sdk.android:crashlytics:2.2.3@aar') {
+		transitive = true;
+	}
+	compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
+		// exclusion is not necessary, but generally a good idea.
+		exclude group: 'com.google.android', module: 'support-v4'
+	}
 }
