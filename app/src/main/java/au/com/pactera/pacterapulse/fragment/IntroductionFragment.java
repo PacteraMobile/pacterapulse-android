@@ -21,12 +21,6 @@ import au.com.pactera.pacterapulse.R;
 public class IntroductionFragment extends Fragment implements View.OnClickListener
 {
 	public static final int INSTRUCTION_READ = 0;
-	// The fragment tag parameter
-	private static final String ARG_TAG = "INTRODUCTION_TAG";
-	// Tag from Activity.
-	private String ArgTag;
-
-
 
 	private OnIntroductionInteractionListener mListener;
 
@@ -36,13 +30,10 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 	 *
 	 * @return A new instance of fragment IntroductionFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
-	public static IntroductionFragment newInstance(String argTag)
+	public static IntroductionFragment newInstance()
 	{
 		IntroductionFragment fragment = new IntroductionFragment();
-		Bundle args = new Bundle();
-		args.putString(ARG_TAG,argTag);
-		fragment.setArguments(args);
+		fragment.setRetainInstance(true);
 		return fragment;
 	}
 
@@ -55,10 +46,6 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			ArgTag = getArguments().getString(ARG_TAG);
-		}
 		setHasOptionsMenu(true);
 	}
 
@@ -68,27 +55,6 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 	{
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_introduction, container, false);
-	}
-
-	private void onButtonPressed(int id)
-	{
-		switch (id)
-		{
-		case R.id.btnAgree:
-		default:
-			if (getFragmentManager().getBackStackEntryCount() > 0)
-			{
-				getFragmentManager().popBackStack();
-			}
-			else
-			{
-				introToEmotion();
-			}
-			/*if (mListener != null)
-			{
-				mListener.onIntroductionInteraction(INSTRUCTION_READ);
-			}*/
-		}
 	}
 
 	@Override
@@ -133,6 +99,27 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 		super.onPrepareOptionsMenu(menu);
 	}*/
 
+	private void onButtonPressed(int id)
+	{
+		switch (id)
+		{
+		case R.id.btnAgree:
+		default:
+			if (getFragmentManager().getBackStackEntryCount() > 0)
+			{
+				getFragmentManager().popBackStack();
+			}
+			else
+			{
+				introToEmotion();
+			}
+			if (mListener != null)
+			{
+				mListener.onIntroductionInteraction(INSTRUCTION_READ);
+			}
+		}
+	}
+
 	@Override
 	public void onClick(View v)
 	{
@@ -148,7 +135,7 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 	{
 		return getFragmentManager().beginTransaction()
 				.setCustomAnimations(R.animator.fragment_slide_left_enter, R.animator.fragment_slide_left_exit)
-				.replace(R.id.container, EmotionFragment.newInstance(0, 0, 0))
+				.replace(R.id.container, EmotionFragment.newInstance())
 				.commit();
 	}
 

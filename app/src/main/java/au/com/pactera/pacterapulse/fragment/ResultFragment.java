@@ -80,8 +80,8 @@ public class ResultFragment extends Fragment
 		super.onAttach(activity);
 		try
 		{
-			mListener = new WeakReference<OnResultInteractionListener>((OnResultInteractionListener)activity);
-			mWeakActivity = new WeakReference<Activity>(activity);
+			mListener = new WeakReference<>((OnResultInteractionListener)activity);
+			mWeakActivity = new WeakReference<>(activity);
 		}
 		catch (ClassCastException e)
 		{
@@ -123,6 +123,25 @@ public class ResultFragment extends Fragment
 			item.setVisible(false);
 		}
 		super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		switch (id)
+		{
+		case android.R.id.home:
+			getFragmentManager().popBackStack();
+			return true;
+		default:
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	private void getResultData()
@@ -231,7 +250,6 @@ public class ResultFragment extends Fragment
 	 */
 	public interface OnResultInteractionListener
 	{
-		// TODO: Update argument type and name
 		public void onResultInteraction(int id);
 	}
 }
