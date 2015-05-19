@@ -1,8 +1,7 @@
 package com.pactera.pacterapulseopensourceandroid.core;
 
-import android.app.LoaderManager;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.support.v4.app.LoaderManager;
 
 public interface CocoLoader<T> extends LoaderManager.LoaderCallbacks<T> {
 
@@ -23,7 +22,7 @@ public interface CocoLoader<T> extends LoaderManager.LoaderCallbacks<T> {
     void onLoaderDone(final T items);
 
     /**
-     * Show exception in a {@link Toast}
+     * Show exception
      *
      * @param e
      */

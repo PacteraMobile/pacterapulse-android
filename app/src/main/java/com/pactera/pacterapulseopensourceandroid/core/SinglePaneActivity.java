@@ -1,10 +1,10 @@
 package com.pactera.pacterapulseopensourceandroid.core;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
@@ -134,11 +134,11 @@ public class SinglePaneActivity extends BaseActivity {
             mFragment = onCreatePane();
             mFragment.setArguments(SinglePaneActivity
                     .intentToFragmentArguments(getIntent()));
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.root_container, mFragment, "single_pane")
                     .commit();
         } else {
-            mFragment = getFragmentManager().findFragmentByTag(
+            mFragment = getSupportFragmentManager().findFragmentByTag(
                     "single_pane");
         }
 

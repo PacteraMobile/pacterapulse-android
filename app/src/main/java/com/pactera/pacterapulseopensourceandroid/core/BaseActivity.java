@@ -2,13 +2,14 @@ package com.pactera.pacterapulseopensourceandroid.core;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import butterknife.ButterKnife;
 
 /**
  * Created by kai on 19/05/15.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     @SuppressWarnings("deprecation")
     @Override
