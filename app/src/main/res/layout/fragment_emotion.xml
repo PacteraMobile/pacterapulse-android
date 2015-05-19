@@ -1,41 +1,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:orientation="vertical"
-			  tools:context="com.pactera.pacterapulseopensourceandroid.fragment.EmotionFragment">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context="com.pactera.pacterapulseopensourceandroid.fragment.EmotionFragment">
 
-
-	<GridLayout
+	<!-- TODO: Update blank fragment layout -->
+	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:layout_weight="1">
 
-		android:columnCount="1"
-		android:rowCount="3"
-		>
 		<ImageButton
-			android:id="@+id/a"
-			android:layout_row="1"
+			android:id="@+id/btnSad"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/btn_sad"
-			android:layout_gravity="center" />
-		<ImageButton
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true"
+			android:background="@drawable/btn_sad"/>
+	</RelativeLayout>
 
-			android:layout_rowWeight="1"
-			android:id="@+id/b"
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1">
+
+		<ImageButton
+			android:id="@+id/btnNeutral"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/btn_sad"
-			android:layout_gravity="center" />
-		<ImageButton
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true"
+			android:background="@drawable/btn_neutral"/>
+	</RelativeLayout>
 
-			android:layout_rowWeight="1"
-			android:id="@+id/c"
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1">
+
+		<ImageButton
+			android:id="@+id/btnHappy"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/btn_sad"
-			android:layout_gravity="center" />
-	</GridLayout>
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true"
+			android:background="@drawable/btn_happy"/>
+	</RelativeLayout>
+
 
 </LinearLayout>
