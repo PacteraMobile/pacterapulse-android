@@ -7,4 +7,5 @@
 	<string name="gettingData">Data processing, please wait</string>
 	<string name="Instruction">Tap to start</string>
 	<string name="result24H">24 Hours Results</string>
+	<string name="activity_not_found">Activity is not found</string>
 </resources>
