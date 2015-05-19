@@ -1,8 +1,7 @@
-package com.pactera.pacterapulseopensourceandroid;
+package au.com.pactera.pacterapulse;
 
 import android.app.Application;
 import android.content.Intent;
-import android.os.Bundle;
 import android.test.ApplicationTestCase;
 
 /**

@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid;
+package au.com.pactera.pacterapulse;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,14 +15,18 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.pactera.pacterapulseopensourceandroid.fragment.EmotionFragment;
-import com.pactera.pacterapulseopensourceandroid.fragment.IntroductionFragment;
-import com.pactera.pacterapulseopensourceandroid.fragment.ResultFragment;
-import com.pactera.pacterapulseopensourceandroid.helper.NetworkHelper;
 
-import io.fabric.sdk.android.Fabric;
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import au.com.pactera.pacterapulse.fragment.EmotionFragment;
+import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
+import au.com.pactera.pacterapulse.fragment.ResultFragment;
+import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.helper.VoteManager;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+import io.fabric.sdk.android.Fabric;
 
 /**
  *
@@ -40,13 +44,13 @@ public class MainActivity extends Activity implements
 	private Integer iHappy = 0;
 	private Integer iNeutral = 0;
 	private Integer iSad = 0;
-
-	private static ProgressDialog progressdlg = null;
+	private VoteManager voteManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		voteManager = new VoteManager(this);
 		Fabric.with(this, new Crashlytics());
 		setContentView(R.layout.activity_main);
 		// Use shared preference to identify if it is the first launch of this app after installed.
@@ -76,30 +80,19 @@ public class MainActivity extends Activity implements
 		}
 		mActionBar = getActionBar();
 		getFragmentManager().addOnBackStackChangedListener(this);
-		if (null == progressdlg)
-		{
-			progressdlg = new ProgressDialog(this);
-			progressdlg.setTitle(R.string.app_name);
-			progressdlg.setMessage(getString(R.string.gettingData));
-			progressdlg.setIndeterminate(true);
-			/**
-			 *  Set the static progress dialog to un-cancelable to prevent activity be destroyed
-			 *  during a asynchronous process.
-			 */
-			progressdlg.setCancelable(false);
-		}
 	}
 
 	@Override
 	protected void onDestroy()
 	{
-		progressdlg.dismiss();
-		progressdlg = null;
+		Crouton.cancelAllCroutons();
+		NetworkHelper.canelAll();
 		super.onDestroy();
 	}
 
 	/**
 	 * Handle onCreateOptionsMenu
+	 *
 	 * @param menu the menu of this activity
 	 * @return true to show the menu otherwise the menu is invisable.
 	 */
@@ -137,27 +130,12 @@ public class MainActivity extends Activity implements
 	}
 
 	/**
-	 * Replace introduction fragment to emotion fragment and also save it into back stack.
-	 * @return commitment ID.
-	 */
-	private int introToEmotion()
-	{
-		return getFragmentManager().beginTransaction()
-				.setCustomAnimations(R.animator.fragment_slide_left_enter, R.animator.fragment_slide_left_exit)
-				.replace(R.id.container, EmotionFragment.newInstance(iHappy, iNeutral, iSad))
-				.commit();
-	}
-
-	/**
 	 * Replace emotion fragment to result fragment and also save it into back stack.
+	 *
 	 * @return commitment ID.
 	 */
 	private int emotionToResult()
 	{
-		if (null != mActionBar)
-		{
-			mActionBar.setDisplayHomeAsUpEnabled(true);
-		}
 		/**
 		 *  To avoid an commitment after onSaveInstanceState() exception we need to use commitAllowingStateLoss.
 		 */
@@ -170,6 +148,7 @@ public class MainActivity extends Activity implements
 
 	/**
 	 * Replace emotion fragment to introduction fragment and also save it into back stack.
+	 *
 	 * @return commitment ID.
 	 */
 	private int emotionToIntro()
@@ -188,103 +167,25 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onIntroductionInteraction(int id)
 	{
-		switch (id)
-		{
-		case IntroductionFragment.INSTRUCTION_READ:
-		default:
-			if (getFragmentManager().getBackStackEntryCount() > 0)
-			{
-				getFragmentManager().popBackStack();
-			}
-			else
-			{
-				introToEmotion();
-			}
-		}
-
 	}
 
 	@Override
 	public void onEmotionInteraction(int id)
 	{
-		NetworkHelper.postVote(id, this, new JsonHttpResponseHandler()
-		{
-			@Override
-			public void onStart()
-			{
-				super.onStart();
-				if (null != progressdlg)
-				{
-					progressdlg.show();
-				}
-			}
-
-			@Override
-			public void onFinish()
-			{
-				if (null != progressdlg)
-				{
-					progressdlg.dismiss();
-				}
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-			{
-				super.onSuccess(statusCode, headers, response);
-				Log.d("Voting result", response.toString());
-				// move to the result fragment
-				emotionToResult();
-			}
-
-			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-			{
-				super.onFailure(statusCode, headers, throwable, errorResponse);
-				Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-				if (null != progressdlg)
-				{
-					progressdlg.dismiss();
-				}
-			}
-
-			@Override
-			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-			{
-				super.onFailure(statusCode, headers, responseString, throwable);
-				Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-				if (null != progressdlg)
-				{
-					progressdlg.dismiss();
-				}
-			}
-		});
 	}
 
 	@Override
 	public void onResultInteraction(int id)
 	{
-		switch(id)
+		switch (id)
 		{
 		case ResultFragment.RESULT_SUCCESS:
 		case ResultFragment.RESULT_FAILURE:
-			if (null != progressdlg)
-			{
-				progressdlg.dismiss();
-			}
 			break;
 		case ResultFragment.RESULT_RESUME:
 			if (null != mActionBar)
 			{
 				mActionBar.setTitle(getResources().getString(R.string.result24H));
-			}
-			if (null != progressdlg)
-			{
-				if(!progressdlg.isShowing())
-				{
-					progressdlg.show();
-				}
 			}
 			break;
 		case ResultFragment.RESULT_PAUSE:
@@ -294,20 +195,23 @@ public class MainActivity extends Activity implements
 			}
 			break;
 		default:
-			if (null != progressdlg)
-			{
-				progressdlg.dismiss();
-			}
 		}
 	}
 
 	@Override
 	public void onBackStackChanged()
 	{
-		if (0 == getFragmentManager().getBackStackEntryCount())
+		if(null != mActionBar)
 		{
-			mActionBar.setDisplayHomeAsUpEnabled(false);
-			mActionBar.setHomeButtonEnabled(false);
+			if (0 == getFragmentManager().getBackStackEntryCount())
+			{
+				mActionBar.setDisplayHomeAsUpEnabled(false);
+				mActionBar.setHomeButtonEnabled(false);
+			}
+			else
+			{
+				mActionBar.setDisplayHomeAsUpEnabled(true);
+			}
 		}
 	}
 }

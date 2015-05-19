@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.helper;
+package au.com.pactera.pacterapulse.helper;
 
 import android.content.Context;
 import android.util.Log;
@@ -64,4 +64,8 @@ public class NetworkHelper
 		sClient.get(getAbsoluteUrl(url), null, responseHandler);
 	}
 
+	public static void canelAll()
+	{
+		sClient.cancelAllRequests(true);
+	}
 }

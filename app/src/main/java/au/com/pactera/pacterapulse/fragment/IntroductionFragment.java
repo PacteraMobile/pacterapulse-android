@@ -1,15 +1,14 @@
-package com.pactera.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.fragment;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pactera.pacterapulseopensourceandroid.R;
+import au.com.pactera.pacterapulse.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,10 +76,18 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 		{
 		case R.id.btnAgree:
 		default:
-			if (mListener != null)
+			if (getFragmentManager().getBackStackEntryCount() > 0)
+			{
+				getFragmentManager().popBackStack();
+			}
+			else
+			{
+				introToEmotion();
+			}
+			/*if (mListener != null)
 			{
 				mListener.onIntroductionInteraction(INSTRUCTION_READ);
-			}
+			}*/
 		}
 	}
 
@@ -130,6 +137,19 @@ public class IntroductionFragment extends Fragment implements View.OnClickListen
 	public void onClick(View v)
 	{
 		onButtonPressed(v.getId());
+	}
+
+	/**
+	 * Replace introduction fragment to emotion fragment and also save it into back stack.
+	 *
+	 * @return commitment ID.
+	 */
+	private int introToEmotion()
+	{
+		return getFragmentManager().beginTransaction()
+				.setCustomAnimations(R.animator.fragment_slide_left_enter, R.animator.fragment_slide_left_exit)
+				.replace(R.id.container, EmotionFragment.newInstance(0, 0, 0))
+				.commit();
 	}
 
 	/**
