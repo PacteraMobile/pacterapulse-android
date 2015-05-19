@@ -46,8 +46,6 @@ public class MainActivity extends Activity implements
 	private Integer iSad = 0;
 	private VoteManager voteManager;
 
-	private static ProgressDialog progressdlg = null;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -82,26 +80,13 @@ public class MainActivity extends Activity implements
 		}
 		mActionBar = getActionBar();
 		getFragmentManager().addOnBackStackChangedListener(this);
-		if (null == progressdlg)
-		{
-			progressdlg = new ProgressDialog(this);
-			progressdlg.setTitle(R.string.app_name);
-			progressdlg.setMessage(getString(R.string.gettingData));
-			progressdlg.setIndeterminate(true);
-			/**
-			 *  Set the static progress dialog to un-cancelable to prevent activity be destroyed
-			 *  during a asynchronous process.
-			 */
-			progressdlg.setCancelable(false);
-		}
 	}
 
 	@Override
 	protected void onDestroy()
 	{
-		progressdlg.dismiss();
-		progressdlg = null;
 		Crouton.cancelAllCroutons();
+		NetworkHelper.canelAll();
 		super.onDestroy();
 	}
 
@@ -145,29 +130,12 @@ public class MainActivity extends Activity implements
 	}
 
 	/**
-	 * Replace introduction fragment to emotion fragment and also save it into back stack.
-	 *
-	 * @return commitment ID.
-	 */
-	private int introToEmotion()
-	{
-		return getFragmentManager().beginTransaction()
-				.setCustomAnimations(R.animator.fragment_slide_left_enter, R.animator.fragment_slide_left_exit)
-				.replace(R.id.container, EmotionFragment.newInstance(iHappy, iNeutral, iSad))
-				.commit();
-	}
-
-	/**
 	 * Replace emotion fragment to result fragment and also save it into back stack.
 	 *
 	 * @return commitment ID.
 	 */
 	private int emotionToResult()
 	{
-		if (null != mActionBar)
-		{
-			mActionBar.setDisplayHomeAsUpEnabled(true);
-		}
 		/**
 		 *  To avoid an commitment after onSaveInstanceState() exception we need to use commitAllowingStateLoss.
 		 */
@@ -199,32 +167,11 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onIntroductionInteraction(int id)
 	{
-		switch (id)
-		{
-		case IntroductionFragment.INSTRUCTION_READ:
-		default:
-			if (getFragmentManager().getBackStackEntryCount() > 0)
-			{
-				getFragmentManager().popBackStack();
-			}
-			else
-			{
-				introToEmotion();
-			}
-		}
-
 	}
 
 	@Override
 	public void onEmotionInteraction(int id)
 	{
-		if (voteManager.hasVotedToday())
-		{
-			Crouton.makeText(this, "Thanks. You have voted today.", Style.ALERT).show();
-			emotionToResult();
-			return;
-		}
-		NetworkHelper.postVote(id, this, new PacteraPulseJsonHttpResponseHandler(id));
 	}
 
 	@Override
@@ -234,22 +181,11 @@ public class MainActivity extends Activity implements
 		{
 		case ResultFragment.RESULT_SUCCESS:
 		case ResultFragment.RESULT_FAILURE:
-			if (null != progressdlg)
-			{
-				progressdlg.dismiss();
-			}
 			break;
 		case ResultFragment.RESULT_RESUME:
 			if (null != mActionBar)
 			{
 				mActionBar.setTitle(getResources().getString(R.string.result24H));
-			}
-			if (null != progressdlg)
-			{
-				if (!progressdlg.isShowing())
-				{
-					progressdlg.show();
-				}
 			}
 			break;
 		case ResultFragment.RESULT_PAUSE:
@@ -259,93 +195,22 @@ public class MainActivity extends Activity implements
 			}
 			break;
 		default:
-			if (null != progressdlg)
-			{
-				progressdlg.dismiss();
-			}
 		}
 	}
 
 	@Override
 	public void onBackStackChanged()
 	{
-		if (0 == getFragmentManager().getBackStackEntryCount())
+		if(null != mActionBar)
 		{
-			mActionBar.setDisplayHomeAsUpEnabled(false);
-			mActionBar.setHomeButtonEnabled(false);
-		}
-	}
-
-	class PacteraPulseJsonHttpResponseHandler extends JsonHttpResponseHandler
-	{
-
-		private int lastVotedEmotion;
-
-		public PacteraPulseJsonHttpResponseHandler()
-		{
-		}
-
-		public PacteraPulseJsonHttpResponseHandler(int votedEmotion)
-		{
-			lastVotedEmotion = votedEmotion;
-		}
-
-		public PacteraPulseJsonHttpResponseHandler(String encoding)
-		{
-			super(encoding);
-		}
-
-
-		@Override
-		public void onStart()
-		{
-			super.onStart();
-			if (null != progressdlg)
+			if (0 == getFragmentManager().getBackStackEntryCount())
 			{
-				progressdlg.show();
+				mActionBar.setDisplayHomeAsUpEnabled(false);
+				mActionBar.setHomeButtonEnabled(false);
 			}
-		}
-
-		@Override
-		public void onFinish()
-		{
-			if (null != progressdlg)
+			else
 			{
-				progressdlg.dismiss();
-			}
-			super.onFinish();
-		}
-
-		@Override
-		public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-		{
-			super.onSuccess(statusCode, headers, response);
-			Log.d("Voting result", response.toString());
-			// save the vote
-			voteManager.saveVote(lastVotedEmotion);
-			// move to the result fragment
-			emotionToResult();
-		}
-
-		@Override
-		public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-		{
-			super.onFailure(statusCode, headers, throwable, errorResponse);
-			Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-			if (null != progressdlg)
-			{
-				progressdlg.dismiss();
-			}
-		}
-
-		@Override
-		public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-		{
-			super.onFailure(statusCode, headers, responseString, throwable);
-			Toast.makeText(getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
-			if (null != progressdlg)
-			{
-				progressdlg.dismiss();
+				mActionBar.setDisplayHomeAsUpEnabled(true);
 			}
 		}
 	}

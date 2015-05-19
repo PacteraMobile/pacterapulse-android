@@ -64,4 +64,8 @@ public class NetworkHelper
 		sClient.get(getAbsoluteUrl(url), null, responseHandler);
 	}
 
+	public static void canelAll()
+	{
+		sClient.cancelAllRequests(true);
+	}
 }

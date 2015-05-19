@@ -3,6 +3,7 @@ package au.com.pactera.pacterapulse.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -127,6 +128,28 @@ public class ResultFragment extends Fragment
 	private void getResultData()
 	{
 		NetworkHelper.getResult("24hours", new JsonHttpResponseHandler() {
+			private ProgressDialog progressdlg;
+			@Override
+			public void onStart()
+			{
+				super.onStart();
+				showProgressDlg();
+			}
+
+			@Override
+			public void onFinish()
+			{
+				DismissProgressDlg();
+				super.onFinish();
+			}
+
+			@Override
+			public void onCancel()
+			{
+				DismissProgressDlg();
+				super.onCancel();
+			}
+
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
@@ -168,6 +191,20 @@ public class ResultFragment extends Fragment
 				if (listener != null && act != null) {
 					Toast.makeText(act, "Network error!", Toast.LENGTH_SHORT).show();
 					listener.onResultInteraction(RESULT_FAILURE);
+				}
+			}
+
+			private void showProgressDlg()
+			{
+				progressdlg = ProgressDialog.show(getActivity(),getString(R.string.app_name),getString(R.string.gettingData),true, false);
+			}
+
+			private void DismissProgressDlg()
+			{
+				if (null != progressdlg)
+				{
+					progressdlg.dismiss();
+					progressdlg = null;
 				}
 			}
 		});

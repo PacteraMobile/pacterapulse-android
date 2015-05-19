@@ -2,6 +2,8 @@ package au.com.pactera.pacterapulse.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -12,7 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import au.com.pactera.pacterapulse.R;
+import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.helper.VoteManager;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 /**
@@ -39,6 +50,7 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 	private Integer iNeutral;
 	private Integer iSad;
 
+	private VoteManager voteManager;
 	private OnEmotionInteractionListener mListener;
 
 	/**
@@ -117,6 +129,13 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 			{
 				mListener.onEmotionInteraction(vote);
 			}
+			if (voteManager.hasVotedToday())
+			{
+				Crouton.makeText(getActivity(), "Thanks. You have voted today.", Style.ALERT).show();
+				emotionToResult();
+				return;
+			}
+			NetworkHelper.postVote(vote, getActivity(), new PacteraPulseJsonHttpResponseHandler(id));
 		}
 		else
 		{
@@ -139,6 +158,7 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnEmotionInteractionListener");
 		}
+		voteManager = new VoteManager(getActivity());
 	}
 
 	@Override
@@ -166,6 +186,23 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 	}
 
 	/**
+	 * Replace emotion fragment to result fragment and also save it into back stack.
+	 *
+	 * @return commitment ID.
+	 */
+	private int emotionToResult()
+	{
+		/**
+		 *  To avoid an commitment after onSaveInstanceState() exception we need to use commitAllowingStateLoss.
+		 */
+		return getFragmentManager().beginTransaction()
+				.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+				.replace(R.id.container, ResultFragment.newInstance())
+				.addToBackStack(null)
+				.commitAllowingStateLoss();
+	}
+
+	/**
 	 * This interface must be implemented by activities that contain this
 	 * fragment to allow an interaction in this fragment to be communicated
 	 * to the activity and potentially other fragments contained in that
@@ -178,5 +215,86 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 	public interface OnEmotionInteractionListener
 	{
 		public void onEmotionInteraction(int id);
+	}
+
+	class PacteraPulseJsonHttpResponseHandler extends JsonHttpResponseHandler
+	{
+		private ProgressDialog progressdlg;
+		private int lastVotedEmotion;
+
+		public PacteraPulseJsonHttpResponseHandler()
+		{
+		}
+
+		public PacteraPulseJsonHttpResponseHandler(int votedEmotion)
+		{
+			lastVotedEmotion = votedEmotion;
+		}
+
+		public PacteraPulseJsonHttpResponseHandler(String encoding)
+		{
+			super(encoding);
+		}
+
+		@Override
+		public void onStart()
+		{
+			super.onStart();
+			showProgressDlg();
+		}
+
+		@Override
+		public void onFinish()
+		{
+			DismissProgressDlg();
+			super.onFinish();
+		}
+
+		@Override
+		public void onCancel()
+		{
+			DismissProgressDlg();
+			super.onCancel();
+			Log.d(getTag(),"ResponseHandler onCancel");
+		}
+
+		@Override
+		public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+		{
+			super.onSuccess(statusCode, headers, response);
+			Log.d("Voting result", response.toString());
+			// save the vote
+			voteManager.saveVote(lastVotedEmotion);
+			// move to the result fragment
+			emotionToResult();
+		}
+
+		@Override
+		public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
+		{
+			super.onFailure(statusCode, headers, throwable, errorResponse);
+			Toast.makeText(getActivity().getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
+		{
+			super.onFailure(statusCode, headers, responseString, throwable);
+			Toast.makeText(getActivity().getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+		}
+
+		private void showProgressDlg()
+		{
+			progressdlg = ProgressDialog.show(getActivity(),getString(R.string.app_name),getString(R.string.gettingData),true, false);
+		}
+
+		private void DismissProgressDlg()
+		{
+			if (null != progressdlg)
+			{
+				progressdlg.dismiss();
+				progressdlg = null;
+			}
+		}
 	}
 }
