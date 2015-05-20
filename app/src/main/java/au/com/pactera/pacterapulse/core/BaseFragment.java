@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.pactera.pacterapulseopensourceandroid.R;
+import au.com.pactera.pacterapulse.R;
 
 import butterknife.ButterKnife;
 
