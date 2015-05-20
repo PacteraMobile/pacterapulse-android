@@ -3,6 +3,7 @@ package au.com.pactera.pacterapulse;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import com.crashlytics.android.Crashlytics;
 import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 import au.com.pactera.pacterapulse.fragment.ResultFragment;
+import au.com.pactera.pacterapulse.helper.LoginHelper;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import io.fabric.sdk.android.Fabric;
@@ -30,6 +32,7 @@ public class MainActivity extends Activity implements
 	// Key of data which tell if the app is the first time launched saved in shared preference.
 	final String FIRST_RUN = "FIRST_RUN";
 	private ActionBar mActionBar = null;
+	LoginHelper loginHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +60,8 @@ public class MainActivity extends Activity implements
 			}
 			else
 			{
+				loginHelper = new LoginHelper();
+				loginHelper.callAD(this);
 				getFragmentManager().beginTransaction()
 						.add(R.id.container, EmotionFragment.newInstance())
 						.commit();
@@ -72,6 +77,16 @@ public class MainActivity extends Activity implements
 		Crouton.cancelAllCroutons();
 		NetworkHelper.canelAll();
 		super.onDestroy();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		if(null!=loginHelper)
+		{
+			loginHelper.handleActivityResult(requestCode,resultCode,data);
+		}
 	}
 
 	/**
@@ -97,6 +112,16 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onIntroductionInteraction(int id)
 	{
+		switch (id)
+		{
+		case IntroductionFragment.INSTRUCTION_READ:
+		default:
+			if(null == loginHelper)
+			{
+				loginHelper = new LoginHelper();
+				loginHelper.callAD(this);
+			}
+		}
 	}
 
 	@Override

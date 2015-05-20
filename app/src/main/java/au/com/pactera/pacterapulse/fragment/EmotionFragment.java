@@ -91,7 +91,7 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnEmotionInteractionListener");
 		}
-		voteManager = new VoteManager(getActivity());
+		voteManager = new VoteManager(activity);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class EmotionFragment extends Fragment implements View.OnClickListener
 		getActivity().findViewById(R.id.btnHappy).setOnClickListener(this);
 		getActivity().findViewById(R.id.btnNeutral).setOnClickListener(this);
 		getActivity().findViewById(R.id.btnSad).setOnClickListener(this);
-//		getActivity().getActionBar().show();
+		getActivity().getActionBar().show();
 	}
 
 	@Override
