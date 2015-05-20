@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-import com.pactera.pacterapulseopensourceandroid.R;
+import au.com.pactera.pacterapulse.R;
 
 /**
  * Created by kai on 19/05/15.
