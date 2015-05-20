@@ -6,6 +6,8 @@ import android.util.Log;
 import com.github.kevinsawicki.http.HttpRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import au.com.pactera.pacterapulse.model.Emotions;
 
@@ -66,13 +68,11 @@ public class NetworkHelper
 	 * Get statistic info from server
 	 * @throws NetworkException
 	 */
-	public static Emotions getResult() throws NetworkException {
+	public static Emotions getResult() throws NetworkException, JSONException {
 		String url = API_PART_RESULT_URL + "/" + "24hours";
-		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_POST);
+		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_GET);
 		request(request);
-		Log.d("NETWORK",request.body());
-
-		return null;
-
+		JSONObject json = new JSONObject(request.body());
+		return new Emotions(json.getJSONArray("emotionVotes"));
 	}
 }

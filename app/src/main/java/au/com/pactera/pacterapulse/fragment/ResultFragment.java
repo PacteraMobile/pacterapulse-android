@@ -45,6 +45,10 @@ public class ResultFragment extends BaseFragment<Emotions> {
         return NetworkHelper.getResult();
     }
 
+    @Override
+    protected int getLoaderOn() {
+        return ONCREATE;
+    }
 
     @Override
     public void onLoaderDone(Emotions items) {
@@ -53,6 +57,7 @@ public class ResultFragment extends BaseFragment<Emotions> {
 
     @Override
     public void showError(Exception e) {
+        e.printStackTrace();
         Toast.makeText(context, "Network error!", Toast.LENGTH_SHORT).show();
     }
 
