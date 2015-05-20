@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import au.com.pactera.pacterapulse.R;
 
+import au.com.pactera.pacterapulse.R;
 import butterknife.ButterKnife;
 
 /**
@@ -93,9 +93,17 @@ public abstract class BaseFragment<T> extends Fragment implements
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getLoaderOn() == ONCREATE && reloadNeeded(savedInstanceState)) {
-            onStartLoading();
-            getLoaderManager().initLoader(this.hashCode(), getArguments(), this);
+           initLoader(getArguments());
         }
+    }
+
+    /**
+     * manually initial and start loader
+     * @param bundle
+     */
+    protected void initLoader(Bundle bundle) {
+        onStartLoading();
+        getLoaderManager().initLoader(this.hashCode(), bundle, this);
     }
 
     protected boolean reloadNeeded(final Bundle savedInstanceState) {

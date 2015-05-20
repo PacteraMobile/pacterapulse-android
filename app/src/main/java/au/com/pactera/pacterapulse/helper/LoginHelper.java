@@ -13,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.NoSuchPaddingException;
 
+import au.com.pactera.pacterapulse.app.PacteraPulse;
+
 /**
  * Created by chanielyu on 20/05/2015.
  */
@@ -53,6 +55,7 @@ public class LoginHelper
 			{
 				Log.d("AuthResult", "" + result.toString());
 				TOKEN = result.getRefreshToken();
+				PacteraPulse.getInstance().setTOKEN(TOKEN);
 			}
 
 			@Override
