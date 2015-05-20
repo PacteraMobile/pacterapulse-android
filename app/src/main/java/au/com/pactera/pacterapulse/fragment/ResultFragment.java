@@ -1,8 +1,9 @@
-package com.pactera.pacterapulseopensourceandroid.fragment;
+package au.com.pactera.pacterapulse.fragment;
 
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +15,17 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.pactera.pacterapulseopensourceandroid.R;
-import com.pactera.pacterapulseopensourceandroid.chart.EmotionBarChartView;
-import com.pactera.pacterapulseopensourceandroid.helper.NetworkHelper;
-import com.pactera.pacterapulseopensourceandroid.model.Emotions;
 
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+
+import au.com.pactera.pacterapulse.R;
+import au.com.pactera.pacterapulse.chart.EmotionBarChartView;
+import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.model.Emotions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,8 +80,8 @@ public class ResultFragment extends Fragment
 		super.onAttach(activity);
 		try
 		{
-			mListener = new WeakReference<OnResultInteractionListener>((OnResultInteractionListener)activity);
-			mWeakActivity = new WeakReference<Activity>(activity);
+			mListener = new WeakReference<>((OnResultInteractionListener)activity);
+			mWeakActivity = new WeakReference<>(activity);
 		}
 		catch (ClassCastException e)
 		{
@@ -123,62 +125,105 @@ public class ResultFragment extends Fragment
 		super.onPrepareOptionsMenu(menu);
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		switch (id)
+		{
+		case android.R.id.home:
+			getFragmentManager().popBackStack();
+			return true;
+		default:
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	private void getResultData()
 	{
-		NetworkHelper.getResult("24hours", new JsonHttpResponseHandler()
-		{
+		NetworkHelper.getResult("24hours", new JsonHttpResponseHandler() {
+			private ProgressDialog progressdlg;
 			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+			public void onStart()
 			{
+				super.onStart();
+				showProgressDlg();
+			}
+
+			@Override
+			public void onFinish()
+			{
+				DismissProgressDlg();
+				super.onFinish();
+			}
+
+			@Override
+			public void onCancel()
+			{
+				DismissProgressDlg();
+				super.onCancel();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
 				Log.d("Voting result", response.toString());
 				// show emotions
-				try
-				{
+				try {
 					// TODO: The following code needs to be changed to handle all possible error.
 					// It is OK at the moment we have the protocol to make sure all JSON object are exist.
 					Emotions emotions = new Emotions(response.getJSONArray("emotionVotes"));
-					setEmotionResult(emotions.getHappy(),emotions.getSoso(),emotions.getSad());
-				}
-				catch (JSONException e)
-				{
+					setEmotionResult(emotions.getHappy(), emotions.getSoso(), emotions.getSad());
+				} catch (JSONException e) {
 					Log.w("JSON Exception", e.getMessage());
-				}
-				catch (Exception e)
-				{
+				} catch (Exception e) {
 					Log.w("Exception", e.getMessage());
 				}
 				OnResultInteractionListener listener = mListener.get();
 				Activity act = mWeakActivity.get();
-				if (listener != null && act != null)
-				{
+				if (listener != null && act != null) {
 					listener.onResultInteraction(RESULT_SUCCESS);
 				}
 			}
 
 			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-			{
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
 				super.onFailure(statusCode, headers, throwable, errorResponse);
 				OnResultInteractionListener listener = mListener.get();
 				Activity act = mWeakActivity.get();
-				if (listener != null && act != null)
-				{
+				if (listener != null && act != null) {
 					Toast.makeText(act, "Network error!", Toast.LENGTH_SHORT).show();
 					listener.onResultInteraction(RESULT_FAILURE);
 				}
 			}
 
 			@Override
-			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-			{
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
 				OnResultInteractionListener listener = mListener.get();
 				Activity act = mWeakActivity.get();
-				if (listener != null && act != null)
-				{
+				if (listener != null && act != null) {
 					Toast.makeText(act, "Network error!", Toast.LENGTH_SHORT).show();
 					listener.onResultInteraction(RESULT_FAILURE);
+				}
+			}
+
+			private void showProgressDlg()
+			{
+				progressdlg = ProgressDialog.show(getActivity(),getString(R.string.app_name),getString(R.string.gettingData),true, false);
+			}
+
+			private void DismissProgressDlg()
+			{
+				if (null != progressdlg)
+				{
+					progressdlg.dismiss();
+					progressdlg = null;
 				}
 			}
 		});
@@ -205,7 +250,6 @@ public class ResultFragment extends Fragment
 	 */
 	public interface OnResultInteractionListener
 	{
-		// TODO: Update argument type and name
 		public void onResultInteraction(int id);
 	}
 }

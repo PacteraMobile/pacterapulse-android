@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.chart;
+package au.com.pactera.pacterapulse.chart;
 
 import android.content.Context;
 import android.graphics.Canvas;

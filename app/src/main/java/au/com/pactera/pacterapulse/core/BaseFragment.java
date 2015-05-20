@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.core;
+package au.com.pactera.pacterapulse.core;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

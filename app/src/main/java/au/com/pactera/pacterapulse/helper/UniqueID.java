@@ -1,4 +1,4 @@
-package com.pactera.pacterapulseopensourceandroid.helper;
+package au.com.pactera.pacterapulse.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
