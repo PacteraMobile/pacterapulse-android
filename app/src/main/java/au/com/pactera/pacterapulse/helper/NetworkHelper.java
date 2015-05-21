@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import au.com.pactera.pacterapulse.app.Config;
 import au.com.pactera.pacterapulse.model.Emotions;
 
 
@@ -20,7 +21,7 @@ import au.com.pactera.pacterapulse.model.Emotions;
 public class NetworkHelper
 {
 	// /RequestStatuses/index
-	private static final String BASE_URL = "http://pacterapulse-sit.elasticbeanstalk.com/";
+	private static final String BASE_URL = Config.SERVERURL;
 	private static final String API_PART_URL = "";
 	private static final String API_PART_RESULT_URL = "emotions";
 	private static final String API_PART_VOTE_URL = "emotions";
@@ -38,14 +39,16 @@ public class NetworkHelper
 	 * @param context
 	 * @throws Exception
 	 */
-	public static void postVote(Integer emotionId, Context context) throws Exception
+	public static boolean postVote(Integer emotionId, Context context) throws Exception
 	{
 		String url = API_PART_VOTE_URL + "/" + UniqueID.id(context) + "/" + emotionId.toString();
 		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_POST);
 		request(request);
+		return true;
 	}
 
 	private static HttpRequest request(HttpRequest request) throws NetworkException {
+		Log.d("Network",request.getConnection().getURL().toString());
 		request.connectTimeout(TIMEOUT);
 		request.acceptJson();
 		request.acceptCharset("UTF-8");
@@ -68,8 +71,8 @@ public class NetworkHelper
 	 * Get statistic info from server
 	 * @throws NetworkException
 	 */
-	public static Emotions getResult() throws NetworkException, JSONException {
-		String url = API_PART_RESULT_URL + "/" + "24hours";
+	public static Emotions getResult(String type) throws NetworkException, JSONException {
+		String url = API_PART_RESULT_URL + "/" + type;
 		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_GET);
 		request(request);
 		JSONObject json = new JSONObject(request.body());

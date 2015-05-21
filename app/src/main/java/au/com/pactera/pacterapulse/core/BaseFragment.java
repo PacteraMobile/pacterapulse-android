@@ -101,7 +101,7 @@ public abstract class BaseFragment<T> extends Fragment implements
      * manually initial and start loader
      * @param bundle
      */
-    protected void initLoader(Bundle bundle) {
+    private void initLoader(Bundle bundle) {
         onStartLoading();
         getLoaderManager().initLoader(this.hashCode(), bundle, this);
     }
