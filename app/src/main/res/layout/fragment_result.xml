@@ -1,9 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			 xmlns:tools="http://schemas.android.com/tools"
 			 android:layout_width="match_parent"
 			 android:layout_height="match_parent"
 			 tools:context="au.com.pactera.pacterapulse.fragment.ResultFragment">
 
-	<!-- TODO: Update blank fragment layout -->
+	<RadioGroup
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:orientation="horizontal"
+		android:id="@+id/actions"
+		style="@android:style/Widget.CompoundButton.RadioButton">
 
-</FrameLayout>
+		<RadioButton
+			android:id="@+id/oneday"
+			style="@style/Button.ActionButton"
+			android:text="@string/oneday"
+			android:tag="24hours"/>
+		<RadioButton
+			android:id="@+id/oneweek"
+			style="@style/Button.ActionButton"
+			android:text="@string/oneweek"
+			android:tag="7days"/>
+		<RadioButton
+			android:id="@+id/onemonth"
+			style="@style/Button.ActionButton"
+			android:text="@string/onemonth"
+			android:tag="30days"/>
+	</RadioGroup>
+
+	<au.com.pactera.pacterapulse.chart.EmotionBarChartView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/chartView"
+		android:layout_above="@id/actions"/>
+
+	<ProgressBar
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		style="@android:style/Widget.ProgressBar.Small"
+		android:id="@+id/progressBar"/>
+
+</RelativeLayout>

@@ -10,6 +10,7 @@
 	<string name="activity_not_found">Activity is not found</string>
 	<string name="voted_today">Thanks. You have voted today.</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="oneday">24 Hours</string>
+	<string name="oneweek">1 Week</string>
+	<string name="onemonth">1 Month</string>
 </resources>
