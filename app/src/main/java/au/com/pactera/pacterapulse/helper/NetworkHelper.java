@@ -50,6 +50,7 @@ public class NetworkHelper
 	private static HttpRequest request(HttpRequest request) throws NetworkException {
 		Log.d("Network",request.getConnection().getURL().toString());
 		request.connectTimeout(TIMEOUT);
+		request.readTimeout(TIMEOUT);
 		request.acceptJson();
 		request.acceptCharset("UTF-8");
 		request.useCaches(true);
