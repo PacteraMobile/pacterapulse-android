@@ -3,6 +3,7 @@ package au.com.pactera.pacterapulse.chart;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.util.Log;
 
 import org.xclcharts.chart.BarChart;
@@ -32,14 +33,25 @@ public class EmotionBarChartView extends BaseChartView
 	private List<String> chartLabels = new LinkedList<>();
 	private List<BarData> chartData = new LinkedList<>();
 
-	public EmotionBarChartView(Context context, int chartStyle, int offsetHeight)
-	{
+	public EmotionBarChartView(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		init();
+	}
 
-		mChartStyle = chartStyle;
+	public EmotionBarChartView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+	}
+
+	public EmotionBarChartView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		init();
+	}
+
+	private void init() {
+		mChartStyle = 0;
 		mOffsetWidth = 0;
-		mOffsetHeight = offsetHeight;
+		mOffsetHeight = 0;
 		chartLabels();
 		chartDataSet();
 		chartRender();

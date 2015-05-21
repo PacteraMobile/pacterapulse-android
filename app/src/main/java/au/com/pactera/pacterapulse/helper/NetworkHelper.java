@@ -68,8 +68,8 @@ public class NetworkHelper
 	 * Get statistic info from server
 	 * @throws NetworkException
 	 */
-	public static Emotions getResult() throws NetworkException, JSONException {
-		String url = API_PART_RESULT_URL + "/" + "24hours";
+	public static Emotions getResult(String type) throws NetworkException, JSONException {
+		String url = API_PART_RESULT_URL + "/" + type;
 		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_GET);
 		request(request);
 		JSONObject json = new JSONObject(request.body());
