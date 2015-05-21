@@ -34,7 +34,7 @@ public abstract class BaseFragment<T> extends Fragment implements
      * Close current UI container(activity/dialog)
      */
     public void finish() {
-        {
+        if (getActivity()!=null){
             getActivity().finish();
         }
     }
@@ -206,7 +206,9 @@ public abstract class BaseFragment<T> extends Fragment implements
      * @param b
      */
     protected void refresh(final Bundle b) {
-        onStartLoading();
+        if (loader!=null) {
+            onStartLoading();
+        }
         getLoaderManager().restartLoader(this.hashCode(), b, this);
     }
 
