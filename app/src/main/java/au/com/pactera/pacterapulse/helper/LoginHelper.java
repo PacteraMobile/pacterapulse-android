@@ -27,13 +27,6 @@ public class LoginHelper
 	private static final String REDIRECT_URL = "ppos://pactera.com.au/oauth2";
 	private static final String AUTHORITY_URL = "https://login.windows.net/common";
 
-	public static String getTOKEN()
-	{
-		return TOKEN;
-	}
-
-	private static String TOKEN = "";
-
 	public void callAD(Activity activity)
 	{
 		try
@@ -54,13 +47,15 @@ public class LoginHelper
 			public void onSuccess(AuthenticationResult result)
 			{
 				Log.d("AuthResult", "" + result.toString());
-				TOKEN = result.getRefreshToken();
-				PacteraPulse.getInstance().setTOKEN(TOKEN);
+				PacteraPulse.getInstance().setTOKEN(result.getRefreshToken());
+				PacteraPulse.getInstance().setGivenName(result.getUserInfo().getGivenName());
+				PacteraPulse.getInstance().setSurName(result.getUserInfo().getFamilyName());
 			}
 
 			@Override
 			public void onError(Exception exc)
 			{
+				// TODO: Add token expired process.
 				Log.d("AuthResult", "" + exc.getLocalizedMessage());
 			}
 

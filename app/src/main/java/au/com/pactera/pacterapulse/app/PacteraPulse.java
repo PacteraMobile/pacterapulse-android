@@ -6,30 +6,54 @@ import android.app.Application;
  * Application context
  * Created by kai on 20/05/15.
  */
-public class PacteraPulse extends Application{
+public class PacteraPulse extends Application
+{
 
-    private static PacteraPulse instance;
+	private static PacteraPulse instance;
 
-    public String getTOKEN()
-    {
-        return TOKEN;
-    }
+	private String TOKEN = "";
+	private String givenName = "";
+	private String surName = "";
 
-    public void setTOKEN(String token)
-    {
-        TOKEN = token;
-    }
+	public String getTOKEN()
+	{
+		return TOKEN;
+	}
 
-    private String TOKEN = "";
+	public void setTOKEN(String token)
+	{
+		TOKEN = token;
+	}
+	public String getGivenName()
+	{
+		return givenName;
+	}
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        new Config(this);
-        instance = this;
-    }
+	public void setGivenName(String givenName)
+	{
+		this.givenName = givenName;
+	}
 
-    public static PacteraPulse getInstance() {
-        return instance;
-    }
+	public String getSurName()
+	{
+		return surName;
+	}
+
+	public void setSurName(String surName)
+	{
+		this.surName = surName;
+	}
+
+	@Override
+	public void onCreate()
+	{
+		super.onCreate();
+		new Config(this);
+		instance = this;
+	}
+
+	public static PacteraPulse getInstance()
+	{
+		return instance;
+	}
 }

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.view.MenuItem;
+
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
@@ -38,6 +40,18 @@ public class MainActivity extends SinglePaneActivity {
 			}
 		}
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+		case android.R.id.home:
+			return false;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
