@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import au.com.pactera.pacterapulse.app.Config;
 import au.com.pactera.pacterapulse.model.Emotions;
 
 
@@ -20,7 +21,7 @@ import au.com.pactera.pacterapulse.model.Emotions;
 public class NetworkHelper
 {
 	// /RequestStatuses/index
-	private static final String BASE_URL = "http://pacterapulse-sit.elasticbeanstalk.com/";
+	private static final String BASE_URL = Config.SERVERURL;
 	private static final String API_PART_URL = "";
 	private static final String API_PART_RESULT_URL = "emotions";
 	private static final String API_PART_VOTE_URL = "emotions";
@@ -46,6 +47,7 @@ public class NetworkHelper
 	}
 
 	private static HttpRequest request(HttpRequest request) throws NetworkException {
+		Log.d("Network",request.getConnection().getURL().toString());
 		request.connectTimeout(TIMEOUT);
 		request.acceptJson();
 		request.acceptCharset("UTF-8");
