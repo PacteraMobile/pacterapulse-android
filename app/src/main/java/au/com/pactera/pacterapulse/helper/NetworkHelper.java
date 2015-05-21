@@ -39,11 +39,12 @@ public class NetworkHelper
 	 * @param context
 	 * @throws Exception
 	 */
-	public static void postVote(Integer emotionId, Context context) throws Exception
+	public static boolean postVote(Integer emotionId, Context context) throws Exception
 	{
 		String url = API_PART_VOTE_URL + "/" + UniqueID.id(context) + "/" + emotionId.toString();
 		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_POST);
 		request(request);
+		return true;
 	}
 
 	private static HttpRequest request(HttpRequest request) throws NetworkException {
