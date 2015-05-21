@@ -31,7 +31,7 @@ android {
 	signingConfigs {
 		Pactera {
 			keyPassword '1a2b3c4d5e'
-			storeFile file('../keys/release.jks')
+			storeFile file('../keys/Pactera.jks')
 			storePassword '1a2b3c4d5e'
 			keyAlias 'PacteraRelease'
 		}
