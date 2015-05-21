@@ -67,4 +67,7 @@ dependencies {
 		// exclusion is not necessary, but generally a good idea.
 		exclude group: 'com.google.android', module: 'support-v4'
 	}
+	compile('com.microsoft.aad:adal:1.1.5') {
+		exclude group: 'com.android.support'
+	}
 }
