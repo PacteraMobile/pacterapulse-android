@@ -117,6 +117,12 @@ public abstract class BaseFragment<T> extends Fragment implements
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getLoaderManager().destroyLoader(this.hashCode());
+        loader = null;
+    }
 
     @Override
     public Loader<T> onCreateLoader(final int id, final Bundle args) {
@@ -206,9 +212,9 @@ public abstract class BaseFragment<T> extends Fragment implements
      * @param b
      */
     protected void refresh(final Bundle b) {
-        if (loader!=null) {
-            onStartLoading();
-        }
+//        if (loader!=null) {
+//            onStartLoading();
+//        }
         getLoaderManager().restartLoader(this.hashCode(), b, this);
     }
 
