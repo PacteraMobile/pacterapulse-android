@@ -48,8 +48,8 @@ public class EmotionFragment extends BaseFragment<Boolean> {
         return R.layout.fragment_emotion;
     }
 
-    @OnClick({R.id.btnAgree, R.id.btnHappy, R.id.btnNeutral})
-    void onVote(Button button) {
+    @OnClick({R.id.btnSad, R.id.btnHappy, R.id.btnNeutral})
+    void onVote(View button) {
         if (voteManager.hasVotedToday()) {
             SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, false));
             return;
