@@ -13,4 +13,5 @@
 	<string name="oneday">24 Hours</string>
 	<string name="oneweek">1 Week</string>
 	<string name="onemonth">1 Month</string>
+	<string name="vote_again">Network error, please vote again!</string>
 </resources>

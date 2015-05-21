@@ -71,7 +71,7 @@ public class EmotionFragment extends BaseFragment<Boolean> {
 
     @Override
     public void showError(Exception e) {
-        Toast.makeText(getActivity().getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class EmotionFragment extends BaseFragment<Boolean> {
         if (items) {
             SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, items.booleanValue()));
         } else {
-            Toast.makeText(getActivity().getBaseContext(), "Network error, please vote again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
         }
     }
 
