@@ -5,4 +5,19 @@
 		<!-- Customize your theme here. -->
 	</style>
 
+
+
+	<style name="Button"/>
+
+	<style name="Button.ActionButton">
+		<item name="android:button">@null</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:gravity">center</item>
+		<item name="android:background">@drawable/action_button_bg</item>
+		<item name="android:textColor">@color/action_button_textcolor</item>
+		<item name="android:minHeight">40dp</item>
+	</style>
+
 </resources>
