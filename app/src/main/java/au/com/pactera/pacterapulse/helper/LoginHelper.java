@@ -3,6 +3,7 @@ package au.com.pactera.pacterapulse.helper;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.microsoft.aad.adal.AuthenticationCallback;
 import com.microsoft.aad.adal.AuthenticationContext;
