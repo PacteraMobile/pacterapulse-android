@@ -1,5 +1,6 @@
 package au.com.pactera.pacterapulse.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -82,7 +83,7 @@ public class EmotionFragment extends BaseFragment<Boolean> implements View.OnCli
                 Log.w("Warning", "Should never reach here!");
         }
         if (checkNetwork())
-            initLoader(getArguments());
+            refresh(getArguments());
     }
 
 
@@ -91,7 +92,7 @@ public class EmotionFragment extends BaseFragment<Boolean> implements View.OnCli
     public Boolean pendingData(Bundle arg) throws Exception {
         if (voteManager.hasVotedToday())
             return false;
-        NetworkHelper.postVote(vote,context);
+        NetworkHelper.postVote(vote, context);
         return true;
     }
 
@@ -104,7 +105,7 @@ public class EmotionFragment extends BaseFragment<Boolean> implements View.OnCli
     public void onLoaderDone(Boolean items) {
         super.onLoaderDone(items);
         voteManager.saveVote(vote);
-        SinglePaneActivity.start(ResultFragment.class,getActivity(),new Intent().putExtra(SUCCESS,items.booleanValue()));
+        SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, items.booleanValue()));
     }
 
     @Override
