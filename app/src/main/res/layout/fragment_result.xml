@@ -17,7 +17,8 @@
 			android:id="@+id/oneday"
 			style="@style/Button.ActionButton"
 			android:text="@string/oneday"
-			android:tag="24hours"/>
+			android:tag="24hours"
+			android:checked="true"/>
 		<RadioButton
 			android:id="@+id/oneweek"
 			style="@style/Button.ActionButton"
