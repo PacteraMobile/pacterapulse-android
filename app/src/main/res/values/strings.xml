@@ -14,4 +14,6 @@
 	<string name="oneweek">1 Week</string>
 	<string name="onemonth">1 Month</string>
 	<string name="vote_again">Network error, please vote again!</string>
+	<string name="hearmore">We would love to hear more</string>
+	<string name="workload">Work overload-</string>
 </resources>
