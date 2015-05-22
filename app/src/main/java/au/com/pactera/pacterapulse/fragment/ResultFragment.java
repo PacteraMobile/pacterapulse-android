@@ -2,12 +2,9 @@ package au.com.pactera.pacterapulse.fragment;
 
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.List;
@@ -33,19 +30,20 @@ public class ResultFragment extends BaseFragment<Emotions> {
     @InjectView(R.id.chartView)
     EmotionBarChartView chartView;
 
-    @InjectViews({R.id.oneweek,R.id.oneday,R.id.onemonth})
-    List<View> radios;
+    @InjectViews({R.id.oneweek, R.id.oneday, R.id.onemonth})
+    List<RadioButton> radios;
 
     private String currentType = "24hours";
 
 
     @OnCheckedChanged({R.id.oneday, R.id.onemonth, R.id.oneweek})
     void onActionsChecked(RadioButton view) {
-        if (!view.getTag().equals(currentType)) {
+        if (view.isChecked() && !view.getTag().equals(currentType)) {
             currentType = (String) view.getTag();
             Bundle b = new Bundle();
             b.putString(TYPE, currentType);
             refresh(b);
+            chartView.clear();
         }
     }
 
@@ -75,6 +73,7 @@ public class ResultFragment extends BaseFragment<Emotions> {
 
     @Override
     protected void onStartLoading() {
+        super.onStartLoading();
         progressBar.setVisibility(View.VISIBLE);
         ButterKnife.apply(radios, new ButterKnife.Action<View>() {
             @Override
@@ -86,6 +85,7 @@ public class ResultFragment extends BaseFragment<Emotions> {
 
     @Override
     protected void onStopLoading() {
+        super.onStopLoading();
         progressBar.setVisibility(View.GONE);
         ButterKnife.apply(radios, new ButterKnife.Action<View>() {
             @Override
