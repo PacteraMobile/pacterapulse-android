@@ -1,7 +1,6 @@
 package au.com.pactera.pacterapulse;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import au.com.pactera.pacterapulse.app.PacteraPulse;
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
-import au.com.pactera.pacterapulse.helper.LoginHelper;
 
 
 /**
@@ -83,19 +81,22 @@ public class MainActivity extends SinglePaneActivity {
 		return Fragment.instantiate(this,EmotionFragment.class.getName());
 	}
 
-	public void callAD(Activity activity)
+	private void callAD(Activity activity)
 	{
 		try
 		{
-			mAuthContext = new AuthenticationContext(this.getApplicationContext(), AUTHORITY_URL,
-					true); //true = use SharedPreferences for cache
+			mAuthContext = new AuthenticationContext(this.getApplicationContext(),
+					AUTHORITY_URL, true); //true = use SharedPreferences for cache
 		}
 		catch (NoSuchAlgorithmException e)
 		{
+			Log.d(getClass().getName(),e.toString());
 		}
 		catch (NoSuchPaddingException e)
 		{
+			Log.d(getClass().getName(),e.toString());
 		}
+
 		AuthenticationCallback callback = new AuthenticationCallback<AuthenticationResult>()
 		{
 
@@ -114,7 +115,7 @@ public class MainActivity extends SinglePaneActivity {
 				// TODO: Add token expired process.
 				Log.d("AuthResult", "" + exc.getLocalizedMessage());
 				SinglePaneActivity.start(IntroductionFragment.class, MainActivity.this);
-				finish();
+				MainActivity.this.finish();
 			}
 
 		};
