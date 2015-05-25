@@ -37,6 +37,8 @@ public class MainActivity extends SinglePaneActivity {
 	private final String FIRST_RUN = "FIRST_RUN";
 	// Login office 365
 	private AuthenticationContext mAuthContext;
+	// Activity visibility
+	private boolean visible;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +54,28 @@ public class MainActivity extends SinglePaneActivity {
 			callAD(this);
 		}
 		super.onCreate(savedInstanceState);
+		visible = false;
+	}
+
+	@Override
+	protected void onResume()
+	{
+		visible = true;
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause()
+	{
+		visible = false;
+		super.onPause();
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		mAuthContext.cancelAuthenticationActivity(0);
+		super.onDestroy();
 	}
 
 	@Override
@@ -81,11 +105,15 @@ public class MainActivity extends SinglePaneActivity {
 		return Fragment.instantiate(this,EmotionFragment.class.getName());
 	}
 
+	public boolean isVisible()
+	{
+		return visible;
+	}
 	private void callAD(Activity activity)
 	{
 		try
 		{
-			mAuthContext = new AuthenticationContext(this.getApplicationContext(),
+			mAuthContext = new AuthenticationContext(activity.getApplicationContext(),
 					AUTHORITY_URL, true); //true = use SharedPreferences for cache
 		}
 		catch (NoSuchAlgorithmException e)
@@ -114,8 +142,11 @@ public class MainActivity extends SinglePaneActivity {
 			{
 				// TODO: Add token expired process.
 				Log.d("AuthResult", "" + exc.getLocalizedMessage());
-				SinglePaneActivity.start(IntroductionFragment.class, MainActivity.this);
-				MainActivity.this.finish();
+				if(MainActivity.this.isVisible())
+				{
+					SinglePaneActivity.start(IntroductionFragment.class, MainActivity.this);
+					MainActivity.this.finish();
+				}
 			}
 
 		};
