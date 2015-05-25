@@ -1,6 +1,5 @@
 <resources>
 	<string name="app_name">PacteraPulse</string>
-	<string name="agree_btn"></string>
 	<string name="action_settings">Settings</string>
 	<string name="action_results">Show Results</string>
 	<string name="invalidNetwork">No network available!\nPlease check your network connection!</string>
@@ -10,10 +9,16 @@
 	<string name="activity_not_found">Activity is not found</string>
 	<string name="voted_today">Thanks. You have voted today.</string>
 
-	<string name="oneday">24 Hours</string>
-	<string name="oneweek">1 Week</string>
-	<string name="onemonth">1 Month</string>
+	<string name="one_day">24 Hours</string>
+	<string name="one_week">1 Week</string>
+	<string name="one_month">1 Month</string>
 	<string name="vote_again">Network error, please vote again!</string>
-	<string name="hearmore">We would love to hear more</string>
+	<string name="hear_more">We would love to hear more</string>
 	<string name="workload">Work overload-</string>
+	<string name="detail_emotion_desc">detail_emotion_icon</string>
+	<string name="user_name">Thank you</string>
+	<string name="label_bad">Bad</string>
+	<string name="label_good">Good</string>
+	<string name="feedback">Project feedback and accomplishment-</string>
+	<string name="btntxt_submit">Submit</string>
 </resources>

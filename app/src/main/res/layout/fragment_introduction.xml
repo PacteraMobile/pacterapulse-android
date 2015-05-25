@@ -10,7 +10,6 @@
 	<Button
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:text="@string/agree_btn"
 		android:id="@+id/btnAgree"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"

@@ -9,40 +9,41 @@
 
 	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="0dp"
+		android:layout_weight="1">
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
-			<LinearLayout
+			<FrameLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="horizontal">
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="right|center_vertical"
+					android:gravity="end"
+					android:textStyle="bold"
+					tools:text="@string/user_name"/>
 
 				<ImageView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_gravity="left|center_vertical"
+					android:layout_marginLeft="0dp"
+					android:layout_marginTop="0dp"
+					android:contentDescription="@string/detail_emotion_desc"
 					android:src="@mipmap/happy_icon"/>
-
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:orientation="horizontal"
-					android:gravity="center_vertical|right">
-
-					<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						tools:text="Thank you Martin"/>
-				</LinearLayout>
-			</LinearLayout>
+			</FrameLayout>
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/hearmore"/>
+				android:text="@string/hear_more"
+				android:textStyle="bold"/>
 
 			<TextView
 				android:layout_width="wrap_content"
@@ -54,6 +55,76 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
 
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="start"
+					android:text="@string/label_bad"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end"
+					android:text="@string/label_good"/>
+			</FrameLayout>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/hear_more"/>
+
+			<SeekBar
+				android:id="@+id/seek_hear_more"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="start"
+					android:text="@string/label_bad"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end"
+					android:text="@string/label_good"/>
+			</FrameLayout>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/feedback"/>
+
+			<SeekBar
+				android:id="@+id/seek_project_feedback"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="start"
+					android:text="@string/label_bad"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end"
+					android:text="@string/label_good"/>
+			</FrameLayout>
 
 		</LinearLayout>
 
@@ -61,9 +132,12 @@
 
 	<Button
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/btnSubmit"
 		android:layout_marginTop="16dp"
-		android:layout_weight="0"
-		android:minHeight="40dp"/>
+		android:text="@string/btntxt_submit"
+		android:minHeight="40dp"
+		android:textColor="@android:color/holo_red_light"
+		android:background="@android:color/holo_orange_light"/>
 
 </LinearLayout>
