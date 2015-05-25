@@ -1,14 +1,13 @@
 package au.com.pactera.pacterapulse.helper;
 
-import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * Created by liny1 on 14/05/2015.
  */
-@RunWith(AndroidJUnit4.class)
+@SmallTest
 public class VoteManagerTest {
 
     @Test

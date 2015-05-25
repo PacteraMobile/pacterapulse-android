@@ -46,4 +46,13 @@ public class Emotions
 			sad = jSad.optInt("count");
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Emotions{" +
+				"happy=" + happy +
+				", soso=" + soso +
+				", sad=" + sad +
+				'}';
+	}
 }

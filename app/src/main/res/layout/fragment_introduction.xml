@@ -4,9 +4,6 @@
 				android:layout_height="match_parent"
 				tools:context="au.com.pactera.pacterapulse.fragment.IntroductionFragment"
 				android:background="@mipmap/splash_android">
-
-	<!-- TODO: Update blank fragment layout -->
-
 	<Button
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"

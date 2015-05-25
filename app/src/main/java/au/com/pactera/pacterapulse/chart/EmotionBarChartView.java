@@ -200,4 +200,12 @@ public class EmotionBarChartView extends BaseChartView
 			dataSource.get(2).getDataSet().set(0, ((double) sad) * 100 / sum);
 		}
 	}
+
+	public void clear() {
+		List<BarData> dataSource = mChart.getDataSource();
+		dataSource.get(0).getDataSet().set(0, 0.0);
+		dataSource.get(1).getDataSet().set(0, 0.0);
+		dataSource.get(2).getDataSet().set(0, 0.0);
+		invalidate();
+	}
 }
