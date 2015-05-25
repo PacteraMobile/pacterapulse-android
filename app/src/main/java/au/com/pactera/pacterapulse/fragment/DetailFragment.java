@@ -1,6 +1,8 @@
 package au.com.pactera.pacterapulse.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -16,6 +18,9 @@ import java.util.List;
 
 import au.com.pactera.pacterapulse.R;
 import au.com.pactera.pacterapulse.core.BaseFragment;
+import au.com.pactera.pacterapulse.core.SinglePaneActivity;
+import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.helper.VoteManager;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
@@ -27,7 +32,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  * <p/>
  * Created by kai on 22/05/15.
  */
-public class DetailFragment extends BaseFragment<Void>
+public class DetailFragment extends BaseFragment<Boolean>
 {
 	static final String SUCCESS = "_SUCCESS";
 	@InjectView(R.id.emotion_icon)
@@ -39,17 +44,20 @@ public class DetailFragment extends BaseFragment<Void>
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
 
+	private VoteManager voteManager;
+	private int vote;
+	private ProgressDialog progressDialog;
+
 	@Override
 	protected void setupUI(View view, Bundle bundle) throws Exception
 	{
-		int emotion=-1;
 		String userName;
 		Bundle bundleArg = getArguments();
 		if(null != bundleArg)
 		{
-			emotion = bundleArg.getInt(EmotionFragment.EMOTIONS,-1);
+			vote = bundleArg.getInt(EmotionFragment.EMOTIONS,-1);
 			userName = bundleArg.getString(EmotionFragment.USERNAME);
-			switch (emotion)
+			switch (vote)
 			{
 			case 0:
 				emotionIcon.setImageResource(R.mipmap.happy_icon);
@@ -80,6 +88,8 @@ public class DetailFragment extends BaseFragment<Void>
 			}
 			tvUserName.setText(userName);
 		}
+		voteManager = new VoteManager(getActivity());
+		checkNetwork();
 	}
 
 	private boolean checkNetwork()
@@ -107,36 +117,62 @@ public class DetailFragment extends BaseFragment<Void>
 	@OnClick({R.id.btnSubmit})
 	void onSubmit(View submitButton)
 	{
-		Crouton.makeText(getActivity(), "Submitted", Style.INFO).show();
+		if (voteManager.hasVotedToday())
+		{
+			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, false));
+			finish();
+			return;
+		}
+		if (checkNetwork())
+		{
+			refresh();
+		}
 	}
 
 	@Override
 	protected void onStartLoading()
 	{
 		super.onStartLoading();
+		progressDialog = ProgressDialog.show(getActivity(),
+				getString(R.string.app_name), getString(R.string.app_loading), true, false);
 	}
 
 	@Override
 	protected void onStopLoading()
 	{
+		if(null != progressDialog)
+		{
+			progressDialog.dismiss();
+			progressDialog = null;
+		}
 		super.onStopLoading();
 	}
 
 	@Override
-	public Void pendingData(Bundle arg) throws Exception
+	public Boolean pendingData(Bundle arg) throws Exception
 	{
-		return super.pendingData(arg);
+		return NetworkHelper.postVote(vote, context);
 	}
 
 	@Override
 	public void showError(Exception e)
 	{
-		super.showError(e);
+		Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
-	public void onLoaderDone(Void items)
+	public void onLoaderDone(Boolean items)
 	{
 		super.onLoaderDone(items);
+		voteManager.saveVote(vote);
+		if (items)
+		{
+			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, items.booleanValue()));
+			finish();
+		}
+		else
+		{
+			Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
+		}
 	}
 }
