@@ -1,10 +1,20 @@
 package au.com.pactera.pacterapulse;
 
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.view.ViewManager;
 import android.widget.ImageButton;
+
+import java.util.regex.Matcher;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  * Created by chanielyu on 1/05/2015.
@@ -12,8 +22,6 @@ import android.widget.ImageButton;
 public class ActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
 {
 	private MainActivity mMainActivity = null;
-	private ImageButton btnHappy = null;
-	private ImageButton btnNeutral = null;
 
 	public ActivityTest()
 	{
@@ -32,8 +40,6 @@ public class ActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
 		// flags = {@link Intent#FLAG_ACTIVITY_NEW_TASK}
 		// All other fields are null or empty.
 		mMainActivity = getActivity();
-		btnHappy = (ImageButton) mMainActivity.findViewById(R.id.btnHappy);
-		btnNeutral = (ImageButton) mMainActivity.findViewById(R.id.btnNeutral);
 	}
 
 	@Override
@@ -48,12 +54,10 @@ public class ActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	public void testActivity() throws Exception
 	{
 		assertNotNull(mMainActivity);
-		assertNotNull(btnHappy);
-		assertNotNull(btnNeutral);
-		getInstrumentation().waitForIdleSync();
-		TouchUtils.clickView(this, btnNeutral);
-		getInstrumentation().waitForIdleSync();
-		getInstrumentation().invokeContextMenuAction(mMainActivity, android.R.id.home, 1);
+		onView(withId(R.id.btnNeutral)).perform(click());
+
+//		getInstrumentation().waitForIdleSync();
+//		getInstrumentation().invokeContextMenuAction(mMainActivity, android.R.id.home, 1);
 //		TouchUtils.clickView(this,mMainActivity.getActionBar().getCustomView().findViewById(android.R.id.home));
 //		sendKeys(KeyEvent.KEYCODE_BACK);
 		/*getInstrumentation().waitForIdleSync();
@@ -62,11 +66,12 @@ public class ActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
 		getInstrumentation().waitForIdleSync();*/
 	}
 
+
+
 	@MediumTest
 	public void testPreconditions() throws Exception
 	{
-		getInstrumentation().waitForIdleSync();
-		TouchUtils.clickView(this, btnHappy);
+		onView(withId(R.id.btnHappy)).perform(click());
 		/*getInstrumentation().invokeMenuActionSync(mMainActivity, R.id.action_showResults, 0);
 		getInstrumentation().waitForIdleSync();
 		getInstrumentation().invokeMenuActionSync(mMainActivity, android.R.id.home, 0);
