@@ -22,18 +22,19 @@
 				android:layout_height="wrap_content">
 
 				<TextView
+					android:id="@+id/userName"
+					style="@android:style/TextAppearance.Medium"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:id="@+id/userName"
 					android:layout_gravity="end|center_vertical"
 					android:gravity="end"
 					android:textStyle="bold"
 					tools:text="@string/user_name"/>
 
 				<ImageView
+					android:id="@+id/emotion_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:id="@+id/emotion_icon"
 					android:layout_gravity="start|center_vertical"
 					android:layout_marginLeft="0dp"
 					android:layout_marginTop="0dp"
@@ -42,22 +43,27 @@
 			</FrameLayout>
 
 			<TextView
+				style="@android:style/TextAppearance.Medium"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:paddingBottom="8dp"
+				android:paddingTop="8dp"
 				android:text="@string/hear_more"
 				android:textStyle="bold"/>
 
 			<TextView
+				style="@android:style/TextAppearance.Medium"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:paddingBottom="8dp"
 				android:text="@string/workload"/>
 
 			<SeekBar
 				android:id="@+id/seek_work_overload"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:max="10"
-				android:longClickable="false"/>
+				android:longClickable="false"
+				android:max="10" />
 
 			<FrameLayout
 				android:layout_width="match_parent"
@@ -77,8 +83,11 @@
 			</FrameLayout>
 
 			<TextView
+				style="@android:style/TextAppearance.Medium"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:paddingBottom="8dp"
+				android:paddingTop="8dp"
 				android:text="@string/hear_more"/>
 
 			<SeekBar
@@ -105,9 +114,12 @@
 			</FrameLayout>
 
 			<TextView
+				style="@android:style/TextAppearance.Medium"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/feedback"/>
+				android:paddingBottom="8dp"
+				android:paddingTop="8dp"
+				android:text="@string/feedback" />
 
 			<SeekBar
 				android:id="@+id/seek_project_feedback"
@@ -137,13 +149,13 @@
 	</ScrollView>
 
 	<Button
+		android:id="@+id/btnSubmit"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/btnSubmit"
 		android:layout_marginTop="16dp"
-		android:text="@string/btntxt_submit"
 		android:minHeight="40dp"
-		tools:textColor="@android:color/holo_red_light"
-		tools:background="@android:color/holo_orange_light"/>
+		android:text="@string/btntxt_submit"
+		tools:background="@android:color/holo_orange_light"
+		tools:textColor="@android:color/holo_red_light" />
 
 </LinearLayout>
