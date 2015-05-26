@@ -18,7 +18,7 @@
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
 			android:background="@drawable/btn_sad"
-			android:tag="2"/>
+			android:tag="@integer/sad"/>
 	</RelativeLayout>
 
 	<RelativeLayout
@@ -33,7 +33,7 @@
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
 			android:background="@drawable/btn_neutral"
-			android:tag="1"/>
+			android:tag="@integer/neutral"/>
 	</RelativeLayout>
 
 	<RelativeLayout
@@ -48,7 +48,7 @@
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
 			android:background="@drawable/btn_happy"
-			android:tag="0"/>
+			android:tag="@integer/happy"/>
 	</RelativeLayout>
 
 

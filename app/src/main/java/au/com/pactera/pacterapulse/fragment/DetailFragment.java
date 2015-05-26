@@ -53,38 +53,32 @@ public class DetailFragment extends BaseFragment<Boolean>
 		Bundle bundleArg = getArguments();
 		if(null != bundleArg)
 		{
-			vote = bundleArg.getInt(EmotionFragment.EMOTIONS,-1);
+			vote = bundleArg.getInt(EmotionFragment.EMOTIONS, -1);
 			userName = bundleArg.getString(EmotionFragment.USERNAME);
-			switch (vote)
-			{
-			case 0:
+
+			if (vote == getResources().getInteger(R.integer.happy)) {
 				emotionIcon.setImageResource(R.mipmap.happy_icon);
 				for(SeekBar bar : seekBars)
 				{
 					bar.setProgress(10);
 				}
 				btnSubmit.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-				break;
-			case 1:
+			} else if (vote == getResources().getInteger(R.integer.neutral)) {
 				emotionIcon.setImageResource(R.mipmap.soso_icon);
 				for(SeekBar bar : seekBars)
 				{
 					bar.setProgress(5);
 				}
 				btnSubmit.setTextColor(getResources().getColor(android.R.color.holo_blue_light));
-				break;
-			case 2:
+			} else if (vote == getResources().getInteger(R.integer.sad)) {
 				emotionIcon.setImageResource(R.mipmap.unhappy_icon);
 				for(SeekBar bar : seekBars)
 				{
 					bar.setProgress(0);
 				}
 				btnSubmit.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
-				break;
-			default:
-				emotionIcon.setImageResource(R.mipmap.happy_icon);
 			}
-			tvUserName.setText(getText(R.string.thanks)+userName);
+			tvUserName.setText(getText(R.string.thanks) + userName);
 		}
 		voteManager = new VoteManager(getActivity());
 		checkNetwork();
