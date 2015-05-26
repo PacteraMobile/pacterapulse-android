@@ -3,9 +3,9 @@ package au.com.pactera.pacterapulse;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -41,8 +41,6 @@ public class MainActivity extends SinglePaneActivity
 	private final String FIRST_RUN = "FIRST_RUN";
 	// Login office 365
 	private AuthenticationContext mAuthContext;
-	// Activity visibility
-	private boolean visible;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -61,27 +59,6 @@ public class MainActivity extends SinglePaneActivity
 			callAD(this);
 		}
 		super.onCreate(savedInstanceState);
-		visible = false;
-	}
-
-	@Override
-	protected void onResume()
-	{
-		visible = true;
-		super.onResume();
-	}
-
-	@Override
-	protected void onPause()
-	{
-		visible = false;
-		super.onPause();
-	}
-
-	@Override
-	protected void onDestroy()
-	{
-		super.onDestroy();
 	}
 
 	@Override
@@ -110,11 +87,6 @@ public class MainActivity extends SinglePaneActivity
 	protected Fragment onCreatePane()
 	{
 		return Fragment.instantiate(this, EmotionFragment.class.getName());
-	}
-
-	public boolean isVisible()
-	{
-		return visible;
 	}
 
 	private void callAD(Activity activity)
@@ -159,34 +131,31 @@ public class MainActivity extends SinglePaneActivity
 				REDIRECT_URL, PromptBehavior.Auto, callback);
 	}
 
+	/**
+	 * Quit the process to make sure all activities and background threads have been destroyed and
+	 * launch the introduction screen.
+	 *
+	 * @return true if success.
+	 */
 	public boolean doRestart()
 	{
 		try
 		{
-				//fetch the packagemanager so we can get the default launch activity
-				// (you can replace this intent with any other activity if you want
-				PackageManager pm = this.getPackageManager();
-				//check if we got the PackageManager
-				if (pm != null)
-				{
-					//create the intent with the default start activity for your application
-					Intent mStartActivity = new Intent(this, SinglePaneActivity.class)
-							.setAction(IntroductionFragment.class.getName());
-					if (mStartActivity != null)
-					{
-						mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						//create a pending intent so the application is restarted after System.exit(0) was called.
-						// We use an AlarmManager to call this intent in 100ms
-						int mPendingIntentId = 223344;
-						PendingIntent mPendingIntent = PendingIntent
-								.getActivity(this, mPendingIntentId, mStartActivity,
-										PendingIntent.FLAG_CANCEL_CURRENT);
-						AlarmManager mgr = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
-						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-						//kill the application
-						System.exit(0);
-					}
-				}
+			//create the intent with the default start activity for your application
+			Intent mStartActivity = new Intent(this, SinglePaneActivity.class)
+					.setAction(IntroductionFragment.class.getName());
+
+			mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//create a pending intent so the application is restarted after System.exit(0) was called.
+			// We use an AlarmManager to call this intent in 100ms
+			int mPendingIntentId = 223344;
+			PendingIntent mPendingIntent = PendingIntent
+					.getActivity(this, mPendingIntentId, mStartActivity,
+							PendingIntent.FLAG_CANCEL_CURRENT);
+			AlarmManager mgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+			mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+			//kill the application
+			System.exit(0);
 		}
 		catch (Exception ex)
 		{
