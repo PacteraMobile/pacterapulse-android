@@ -1,11 +1,12 @@
 package au.com.pactera.pacterapulse.helper;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.github.kevinsawicki.http.HttpRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,21 +63,28 @@ public class NetworkHelper
 	}
 
 	/**
-	 * Exception that identify there is something wrong to fetch/send data to server side.
-	 */
-	public static class NetworkException extends Exception {
-
-	}
-
-	/**
 	 * Get statistic info from server
 	 * @throws NetworkException
 	 */
 	public static Emotions getResult(String type) throws NetworkException, JSONException {
 		String url = API_PART_RESULT_URL + "/" + type;
-		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_GET);
+		HttpRequest request = new HttpRequest(getAbsoluteUrl(url), HttpRequest.METHOD_GET);
 		request(request);
 		JSONObject json = new JSONObject(request.body());
 		return new Emotions(json.getJSONArray("emotionVotes"));
+	}
+
+	public static boolean checkNetwork(Context context) {
+		ConnectivityManager connMgr = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		return networkInfo != null && networkInfo.isConnected();
+	}
+
+	/**
+	 * Exception that identify there is something wrong to fetch/send data to server side.
+	 */
+	public static class NetworkException extends Exception {
+
 	}
 }
