@@ -43,13 +43,15 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
 
-	private VoteManager voteManager;
 	private int vote;
 	private ProgressDialog progressDialog;
 
 	@Override
 	protected void setupUI(View view, Bundle bundle) throws Exception
 	{
+		/**
+		 * Set the slide bar and icon to the match user's last vote.
+		 */
 		String userName;
 		Bundle bundleArg = getArguments();
 		if(null != bundleArg)
@@ -81,7 +83,6 @@ public class DetailFragment extends BaseFragment<Boolean>
 			}
 			tvUserName.setText(getText(R.string.thanks) + userName);
 		}
-		voteManager = new VoteManager(getActivity());
 		checkNetwork();
 	}
 
@@ -130,6 +131,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@Override
 	public Boolean pendingData(Bundle arg) throws Exception
 	{
+		// TODO: Add the real backend API process once it is ready.
 		return true;
 	}
 

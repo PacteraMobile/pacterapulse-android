@@ -71,6 +71,13 @@ public class ResultFragment extends BaseFragment<Emotions> {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
+        /**
+         * There are 2 possibilities to enter this screen
+         * 1. Directly from emotion fragment by click result menu item.
+         * 2. Show result after voted.
+         * for option 2 we need to load menu and show more details menu item
+         * by read the extra data passed by emotion fragment.
+         */
         if(getArguments().getBoolean(EmotionFragment.SUCCESS, false))
         {
             inflater.inflate(R.menu.menu_main, menu);
@@ -84,6 +91,9 @@ public class ResultFragment extends BaseFragment<Emotions> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        /**
+         * If user would like to express more by select more details menu item, launch the detail page.
+         */
         switch(item.getItemId())
         {
         case R.id.action_moreDetails:
@@ -101,6 +111,12 @@ public class ResultFragment extends BaseFragment<Emotions> {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        /**
+         * There are 2 possibilities when detail page finished.
+         * 1. User submit the result to backend, we prevent user start a detail page again by hide the menu item.
+         * 2. User finish the detail activity by back key or home button, we shall still allow user submit their details.
+         * for option 1 we need to hide the more detail menu item.
+         */
         if(reqCode == requestCode && null != detailMenu)
         {
             switch (resultCode)
