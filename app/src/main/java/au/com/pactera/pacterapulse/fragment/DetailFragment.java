@@ -1,31 +1,29 @@
 package au.com.pactera.pacterapulse.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 import au.com.pactera.pacterapulse.R;
 import au.com.pactera.pacterapulse.core.BaseFragment;
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
 import au.com.pactera.pacterapulse.helper.VoteManager;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
+import java.util.List;
+
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Detail fragment allow users express their opinions about their emotion
@@ -86,7 +84,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 			default:
 				emotionIcon.setImageResource(R.mipmap.happy_icon);
 			}
-			tvUserName.setText(userName);
+			tvUserName.setText(getText(R.string.thanks)+userName);
 		}
 		voteManager = new VoteManager(getActivity());
 		checkNetwork();
@@ -94,18 +92,10 @@ public class DetailFragment extends BaseFragment<Boolean>
 
 	private boolean checkNetwork()
 	{
-		ConnectivityManager connMgr = (ConnectivityManager) getActivity()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-		if (networkInfo != null && networkInfo.isConnected())
-		{
-			return true;
-		}
-		else
-		{
+		boolean result = NetworkHelper.checkNetwork(getActivity());
+		if (!result)
 			Crouton.makeText(getActivity(), R.string.invalidNetwork, Style.ALERT).show();
-			return false;
-		}
+		return result;
 	}
 
 	@Override

@@ -21,4 +21,5 @@
 	<string name="label_good">Good</string>
 	<string name="feedback">Project feedback and accomplishment-</string>
 	<string name="btntxt_submit">Submit</string>
+	<string name="thanks">Thank you,</string>
 </resources>
