@@ -89,7 +89,7 @@ public class EmotionFragment extends BaseFragment<Boolean>
 	@OnClick({R.id.btnSad, R.id.btnHappy, R.id.btnNeutral})
 	void onVote(View button)
 	{
-		try
+		/*try
 		{
 			vote = Integer.parseInt((String) button.getTag());
 		}
@@ -101,12 +101,12 @@ public class EmotionFragment extends BaseFragment<Boolean>
 		Intent intent = new Intent();
 		intent.putExtra(EMOTIONS, vote);
 		intent.putExtra(USERNAME, userName);
-		SinglePaneActivity.start(DetailFragment.class, getActivity(), intent);
+		SinglePaneActivity.start(DetailFragment.class, getActivity(), intent);*/
 		/*if (voteManager.hasVotedToday())
 		{
 			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, false));
 			return;
-		}
+		}*/
 		if (checkNetwork())
 		{
 			try
@@ -118,7 +118,7 @@ public class EmotionFragment extends BaseFragment<Boolean>
 				vote = -1;
 			}
 			refresh();
-		}*/
+		}
 	}
 
 	@Override
@@ -159,7 +159,10 @@ public class EmotionFragment extends BaseFragment<Boolean>
 		voteManager.saveVote(vote);
 		if (items)
 		{
-			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, items.booleanValue()));
+			Intent intent = new Intent();
+			intent.putExtra(SUCCESS, items.booleanValue());
+			intent.putExtra(EMOTIONS,vote);
+			SinglePaneActivity.start(ResultFragment.class, getActivity(), intent);
 		}
 		else
 		{

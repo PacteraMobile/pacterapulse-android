@@ -1,5 +1,6 @@
 package au.com.pactera.pacterapulse.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,7 +102,9 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@OnClick({R.id.btnSubmit})
 	void onSubmit(View submitButton)
 	{
-		if (voteManager.hasVotedToday())
+		getActivity().setResult(Activity.RESULT_OK);
+		finish();
+		/*if (voteManager.hasVotedToday())
 		{
 			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, false));
 			finish();
@@ -110,7 +113,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 		if (checkNetwork())
 		{
 			refresh();
-		}
+		}*/
 	}
 
 	@Override
