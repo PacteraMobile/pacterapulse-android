@@ -16,18 +16,18 @@
 		<RadioButton
 			android:id="@+id/oneday"
 			style="@style/Button.ActionButton"
-			android:text="@string/oneday"
+			android:text="@string/one_day"
 			android:tag="24hours"
 			android:checked="true"/>
 		<RadioButton
 			android:id="@+id/oneweek"
 			style="@style/Button.ActionButton"
-			android:text="@string/oneweek"
+			android:text="@string/one_week"
 			android:tag="7days"/>
 		<RadioButton
 			android:id="@+id/onemonth"
 			style="@style/Button.ActionButton"
-			android:text="@string/onemonth"
+			android:text="@string/one_month"
 			android:tag="30days"/>
 	</RadioGroup>
 

@@ -52,7 +52,6 @@ public class ResultFragment extends BaseFragment<Emotions> {
         return R.layout.fragment_result;
     }
 
-
     @Override
     protected void setupUI(View view, Bundle bundle) throws Exception {
         if (!getArguments().getBoolean(EmotionFragment.SUCCESS, true)) {
