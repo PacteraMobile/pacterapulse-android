@@ -36,6 +36,7 @@ public class NetworkHelper
 
 	/**
 	 * Post emotionId to server
+	 *
 	 * @param emotionId
 	 * @param context
 	 * @throws Exception
@@ -43,30 +44,36 @@ public class NetworkHelper
 	public static boolean postVote(Integer emotionId, Context context) throws Exception
 	{
 		String url = API_PART_VOTE_URL + "/" + UniqueID.id(context) + "/" + emotionId.toString();
-		HttpRequest request = new HttpRequest(getAbsoluteUrl(url),HttpRequest.METHOD_POST);
+		HttpRequest request = new HttpRequest(getAbsoluteUrl(url), HttpRequest.METHOD_POST);
 		request(request);
 		return true;
 	}
 
-	private static HttpRequest request(HttpRequest request) throws NetworkException {
-		Log.d("Network",request.getConnection().getURL().toString());
+	private static HttpRequest request(HttpRequest request) throws NetworkException
+	{
+		Log.d("Network", request.getConnection().getURL().toString());
 		request.connectTimeout(TIMEOUT);
 		request.readTimeout(TIMEOUT);
 		request.acceptJson();
 		request.acceptCharset("UTF-8");
 		request.useCaches(true);
-		if(!request.ok()) {
+		if (!request.ok())
+		{
 			throw new NetworkException();
-		} else {
+		}
+		else
+		{
 			return request;
 		}
 	}
 
 	/**
 	 * Get statistic info from server
+	 *
 	 * @throws NetworkException
 	 */
-	public static Emotions getResult(String type) throws NetworkException, JSONException {
+	public static Emotions getResult(String type) throws NetworkException, JSONException
+	{
 		String url = API_PART_RESULT_URL + "/" + type;
 		HttpRequest request = new HttpRequest(getAbsoluteUrl(url), HttpRequest.METHOD_GET);
 		request(request);
@@ -74,7 +81,8 @@ public class NetworkHelper
 		return new Emotions(json.getJSONArray("emotionVotes"));
 	}
 
-	public static boolean checkNetwork(Context context) {
+	public static boolean checkNetwork(Context context)
+	{
 		ConnectivityManager connMgr = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -84,7 +92,8 @@ public class NetworkHelper
 	/**
 	 * Exception that identify there is something wrong to fetch/send data to server side.
 	 */
-	public static class NetworkException extends Exception {
+	public static class NetworkException extends Exception
+	{
 
 	}
 }

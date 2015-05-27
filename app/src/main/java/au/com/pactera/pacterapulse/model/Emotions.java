@@ -13,6 +13,25 @@ public class Emotions
 	private int soso;
 	private int sad;
 
+	public Emotions(JSONArray emotions)
+	{
+		JSONObject jHappy = emotions.optJSONObject(0);
+		JSONObject jSoso = emotions.optJSONObject(1);
+		JSONObject jSad = emotions.optJSONObject(2);
+		if (null != jHappy)
+		{
+			happy = jHappy.optInt("count");
+		}
+		if (null != jSoso)
+		{
+			soso = jSoso.optInt("count");
+		}
+		if (null != jSad)
+		{
+			sad = jSad.optInt("count");
+		}
+	}
+
 	public int getHappy()
 	{
 		return happy;
@@ -28,27 +47,9 @@ public class Emotions
 		return sad;
 	}
 
-	public Emotions(JSONArray emotions)
-	{
-		JSONObject jHappy=emotions.optJSONObject(0);
-		JSONObject jSoso=emotions.optJSONObject(1);
-		JSONObject jSad=emotions.optJSONObject(2);
-		if(null!=jHappy)
-		{
-			happy = jHappy.optInt("count");
-		}
-		if(null!=jSoso)
-		{
-			soso = jSoso.optInt("count");
-		}
-		if(null!=jSad)
-		{
-			sad = jSad.optInt("count");
-		}
-	}
-
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Emotions{" +
 				"happy=" + happy +
 				", soso=" + soso +

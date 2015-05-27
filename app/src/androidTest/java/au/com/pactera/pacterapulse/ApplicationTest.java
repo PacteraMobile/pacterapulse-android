@@ -10,6 +10,7 @@ import android.test.ApplicationTestCase;
 public class ApplicationTest extends ApplicationTestCase<Application>
 {
 	private Application application = null;
+
 	public ApplicationTest()
 	{
 		super(Application.class);
@@ -21,7 +22,7 @@ public class ApplicationTest extends ApplicationTestCase<Application>
 		super.setUp();
 		createApplication();
 		application = getApplication();
-		Intent i = new Intent(application.getApplicationContext(),MainActivity.class);
+		Intent i = new Intent(application.getApplicationContext(), MainActivity.class);
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		application.startActivity(i);
 	}

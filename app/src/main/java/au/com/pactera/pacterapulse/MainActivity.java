@@ -2,9 +2,7 @@ package au.com.pactera.pacterapulse;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,7 +18,6 @@ import au.com.pactera.pacterapulse.fragment.EmotionFragment;
 import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 import au.com.pactera.pacterapulse.helper.OfficeAuthenticationHelper;
 import au.com.pactera.pacterapulse.helper.Preference;
-
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
@@ -52,9 +49,9 @@ public class MainActivity extends SinglePaneActivity implements AuthenticationCa
 //			if (Preference.getUID(this)!=null) {
 //				OfficeAuthenticationHelper.acquireTokenSilent(this,Preference.getUID(this),this);
 //			} else {
-				mAuthContext = OfficeAuthenticationHelper.acquireToken(this, this);
-				progressDialog = ProgressDialog.show(this,
-						getString(R.string.app_name), getString(R.string.app_loading), true, false);
+			mAuthContext = OfficeAuthenticationHelper.acquireToken(this, this);
+			progressDialog = ProgressDialog.show(this,
+					getString(R.string.app_name), getString(R.string.app_loading), true, false);
 //			}
 		}
 		super.onCreate(savedInstanceState);
@@ -92,11 +89,13 @@ public class MainActivity extends SinglePaneActivity implements AuthenticationCa
 	@Override
 	public void onSuccess(AuthenticationResult result)
 	{
-		if (progressDialog!=null && progressDialog.isShowing())
+		if (progressDialog != null && progressDialog.isShowing())
+		{
 			progressDialog.dismiss();
+		}
 
 		Log.d("AuthResult", "suc " + result.toString());
-		Preference.setUID(this,result.getUserInfo().getUserId());
+		Preference.setUID(this, result.getUserInfo().getUserId());
 		PacteraPulse.getInstance().setTOKEN(result.getRefreshToken());
 		PacteraPulse.getInstance().setGivenName(result.getUserInfo().getGivenName());
 		PacteraPulse.getInstance().setSurName(result.getUserInfo().getFamilyName());
@@ -105,14 +104,20 @@ public class MainActivity extends SinglePaneActivity implements AuthenticationCa
 	@Override
 	public void onError(Exception exc)
 	{
-		if (progressDialog!=null && progressDialog.isShowing())
+		if (progressDialog != null && progressDialog.isShowing())
+		{
 			progressDialog.dismiss();
-		Log.d("AuthResult", exc.getClass().getName()+ "   err " + exc.getLocalizedMessage());
-		if (exc instanceof AuthenticationCancelError) {
+		}
+		Log.d("AuthResult", exc.getClass().getName() + "   err " + exc.getLocalizedMessage());
+		if (exc instanceof AuthenticationCancelError)
+		{
 			SinglePaneActivity.start(IntroductionFragment.class, this);
 			finish();
-		} else {
-			if (!isDestoryed) {
+		}
+		else
+		{
+			if (!isDestoryed)
+			{
 				Crouton.makeText(this, R.string.login_error, Style.ALERT).show();
 			}
 		}
@@ -120,7 +125,8 @@ public class MainActivity extends SinglePaneActivity implements AuthenticationCa
 	}
 
 	@Override
-	protected void onDestroy() {
+	protected void onDestroy()
+	{
 		isDestoryed = true;
 		super.onDestroy();
 	}

@@ -33,22 +33,26 @@ public class EmotionBarChartView extends BaseChartView
 	private List<String> chartLabels = new LinkedList<>();
 	private List<BarData> chartData = new LinkedList<>();
 
-	public EmotionBarChartView(Context context) {
+	public EmotionBarChartView(Context context)
+	{
 		super(context);
 		init();
 	}
 
-	public EmotionBarChartView(Context context, AttributeSet attrs) {
+	public EmotionBarChartView(Context context, AttributeSet attrs)
+	{
 		super(context, attrs);
 		init();
 	}
 
-	public EmotionBarChartView(Context context, AttributeSet attrs, int defStyle) {
+	public EmotionBarChartView(Context context, AttributeSet attrs, int defStyle)
+	{
 		super(context, attrs, defStyle);
 		init();
 	}
 
-	private void init() {
+	private void init()
+	{
 		mChartStyle = 0;
 		mOffsetWidth = 0;
 		mOffsetHeight = 0;
@@ -145,7 +149,7 @@ public class EmotionBarChartView extends BaseChartView
 		}
 		catch (Exception e)
 		{
-			Log.d("Exception",e.getMessage());
+			Log.d("Exception", e.getMessage());
 		}
 	}
 
@@ -184,7 +188,7 @@ public class EmotionBarChartView extends BaseChartView
 		}
 		catch (Exception e)
 		{
-			Log.d("Exception",e.getMessage());
+			Log.d("Exception", e.getMessage());
 		}
 
 	}
@@ -201,7 +205,8 @@ public class EmotionBarChartView extends BaseChartView
 		}
 	}
 
-	public void clear() {
+	public void clear()
+	{
 		List<BarData> dataSource = mChart.getDataSource();
 		dataSource.get(0).getDataSet().set(0, 0.0);
 		dataSource.get(1).getDataSet().set(0, 0.0);

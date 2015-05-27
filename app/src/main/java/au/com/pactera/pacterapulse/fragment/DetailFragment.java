@@ -15,6 +15,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import au.com.pactera.pacterapulse.R;
 import au.com.pactera.pacterapulse.core.BaseFragment;
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
@@ -22,15 +24,11 @@ import au.com.pactera.pacterapulse.helper.NetworkHelper;
 import au.com.pactera.pacterapulse.helper.OfficeAuthenticationHelper;
 import au.com.pactera.pacterapulse.helper.Utils;
 import au.com.pactera.pacterapulse.helper.VoteManager;
-
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
-
-import java.util.List;
-
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Detail fragment allow users express their opinions about their emotion
@@ -44,7 +42,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	ImageView emotionIcon;
 	@InjectView(R.id.userName)
 	TextView tvUserName;
-	@InjectViews({R.id.seek_work_overload,R.id.seek_hear_more,R.id.seek_project_feedback})
+	@InjectViews({R.id.seek_work_overload, R.id.seek_hear_more, R.id.seek_project_feedback})
 	List<SeekBar> seekBars;
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
@@ -58,28 +56,33 @@ public class DetailFragment extends BaseFragment<Boolean>
 	{
 		String userName;
 		Bundle bundleArg = getArguments();
-		if(null != bundleArg)
+		if (null != bundleArg)
 		{
 			vote = bundleArg.getInt(EmotionFragment.EMOTIONS, -1);
 			userName = bundleArg.getString(EmotionFragment.USERNAME);
 
-			if (vote == getResources().getInteger(R.integer.happy)) {
+			if (vote == getResources().getInteger(R.integer.happy))
+			{
 				emotionIcon.setImageResource(R.mipmap.happy_icon);
-				for(SeekBar bar : seekBars)
+				for (SeekBar bar : seekBars)
 				{
 					bar.setProgress(10);
 				}
 				btnSubmit.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-			} else if (vote == getResources().getInteger(R.integer.neutral)) {
+			}
+			else if (vote == getResources().getInteger(R.integer.neutral))
+			{
 				emotionIcon.setImageResource(R.mipmap.soso_icon);
-				for(SeekBar bar : seekBars)
+				for (SeekBar bar : seekBars)
 				{
 					bar.setProgress(5);
 				}
 				btnSubmit.setTextColor(getResources().getColor(android.R.color.holo_blue_light));
-			} else if (vote == getResources().getInteger(R.integer.sad)) {
+			}
+			else if (vote == getResources().getInteger(R.integer.sad))
+			{
 				emotionIcon.setImageResource(R.mipmap.unhappy_icon);
-				for(SeekBar bar : seekBars)
+				for (SeekBar bar : seekBars)
 				{
 					bar.setProgress(0);
 				}
@@ -95,7 +98,9 @@ public class DetailFragment extends BaseFragment<Boolean>
 	{
 		boolean result = NetworkHelper.checkNetwork(getActivity());
 		if (!result)
+		{
 			Crouton.makeText(getActivity(), R.string.invalidNetwork, Style.ALERT).show();
+		}
 		return result;
 	}
 
@@ -109,31 +114,34 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		switch(item.getItemId())
+		switch (item.getItemId())
 		{
-			case R.id.logout:
-				final AlertDialog.Builder builder = new AlertDialog.Builder(
-						context);
-				builder.setTitle(R.string.confirm).setMessage(R.string.logout_confirm);
-				builder.setPositiveButton(android.R.string.ok,
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(final DialogInterface dialog,
-												final int which) {
-								logout();
-							}
-						});
-				builder.show();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		case R.id.logout:
+			final AlertDialog.Builder builder = new AlertDialog.Builder(
+					context);
+			builder.setTitle(R.string.confirm).setMessage(R.string.logout_confirm);
+			builder.setPositiveButton(android.R.string.ok,
+					new DialogInterface.OnClickListener()
+					{
+						@Override
+						public void onClick(final DialogInterface dialog,
+											final int which)
+						{
+							logout();
+						}
+					});
+			builder.show();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 
 	/**
 	 * Logout current account
 	 */
-	private void logout() {
+	private void logout()
+	{
 		OfficeAuthenticationHelper.logout(context);
 		Utils.restartApp(context);
 	}
@@ -170,7 +178,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@Override
 	protected void onStopLoading()
 	{
-		if(null != progressDialog)
+		if (null != progressDialog)
 		{
 			progressDialog.dismiss();
 			progressDialog = null;

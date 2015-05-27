@@ -1,16 +1,8 @@
 package au.com.pactera.pacterapulse;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.view.ViewManager;
-import android.widget.ImageButton;
-
-import java.util.regex.Matcher;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -65,7 +57,6 @@ public class ActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
 		getInstrumentation().invokeContextMenuAction(mMainActivity, android.R.id.home, 0);
 		getInstrumentation().waitForIdleSync();*/
 	}
-
 
 
 	@MediumTest

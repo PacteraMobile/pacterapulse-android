@@ -16,6 +16,7 @@ import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 public class Utils {
 
     /**
+     /**
      * Quit the process to make sure all activities and background threads have been destroyed and
      * launch the introduction screen.
      *

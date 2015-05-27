@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import au.com.pactera.pacterapulse.R;
-import au.com.pactera.pacterapulse.app.PacteraPulse;
 import au.com.pactera.pacterapulse.core.BaseFragment;
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
@@ -50,7 +49,7 @@ public class EmotionFragment extends BaseFragment<Boolean>
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		switch(item.getItemId())
+		switch (item.getItemId())
 		{
 		case android.R.id.home:
 			SinglePaneActivity.start(IntroductionFragment.class, getActivity());
@@ -119,7 +118,7 @@ public class EmotionFragment extends BaseFragment<Boolean>
 	@Override
 	protected void onStopLoading()
 	{
-		if(null != progressDialog)
+		if (null != progressDialog)
 		{
 			progressDialog.dismiss();
 			progressDialog = null;
@@ -148,7 +147,7 @@ public class EmotionFragment extends BaseFragment<Boolean>
 		{
 			Intent intent = new Intent();
 			intent.putExtra(SUCCESS, items.booleanValue());
-			intent.putExtra(EMOTIONS,vote);
+			intent.putExtra(EMOTIONS, vote);
 			SinglePaneActivity.start(ResultFragment.class, getActivity(), intent);
 		}
 		else
