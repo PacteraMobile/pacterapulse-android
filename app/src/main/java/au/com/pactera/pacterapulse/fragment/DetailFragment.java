@@ -1,9 +1,9 @@
 package au.com.pactera.pacterapulse.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,11 +19,9 @@ import java.util.List;
 
 import au.com.pactera.pacterapulse.R;
 import au.com.pactera.pacterapulse.core.BaseFragment;
-import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
 import au.com.pactera.pacterapulse.helper.OfficeAuthenticationHelper;
 import au.com.pactera.pacterapulse.helper.Utils;
-import au.com.pactera.pacterapulse.helper.VoteManager;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
@@ -47,13 +45,15 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
 
-	private VoteManager voteManager;
 	private int vote;
 	private ProgressDialog progressDialog;
 
 	@Override
 	protected void setupUI(View view, Bundle bundle) throws Exception
 	{
+		/**
+		 * Set the slide bar and icon to the match user's last vote.
+		 */
 		String userName;
 		Bundle bundleArg = getArguments();
 		if (null != bundleArg)
@@ -90,7 +90,6 @@ public class DetailFragment extends BaseFragment<Boolean>
 			}
 			tvUserName.setText(getText(R.string.thanks) + userName);
 		}
-		voteManager = new VoteManager(getActivity());
 		checkNetwork();
 	}
 
@@ -130,6 +129,14 @@ public class DetailFragment extends BaseFragment<Boolean>
 							logout();
 						}
 					});
+			builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick(DialogInterface dialog, int which)
+				{
+					dialog.dismiss();
+				}
+			});
 			builder.show();
 			return true;
 		default:
@@ -155,12 +162,6 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@OnClick({R.id.btnSubmit})
 	void onSubmit(View submitButton)
 	{
-		if (voteManager.hasVotedToday())
-		{
-			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, false));
-			finish();
-			return;
-		}
 		if (checkNetwork())
 		{
 			refresh();
@@ -189,7 +190,8 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@Override
 	public Boolean pendingData(Bundle arg) throws Exception
 	{
-		return NetworkHelper.postVote(vote, context);
+		// TODO: Add the real backend API process once it is ready.
+		return true;
 	}
 
 	@Override
@@ -202,10 +204,9 @@ public class DetailFragment extends BaseFragment<Boolean>
 	public void onLoaderDone(Boolean items)
 	{
 		super.onLoaderDone(items);
-		voteManager.saveVote(vote);
 		if (items)
 		{
-			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, items.booleanValue()));
+			getActivity().setResult(Activity.RESULT_OK);
 			finish();
 		}
 		else
