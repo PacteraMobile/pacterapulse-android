@@ -115,7 +115,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	{
 		switch (item.getItemId())
 		{
-		case R.id.logout:
+		case R.id.action_logout:
 			final AlertDialog.Builder builder = new AlertDialog.Builder(
 					context);
 			builder.setTitle(R.string.confirm).setMessage(R.string.logout_confirm);

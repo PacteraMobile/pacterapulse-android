@@ -2,6 +2,8 @@ package au.com.pactera.pacterapulse.fragment;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +22,8 @@ import au.com.pactera.pacterapulse.chart.EmotionBarChartView;
 import au.com.pactera.pacterapulse.core.BaseFragment;
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.helper.OfficeAuthenticationHelper;
+import au.com.pactera.pacterapulse.helper.Utils;
 import au.com.pactera.pacterapulse.model.Emotions;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -86,11 +90,13 @@ public class ResultFragment extends BaseFragment<Emotions>
 		 */
 		if (getArguments().getBoolean(EmotionFragment.SUCCESS, false))
 		{
-			inflater.inflate(R.menu.menu_main, menu);
-			menu.findItem(R.id.action_showResults).setVisible(false);
-			menu.findItem(R.id.action_moreDetails).setVisible(true);
-			detailMenu = menu;
+			inflater.inflate(R.menu.menu_result, menu);
 		}
+		else
+		{
+			inflater.inflate(R.menu.menu_detail, menu);
+		}
+		detailMenu = menu;
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
@@ -108,6 +114,29 @@ public class ResultFragment extends BaseFragment<Emotions>
 			intent.putExtra(EmotionFragment.EMOTIONS, getArguments().getInt(EmotionFragment.EMOTIONS, 0));
 			intent.putExtra(EmotionFragment.USERNAME, userName);
 			SinglePaneActivity.startForResult(DetailFragment.class, this, intent, reqCode);
+			return true;
+		case R.id.action_logout:
+			final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			builder.setTitle(R.string.confirm).setMessage(R.string.logout_confirm);
+			builder.setPositiveButton(android.R.string.ok,
+					new DialogInterface.OnClickListener()
+					{
+						@Override
+						public void onClick(final DialogInterface dialog,
+											final int which)
+						{
+							logout();
+						}
+					});
+			builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick(DialogInterface dialog, int which)
+				{
+					dialog.dismiss();
+				}
+			});
+			builder.show();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -128,7 +157,12 @@ public class ResultFragment extends BaseFragment<Emotions>
 			switch (resultCode)
 			{
 			case Activity.RESULT_OK:
-				detailMenu.findItem(R.id.action_moreDetails).setVisible(false);
+				detailMenu.removeItem(R.id.action_moreDetails);
+				MenuItem item = detailMenu.findItem(R.id.action_logout);
+				if (null != item)
+				{
+					item.setVisible(true);
+				}
 				break;
 			default:
 			}
@@ -200,4 +234,12 @@ public class ResultFragment extends BaseFragment<Emotions>
 		}
 	}
 
+	/**
+	 * Logout current account
+	 */
+	private void logout()
+	{
+		OfficeAuthenticationHelper.logout(context);
+		Utils.restartApp(context);
+	}
 }

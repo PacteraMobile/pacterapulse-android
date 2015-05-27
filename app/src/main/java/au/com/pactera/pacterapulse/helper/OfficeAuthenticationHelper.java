@@ -3,6 +3,8 @@ package au.com.pactera.pacterapulse.helper;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import com.microsoft.aad.adal.AuthenticationCallback;
 import com.microsoft.aad.adal.AuthenticationContext;
@@ -85,6 +87,9 @@ public class OfficeAuthenticationHelper
 	 */
 	public static boolean logout(Context context)
 	{
+		CookieManager cookieManager = CookieManager.getInstance();
+		cookieManager.removeAllCookie();
+		CookieSyncManager.getInstance().sync();
 		if (getAuthenticationContext(context) != null)
 		{
 			mAuthContext.getCache().removeAll();
