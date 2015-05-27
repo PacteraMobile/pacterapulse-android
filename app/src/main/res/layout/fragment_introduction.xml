@@ -2,26 +2,27 @@
 				xmlns:tools="http://schemas.android.com/tools"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				tools:context="au.com.pactera.pacterapulse.fragment.IntroductionFragment"
-				android:background="@mipmap/splash_android">
+				android:background="@mipmap/splash_android"
+				tools:context="au.com.pactera.pacterapulse.fragment.IntroductionFragment">
+
 	<Button
+		android:id="@+id/btnAgree"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:id="@+id/btnAgree"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
 		android:background="@android:color/transparent"/>
 
 	<TextView
+		android:id="@+id/textView"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:text="@string/Instruction"
-		android:id="@+id/textView"
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
 		android:gravity="center|center_horizontal"
 		android:paddingBottom="@dimen/activity_vertical_margin"
+		android:text="@string/Instruction"
+		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:textColor="#FF0000"/>
 
 

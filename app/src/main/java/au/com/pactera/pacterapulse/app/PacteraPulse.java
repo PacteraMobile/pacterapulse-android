@@ -15,6 +15,11 @@ public class PacteraPulse extends Application
 	private String givenName = "";
 	private String surName = "";
 
+	public static PacteraPulse getInstance()
+	{
+		return instance;
+	}
+
 	public String getTOKEN()
 	{
 		return TOKEN;
@@ -24,6 +29,7 @@ public class PacteraPulse extends Application
 	{
 		TOKEN = token;
 	}
+
 	public String getGivenName()
 	{
 		return givenName;
@@ -50,10 +56,5 @@ public class PacteraPulse extends Application
 		super.onCreate();
 		new Config(this);
 		instance = this;
-	}
-
-	public static PacteraPulse getInstance()
-	{
-		return instance;
 	}
 }
