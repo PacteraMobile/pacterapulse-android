@@ -4,6 +4,7 @@ import android.app.Application;
 
 /**
  * Application context
+ *
  * Created by kai on 20/05/15.
  */
 public class PacteraPulse extends Application
@@ -15,6 +16,11 @@ public class PacteraPulse extends Application
 	private String givenName = "";
 	private String surName = "";
 
+	/**
+	 * Get application context instance
+	 *
+	 * @return context instance
+	 */
 	public static PacteraPulse getInstance()
 	{
 		return instance;

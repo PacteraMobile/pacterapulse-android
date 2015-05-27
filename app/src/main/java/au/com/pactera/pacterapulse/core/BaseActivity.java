@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentActivity;
 import butterknife.ButterKnife;
 
 /**
+ * Base activity for all other activities
+ * We could put some shared methods and properties into this class to simply the UI development
+ *
  * Created by kai on 19/05/15.
  */
 public abstract class BaseActivity extends FragmentActivity

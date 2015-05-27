@@ -90,8 +90,6 @@ public class EmotionBarChartView extends BaseChartView
 			((StackBarChart) mChart).setTotalLabelVisible(false);
 			break;
 		}
-
-
 	}
 
 	private void chartRender()
@@ -123,7 +121,7 @@ public class EmotionBarChartView extends BaseChartView
 					// TODO Auto-generated method stub		
 					Double tmp = Double.parseDouble(value);
 					DecimalFormat df = new DecimalFormat("#0");
-					String label = df.format(tmp).toString();
+					String label = df.format(tmp);
 					return label + "%";
 				}
 
@@ -138,9 +136,8 @@ public class EmotionBarChartView extends BaseChartView
 				@Override
 				public String doubleFormatter(Double value)
 				{
-					// TODO Auto-generated method stub										
 					DecimalFormat df = new DecimalFormat("#0.0");
-					String label = df.format(value).toString();
+					String label = df.format(value);
 					return label + "%";
 				}
 			});
@@ -180,7 +177,6 @@ public class EmotionBarChartView extends BaseChartView
 	@Override
 	public void render(Canvas canvas)
 	{
-
 		mChart.setChartRange(mOffsetWidth, mOffsetHeight, this.getWidth() - mOffsetWidth, this.getHeight() - mOffsetHeight);
 		try
 		{
@@ -190,7 +186,6 @@ public class EmotionBarChartView extends BaseChartView
 		{
 			Log.d("Exception", e.getMessage());
 		}
-
 	}
 
 	public void setDataSet(int happy, int neutral, int sad)

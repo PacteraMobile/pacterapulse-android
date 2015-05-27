@@ -2,6 +2,8 @@ package au.com.pactera.pacterapulse.helper;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 /**
@@ -14,7 +16,7 @@ public class VoteManagerTest
 	@Test
 	public void testSubmitVote() throws Exception
 	{
-
+		Assert.
 	}
 
 	@Test

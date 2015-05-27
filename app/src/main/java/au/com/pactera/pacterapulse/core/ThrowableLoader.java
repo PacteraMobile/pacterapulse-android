@@ -6,9 +6,8 @@ import android.content.Context;
 /**
  * Loader that support throwing an exception when loading in the background
  *
- * @param <D>
  */
-public abstract class ThrowableLoader<D> extends AsyncLoader<D>
+abstract class ThrowableLoader<D> extends AsyncLoader<D>
 {
 
 	private final D data;
@@ -18,8 +17,8 @@ public abstract class ThrowableLoader<D> extends AsyncLoader<D>
 	/**
 	 * Create loader for context and seeded with initial data
 	 *
-	 * @param context
-	 * @param data
+	 * @param context context
+	 * @param data initial data
 	 */
 	public ThrowableLoader(final Context context, final D data)
 	{
@@ -44,7 +43,9 @@ public abstract class ThrowableLoader<D> extends AsyncLoader<D>
 	}
 
 	/**
-	 * @return exception
+	 * Get exception from loader if it provides one
+	 *
+	 * @return exception instance from loader
 	 */
 	public Exception getException()
 	{
@@ -54,7 +55,7 @@ public abstract class ThrowableLoader<D> extends AsyncLoader<D>
 	/**
 	 * Clear the stored exception and return it
 	 *
-	 * @return exception
+	 * @return exception instance from loader
 	 */
 	public Exception clearException()
 	{
@@ -64,7 +65,7 @@ public abstract class ThrowableLoader<D> extends AsyncLoader<D>
 	}
 
 	/**
-	 * Load data
+	 * Load data in the background
 	 *
 	 * @return data
 	 * @throws Exception
