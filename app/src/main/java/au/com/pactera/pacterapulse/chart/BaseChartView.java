@@ -20,25 +20,21 @@ public class BaseChartView extends ChartView
 	public BaseChartView(Context context)
 	{
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	public BaseChartView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
-
 	}
 
 	public BaseChartView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-
 	}
 
 	@Override
 	public List<XChart> bindChart()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -69,7 +65,6 @@ public class BaseChartView extends ChartView
 	protected void onSizeChanged(int w, int h, int oldw, int oldh)
 	{
 		super.onSizeChanged(w, h, oldw, oldh);
-
 	}
 
 }

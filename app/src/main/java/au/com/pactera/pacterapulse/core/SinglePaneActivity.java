@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import au.com.pactera.pacterapulse.R;
 
 /**
+ * You can easily show a fragment inside a activity with this class.
+ * There are 2 ways of using this class.
+ * - Extend SinglePaneActivity and create your own activity. override {@link #onCreatePane()} and return with the fragment instance.
+ * - Launch this activity with fragment class as the action.
+ *
  * Created by kai on 19/05/15.
  */
 public class SinglePaneActivity extends BaseActivity
 {
-
-
 	private Fragment mFragment;
 
 	/**

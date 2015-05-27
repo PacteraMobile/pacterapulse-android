@@ -26,6 +26,7 @@ public class IntroductionFragment extends BaseFragment<Void>
 		{
 			getActivity().getActionBar().hide();
 		}
+		getActivity().getWindow().setBackgroundDrawable(null);
 	}
 
 	@OnClick(R.id.btnAgree)

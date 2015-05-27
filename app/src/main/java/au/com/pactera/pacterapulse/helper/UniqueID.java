@@ -1,5 +1,6 @@
 package au.com.pactera.pacterapulse.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -14,6 +15,7 @@ public class UniqueID
 	private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 	private static String uniqueID = null;
 
+	@SuppressLint("CommitPrefEdits")
 	public synchronized static String id(Context context)
 	{
 		if (uniqueID == null)

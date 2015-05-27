@@ -21,7 +21,6 @@ import au.com.pactera.pacterapulse.model.Emotions;
 
 public class NetworkHelper
 {
-	// /RequestStatuses/index
 	private static final String BASE_URL = Config.SERVERURL;
 	private static final String API_PART_URL = "";
 	private static final String API_PART_RESULT_URL = "emotions";
@@ -37,8 +36,8 @@ public class NetworkHelper
 	/**
 	 * Post emotionId to server
 	 *
-	 * @param emotionId
-	 * @param context
+	 * @param emotionId emotion
+	 * @param context Context
 	 * @throws Exception
 	 */
 	public static boolean postVote(Integer emotionId, Context context) throws Exception
@@ -49,6 +48,9 @@ public class NetworkHelper
 		return true;
 	}
 
+	/**
+	 * This is a perfect place that you could modify the header/content of every http request
+	 */
 	private static HttpRequest request(HttpRequest request) throws NetworkException
 	{
 		Log.d("Network", request.getConnection().getURL().toString());
@@ -81,6 +83,12 @@ public class NetworkHelper
 		return new Emotions(json.getJSONArray("emotionVotes"));
 	}
 
+	/**
+	 * Indicates whether network connectivity exists and it is possible to establish
+	 * connections and pass data.
+	 * @param context Context
+	 * @return whether network connectivity exists or not
+	 */
 	public static boolean checkNetwork(Context context)
 	{
 		ConnectivityManager connMgr = (ConnectivityManager) context
