@@ -10,8 +10,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		android:orientation="horizontal"
-		android:id="@+id/actions"
-		style="@android:style/Widget.CompoundButton.RadioButton">
+		android:id="@+id/actions">
 
 		<RadioButton
 			android:id="@+id/oneday"
