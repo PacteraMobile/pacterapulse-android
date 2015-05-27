@@ -1,9 +1,13 @@
 package au.com.pactera.pacterapulse.fragment;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +19,8 @@ import au.com.pactera.pacterapulse.R;
 import au.com.pactera.pacterapulse.core.BaseFragment;
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
 import au.com.pactera.pacterapulse.helper.NetworkHelper;
+import au.com.pactera.pacterapulse.helper.OfficeAuthenticationHelper;
+import au.com.pactera.pacterapulse.helper.Utils;
 import au.com.pactera.pacterapulse.helper.VoteManager;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -43,15 +49,13 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
 
+	private VoteManager voteManager;
 	private int vote;
 	private ProgressDialog progressDialog;
 
 	@Override
 	protected void setupUI(View view, Bundle bundle) throws Exception
 	{
-		/**
-		 * Set the slide bar and icon to the match user's last vote.
-		 */
 		String userName;
 		Bundle bundleArg = getArguments();
 		if(null != bundleArg)
@@ -83,6 +87,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 			}
 			tvUserName.setText(getText(R.string.thanks) + userName);
 		}
+		voteManager = new VoteManager(getActivity());
 		checkNetwork();
 	}
 
@@ -95,6 +100,45 @@ public class DetailFragment extends BaseFragment<Boolean>
 	}
 
 	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+	{
+		inflater.inflate(R.menu.menu_detail, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+			case R.id.logout:
+				final AlertDialog.Builder builder = new AlertDialog.Builder(
+						context);
+				builder.setTitle(R.string.confirm).setMessage(R.string.logout_confirm);
+				builder.setPositiveButton(android.R.string.ok,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(final DialogInterface dialog,
+												final int which) {
+								logout();
+							}
+						});
+				builder.show();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	/**
+	 * Logout current account
+	 */
+	private void logout() {
+		OfficeAuthenticationHelper.logout(context);
+		Utils.restartApp(context);
+	}
+
+	@Override
 	public int layoutId()
 	{
 		return R.layout.fragment_detail;
@@ -103,6 +147,12 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@OnClick({R.id.btnSubmit})
 	void onSubmit(View submitButton)
 	{
+		if (voteManager.hasVotedToday())
+		{
+			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, false));
+			finish();
+			return;
+		}
 		if (checkNetwork())
 		{
 			refresh();
@@ -131,8 +181,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@Override
 	public Boolean pendingData(Bundle arg) throws Exception
 	{
-		// TODO: Add the real backend API process once it is ready.
-		return true;
+		return NetworkHelper.postVote(vote, context);
 	}
 
 	@Override
@@ -145,9 +194,10 @@ public class DetailFragment extends BaseFragment<Boolean>
 	public void onLoaderDone(Boolean items)
 	{
 		super.onLoaderDone(items);
+		voteManager.saveVote(vote);
 		if (items)
 		{
-			getActivity().setResult(Activity.RESULT_OK);
+			SinglePaneActivity.start(ResultFragment.class, getActivity(), new Intent().putExtra(SUCCESS, items.booleanValue()));
 			finish();
 		}
 		else

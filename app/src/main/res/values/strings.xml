@@ -8,7 +8,7 @@
 	<string name="result24H">24 Hours Results</string>
 	<string name="activity_not_found">Activity is not found</string>
 	<string name="voted_today">Thanks. You have voted today.</string>
-
+	<string name="login_error">Login error, please retry</string>
 	<string name="one_day">24 Hours</string>
 	<string name="one_week">1 Week</string>
 	<string name="one_month">1 Month</string>
@@ -22,4 +22,7 @@
 	<string name="feedback">Project feedback and accomplishment-</string>
 	<string name="btntxt_submit">Submit</string>
 	<string name="thanks">Thank you,</string>
+	<string name="logout">Logout</string>
+	<string name="confirm">Confirm</string>
+	<string name="logout_confirm">Are you sure?</string>
 </resources>
