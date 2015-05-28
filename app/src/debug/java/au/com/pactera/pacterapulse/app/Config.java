@@ -24,7 +24,8 @@ public class Config
 						.penaltyLog();
 		StrictMode.VmPolicy.Builder vmPolicyBuilder =
 				new StrictMode.VmPolicy.Builder()
-						.detectAll()
+						.detectLeakedSqlLiteObjects()
+						.detectLeakedClosableObjects()
 						.penaltyLog();
 		StrictMode.setThreadPolicy(threadPolicyBuilder.build());
 		StrictMode.setVmPolicy(vmPolicyBuilder.build());
