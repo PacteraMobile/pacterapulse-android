@@ -34,9 +34,9 @@ public class OfficeAuthenticationHelper
 	/**
 	 * Acquire token from server, callback obj should be passed to get token
 	 *
-	 * @param activity
-	 * @param callback
-	 * @return
+	 * @param activity activity context
+	 * @param callback callback of token acquire
+	 * @return authenticationContext instance you need to use
 	 */
 	public static AuthenticationContext acquireToken(Activity activity, AuthenticationCallback callback)
 	{
@@ -52,8 +52,8 @@ public class OfficeAuthenticationHelper
 	/**
 	 * Get authentication context object for further operation
 	 *
-	 * @param context
-	 * @return
+	 * @param context Context
+	 * @return authenticationContext instance you need to use
 	 */
 	private static AuthenticationContext getAuthenticationContext(Context context)
 	{
@@ -82,17 +82,21 @@ public class OfficeAuthenticationHelper
 	/**
 	 * Logout from current context
 	 *
-	 * @param context
-	 * @return
+	 * @param context Context
+	 * @return logout success or not
 	 */
+	@SuppressWarnings("deprecation")
 	public static boolean logout(Context context)
 	{
-		CookieManager cookieManager = CookieManager.getInstance();
-		cookieManager.removeAllCookie();
-		CookieSyncManager.getInstance().sync();
 		if (getAuthenticationContext(context) != null)
 		{
 			mAuthContext.getCache().removeAll();
+			CookieSyncManager.createInstance(context.getApplicationContext());
+			CookieManager cookieManager = CookieManager.getInstance();
+			cookieManager.removeSessionCookie();
+			cookieManager.removeAllCookie();
+			CookieSyncManager.getInstance().sync();
+			Preference.setUID(context, null);
 			return false;
 		}
 		return true;
