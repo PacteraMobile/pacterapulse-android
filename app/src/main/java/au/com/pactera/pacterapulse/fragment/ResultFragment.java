@@ -258,6 +258,6 @@ public class ResultFragment extends BaseFragment<Emotions>
 	private void logout()
 	{
 		OfficeAuthenticationHelper.logout(context);
-		Utils.restartApp(context);
+		Utils.restartApp(getActivity());
 	}
 }
