@@ -163,6 +163,9 @@ public class MainActivity extends SinglePaneActivity implements AuthenticationCa
 		}
 		else
 		{
+			/**
+			 * If activity destroyed, just do nothing
+			 */
 			if (!isDestoryed)
 			{
 				Crouton.makeText(this, R.string.login_error, Style.ALERT).show();

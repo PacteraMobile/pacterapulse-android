@@ -63,6 +63,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
 
+	private int voteID;
 	private int vote;
 	private ProgressDialog progressDialog;
 
@@ -78,6 +79,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 		{
 			vote = bundleArg.getInt(EmotionFragment.EMOTIONS, -1);
 			userName = bundleArg.getString(EmotionFragment.USERNAME);
+			voteID = bundleArg.getInt(ResultFragment.VOTEID, -1);
 
 			if (vote == getResources().getInteger(R.integer.happy))
 			{

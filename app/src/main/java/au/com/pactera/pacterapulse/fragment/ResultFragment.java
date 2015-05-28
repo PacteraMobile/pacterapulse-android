@@ -53,7 +53,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class ResultFragment extends BaseFragment<Emotions>
 {
-
+	static final String VOTEID = "_VOTEID";
 	private static final String TYPE = "_TYPE";
 	private final int reqCode = 999;
 	@InjectView(R.id.progressBar)
@@ -131,6 +131,7 @@ public class ResultFragment extends BaseFragment<Emotions>
 			Intent intent = new Intent();
 			intent.putExtra(EmotionFragment.EMOTIONS, getArguments().getInt(EmotionFragment.EMOTIONS, 0));
 			intent.putExtra(EmotionFragment.USERNAME, userName);
+			intent.putExtra(VOTEID, 0);
 			SinglePaneActivity.startForResult(DetailFragment.class, this, intent, reqCode);
 			return true;
 		case R.id.action_logout:
