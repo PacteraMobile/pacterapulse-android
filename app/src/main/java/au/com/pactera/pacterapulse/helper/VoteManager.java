@@ -3,9 +3,9 @@ package au.com.pactera.pacterapulse.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,7 +35,7 @@ public class VoteManager
 	{
 		Date now = new Date();
 		this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		sharedPreferences.edit().putString(VOTED_DATE, simpleDateFormat.format(now)).apply();
+		sharedPreferences.edit().putString(VOTED_DATE, Preference.getUID(context) + simpleDateFormat.format(now)).apply();
 		sharedPreferences.edit().putInt(VOTED_VALUE, emotion).apply();
 		Log.d("info", "saved");
 	}
@@ -49,19 +49,6 @@ public class VoteManager
 	{
 		this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 		String votedDayString = sharedPreferences.getString(VOTED_DATE, "01/01/2000");
-		try
-		{
-			Date today = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
-			Date votedDay = simpleDateFormat.parse(votedDayString);
-			if (votedDay.compareTo(today) == 0)
-			{ // today
-				return true;
-			}
-		}
-		catch (ParseException e)
-		{
-			// add ...
-		}
-		return false;
+		return !TextUtils.isEmpty(votedDayString) && votedDayString.equals(Preference.getUID(context) + simpleDateFormat.format(new Date()));
 	}
 }
