@@ -1,8 +1,6 @@
 package au.com.pactera.pacterapulse.helper;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 
 import au.com.pactera.pacterapulse.core.SinglePaneActivity;
@@ -22,25 +20,16 @@ public class Utils {
      *
      * @return true if success.
      */
-    public static boolean restartApp(Context context)
+    public static boolean restartApp(Activity context)
     {
         try
         {
             //create the intent with the default start activity for your application
             Intent mStartActivity = new Intent(context, SinglePaneActivity.class)
                     .setAction(IntroductionFragment.class.getName());
-
-            mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //create a pending intent so the application is restarted after System.exit(0) was called.
-            // We use an AlarmManager to call this intent in 100ms
-            int mPendingIntentId = 223344;
-            PendingIntent mPendingIntent = PendingIntent
-                    .getActivity(context, mPendingIntentId, mStartActivity,
-                            PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-            //kill the application
-            System.exit(0);
+            mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            mStartActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(mStartActivity);
         }
         catch (Exception ex)
         {

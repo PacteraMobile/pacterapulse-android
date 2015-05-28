@@ -150,7 +150,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	private void logout()
 	{
 		OfficeAuthenticationHelper.logout(context);
-		Utils.restartApp(context);
+		Utils.restartApp(getActivity());
 	}
 
 	@Override
