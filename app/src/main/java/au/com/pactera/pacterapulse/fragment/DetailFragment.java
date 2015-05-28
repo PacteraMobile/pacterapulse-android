@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2015 Pactera. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * THIS CODE IS PROVIDED AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+ * ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A
+ * PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+ *
+ * See the Apache License, Version 2.0 for the specific language
+ * governing permissions and limitations under the License.
+ */
+
 package au.com.pactera.pacterapulse.fragment;
 
 import android.app.Activity;
@@ -45,6 +63,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@InjectView(R.id.btnSubmit)
 	Button btnSubmit;
 
+	private int voteID;
 	private int vote;
 	private ProgressDialog progressDialog;
 
@@ -60,6 +79,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 		{
 			vote = bundleArg.getInt(EmotionFragment.EMOTIONS, -1);
 			userName = bundleArg.getString(EmotionFragment.USERNAME);
+			voteID = bundleArg.getInt(ResultFragment.VOTEID, -1);
 
 			if (vote == getResources().getInteger(R.integer.happy))
 			{
@@ -115,7 +135,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	{
 		switch (item.getItemId())
 		{
-		case R.id.logout:
+		case R.id.action_logout:
 			final AlertDialog.Builder builder = new AlertDialog.Builder(
 					context);
 			builder.setTitle(R.string.confirm).setMessage(R.string.logout_confirm);
@@ -150,7 +170,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	private void logout()
 	{
 		OfficeAuthenticationHelper.logout(context);
-		Utils.restartApp(context);
+		Utils.restartApp(getActivity());
 	}
 
 	@Override

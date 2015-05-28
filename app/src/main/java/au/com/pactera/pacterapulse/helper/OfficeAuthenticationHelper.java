@@ -1,8 +1,28 @@
+/*
+ * Copyright (c) 2015 Pactera. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * THIS CODE IS PROVIDED AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+ * ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A
+ * PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+ *
+ * See the Apache License, Version 2.0 for the specific language
+ * governing permissions and limitations under the License.
+ */
+
 package au.com.pactera.pacterapulse.helper;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import com.microsoft.aad.adal.AuthenticationCallback;
 import com.microsoft.aad.adal.AuthenticationContext;
@@ -32,9 +52,9 @@ public class OfficeAuthenticationHelper
 	/**
 	 * Acquire token from server, callback obj should be passed to get token
 	 *
-	 * @param activity
-	 * @param callback
-	 * @return
+	 * @param activity activity context
+	 * @param callback callback of token acquire
+	 * @return authenticationContext instance you need to use
 	 */
 	public static AuthenticationContext acquireToken(Activity activity, AuthenticationCallback callback)
 	{
@@ -50,8 +70,8 @@ public class OfficeAuthenticationHelper
 	/**
 	 * Get authentication context object for further operation
 	 *
-	 * @param context
-	 * @return
+	 * @param context Context
+	 * @return authenticationContext instance you need to use
 	 */
 	private static AuthenticationContext getAuthenticationContext(Context context)
 	{
@@ -80,14 +100,21 @@ public class OfficeAuthenticationHelper
 	/**
 	 * Logout from current context
 	 *
-	 * @param context
-	 * @return
+	 * @param context Context
+	 * @return logout success or not
 	 */
+	@SuppressWarnings("deprecation")
 	public static boolean logout(Context context)
 	{
 		if (getAuthenticationContext(context) != null)
 		{
 			mAuthContext.getCache().removeAll();
+			CookieSyncManager.createInstance(context.getApplicationContext());
+			CookieManager cookieManager = CookieManager.getInstance();
+			cookieManager.removeSessionCookie();
+			cookieManager.removeAllCookie();
+			CookieSyncManager.getInstance().sync();
+			Preference.setUID(context, null);
 			return false;
 		}
 		return true;
