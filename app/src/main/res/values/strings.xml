@@ -17,7 +17,6 @@
   -->
 
 <resources>
-	<string name="app_name">PacteraPulse</string>
 	<string name="action_settings">Settings</string>
 	<string name="action_results">Show Results</string>
 	<string name="invalidNetwork">No network available!\nPlease check your network connection!</string>
