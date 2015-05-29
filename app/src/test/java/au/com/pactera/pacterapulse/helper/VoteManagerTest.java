@@ -19,12 +19,12 @@ public class VoteManagerTest
 	@Test
 	public void testSubmitVote() throws Exception
 	{
-		Assert.
+		Assert.assertTrue(true);
 	}
 
 	@Test
 	public void testIsVotedToday() throws Exception
 	{
-
+		Assert.assertTrue(true);
 	}
 }
