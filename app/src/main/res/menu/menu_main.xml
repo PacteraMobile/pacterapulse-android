@@ -23,15 +23,8 @@
 		android:id="@+id/action_showResults"
 		android:icon="@android:drawable/ic_menu_info_details"
 		android:orderInCategory="100"
-		android:showAsAction="ifRoom"
+		android:showAsAction="always"
 		android:title="@string/action_results"/>
-	<item
-		android:id="@+id/action_moreDetails"
-		android:icon="@android:drawable/ic_menu_more"
-		android:orderInCategory="101"
-		android:showAsAction="ifRoom"
-		android:title="@string/action_results"
-		android:visible="false"/>
 	<item
 		android:id="@+id/action_settings"
 		android:icon="@android:drawable/ic_menu_manage"

@@ -27,7 +27,7 @@ import android.os.StrictMode;
 public class Config
 {
 
-	public static final String SERVERURL = "http://pacterapulse-sit.elasticbeanstalk.com/";
+	public static final String SERVERURL = "http://pacterapulse-dev.elasticbeanstalk.com/";
 
 	Config(Application application)
 	{

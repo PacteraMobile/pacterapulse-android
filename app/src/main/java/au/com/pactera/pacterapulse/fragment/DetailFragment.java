@@ -182,8 +182,14 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@OnClick({R.id.btnSubmit})
 	void onSubmit(View submitButton)
 	{
+		int size = seekBars.size();
+		int[] details = new int[size];
 		if (checkNetwork())
 		{
+			for (int i=0;i<size;i++)
+			{
+				details[i] = seekBars.get(i).getProgress();
+			}
 			refresh();
 		}
 	}
@@ -211,6 +217,7 @@ public class DetailFragment extends BaseFragment<Boolean>
 	public Boolean pendingData(Bundle arg) throws Exception
 	{
 		// TODO: Add the real backend API process once it is ready.
+		Thread.sleep(500);
 		return true;
 	}
 

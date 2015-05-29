@@ -26,7 +26,7 @@ import android.app.Application;
 public class Config
 {
 
-	public static final String SERVERURL = "http://pacterapulse-sit.elasticbeanstalk.com/";
+	public static final String SERVERURL = "http://pacterapulse-prod.elasticbeanstalk.com/";
 
 	Config(Application application)
 	{
