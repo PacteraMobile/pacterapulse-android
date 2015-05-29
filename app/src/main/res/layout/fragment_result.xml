@@ -1,9 +1,65 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			 xmlns:tools="http://schemas.android.com/tools"
-			 android:layout_width="match_parent"
-			 android:layout_height="match_parent"
-			 tools:context="com.pactera.pacterapulseopensourceandroid.fragment.ResultFragment">
+<!--
+  ~ Copyright (c) 2015 Pactera. All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ THIS CODE IS PROVIDED AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~ OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+  ~ ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A
+  ~ PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+  ~
+  ~ See the Apache License, Version 2.0 for the specific language
+  ~ governing permissions and limitations under the License.
+  -->
 
-	<!-- TODO: Update blank fragment layout -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				tools:context="au.com.pactera.pacterapulse.fragment.ResultFragment">
 
-</FrameLayout>
+	<RadioGroup
+		android:id="@+id/actions"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:orientation="horizontal">
+
+		<RadioButton
+			android:id="@+id/oneday"
+			style="@style/Button.ActionButton"
+			android:checked="true"
+			android:tag="24hours"
+			android:text="@string/one_day"/>
+
+		<RadioButton
+			android:id="@+id/oneweek"
+			style="@style/Button.ActionButton"
+			android:tag="7days"
+			android:text="@string/one_week"/>
+
+		<RadioButton
+			android:id="@+id/onemonth"
+			style="@style/Button.ActionButton"
+			android:tag="30days"
+			android:text="@string/one_month"/>
+	</RadioGroup>
+
+	<au.com.pactera.pacterapulse.chart.EmotionBarChartView
+		android:id="@+id/chartView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@id/actions"/>
+
+	<ProgressBar
+		android:id="@+id/progressBar"
+		style="@android:style/Widget.ProgressBar.Small"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"/>
+
+</RelativeLayout>

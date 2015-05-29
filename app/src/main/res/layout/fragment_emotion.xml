@@ -1,11 +1,28 @@
+<!--
+  ~ Copyright (c) 2015 Pactera. All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ THIS CODE IS PROVIDED AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~ OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+  ~ ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A
+  ~ PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+  ~
+  ~ See the Apache License, Version 2.0 for the specific language
+  ~ governing permissions and limitations under the License.
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:orientation="vertical"
-			  tools:context="com.pactera.pacterapulseopensourceandroid.fragment.EmotionFragment">
+			  tools:context="au.com.pactera.pacterapulse.fragment.EmotionFragment">
 
-	<!-- TODO: Update blank fragment layout -->
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -17,7 +34,9 @@
 			android:layout_height="wrap_content"
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
-			android:background="@drawable/btn_sad"/>
+			android:background="@drawable/btn_sad"
+			android:tag="@integer/sad"
+			tools:ignore="ContentDescription"/>
 	</RelativeLayout>
 
 	<RelativeLayout
@@ -31,7 +50,9 @@
 			android:layout_height="wrap_content"
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
-			android:background="@drawable/btn_neutral"/>
+			android:background="@drawable/btn_neutral"
+			android:tag="@integer/neutral"
+			tools:ignore="ContentDescription"/>
 	</RelativeLayout>
 
 	<RelativeLayout
@@ -45,7 +66,9 @@
 			android:layout_height="wrap_content"
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
-			android:background="@drawable/btn_happy"/>
+			android:background="@drawable/btn_happy"
+			android:tag="@integer/happy"
+			tools:ignore="ContentDescription"/>
 	</RelativeLayout>
 
 

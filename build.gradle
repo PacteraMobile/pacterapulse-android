@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2015 Pactera. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * THIS CODE IS PROVIDED AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+ * ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A
+ * PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+ *
+ * See the Apache License, Version 2.0 for the specific language
+ * governing permissions and limitations under the License.
+ */
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -5,7 +23,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:1.1.0'
+		classpath 'com.android.tools.build:gradle:1.2.3'
 
 		// NOTE: Do not place your application dependencies here; they belong
 		// in the individual module build.gradle files
@@ -15,5 +33,33 @@ buildscript {
 allprojects {
 	repositories {
 		jcenter()
+	}
+
+	// Temporary workaround for bug: https://code.google.com/p/android-test-kit/issues/detail?id=136
+	configurations.all {
+		resolutionStrategy.force 'com.android.support:support-annotations:22.1.1'
+	}
+
+	apply plugin: 'findbugs'
+
+	task findbugs(type: FindBugs) {
+		ignoreFailures = true
+		effort = "max"
+		reportLevel = "high"
+		//excludeFilter = new File("${project.rootDir}/config/quality/findbugs/findbugs-filter.xml")
+		classes = files("$project.buildDir/intermediates/classes/")
+
+		source 'src'
+		include '**/*.java'
+		exclude '**/gen/**'
+
+		reports {
+			xml {
+				destination "$project.buildDir/reports/findbugs/findbugs.xml"
+				xml.withMessages true
+			}
+		}
+
+		classpath = files()
 	}
 }

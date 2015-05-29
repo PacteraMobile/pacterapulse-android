@@ -1,10 +1,45 @@
+<!--
+  ~ Copyright (c) 2015 Pactera. All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ THIS CODE IS PROVIDED AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~ OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+  ~ ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A
+  ~ PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+  ~
+  ~ See the Apache License, Version 2.0 for the specific language
+  ~ governing permissions and limitations under the License.
+  -->
+
 <resources>
-	<string name="app_name">PacteraPulse</string>
-	<string name="agree_btn"></string>
 	<string name="action_settings">Settings</string>
 	<string name="action_results">Show Results</string>
 	<string name="invalidNetwork">No network available!\nPlease check your network connection!</string>
 	<string name="gettingData">Data processing, please wait</string>
 	<string name="Instruction">Tap to start</string>
 	<string name="result24H">24 Hours Results</string>
+	<string name="activity_not_found">Activity is not found</string>
+	<string name="voted_today">Thanks. You have voted today.</string>
+	<string name="login_error">Login error, please retry</string>
+	<string name="one_day">24 Hours</string>
+	<string name="one_week">1 Week</string>
+	<string name="one_month">1 Month</string>
+	<string name="vote_again">Network error, please vote again!</string>
+	<string name="hear_more">We would love to hear more</string>
+	<string name="workload">Work overload-</string>
+	<string name="detail_emotion_desc">detail_emotion_icon</string>
+	<string name="user_name">Thank you</string>
+	<string name="label_bad">Bad</string>
+	<string name="label_good">Good</string>
+	<string name="feedback">Project feedback and accomplishment-</string>
+	<string name="btntxt_submit">Submit</string>
+	<string name="thanks">Thank you,</string>
+	<string name="logout">Logout</string>
+	<string name="confirm">Confirm</string>
+	<string name="logout_confirm">Are you sure?</string>
 </resources>
