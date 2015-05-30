@@ -16,5 +16,6 @@ script: ./gradlew assemble
 
 notifications:
   email: true
+  slack: pacteraaus:HMpth3Uwqh8O3AdXo45fKkxJ
 
 sudo: false
