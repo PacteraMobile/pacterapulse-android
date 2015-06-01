@@ -79,6 +79,8 @@ proguard_logs/
 *.ipr
 *.iws
 .idea/
+app/*.iml
+app/*.ipr
 
 adt-bundle-windows-x86_64/
 

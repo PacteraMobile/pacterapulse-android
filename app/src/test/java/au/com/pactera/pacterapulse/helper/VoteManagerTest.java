@@ -13,15 +13,18 @@ import org.junit.Test;
 public class VoteManagerTest
 {
 
+	// Junit test is not works for this project because our api heavily relies on android api
+	// This is just a sample that we could do Junit test
+
 	@Test
 	public void testSubmitVote() throws Exception
 	{
-		
+		Assert.assertTrue(true);
 	}
 
 	@Test
 	public void testIsVotedToday() throws Exception
 	{
-
+		Assert.assertTrue(true);
 	}
 }
