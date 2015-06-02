@@ -40,7 +40,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class EmotionFragment extends BaseFragment<Integer>
+public class EmotionFragment extends BaseFragment<Boolean>
 {
 	static final String SUCCESS = "_SUCCESS";
 	static final String EMOTIONS = "_EMOTIONS";
@@ -145,7 +145,7 @@ public class EmotionFragment extends BaseFragment<Integer>
 	}
 
 	@Override
-	public Integer pendingData(Bundle arg) throws Exception
+	public Boolean pendingData(Bundle arg) throws Exception
 	{
 		return NetworkHelper.postVote(vote, context);
 	}
@@ -157,15 +157,20 @@ public class EmotionFragment extends BaseFragment<Integer>
 	}
 
 	@Override
-	public void onLoaderDone(Integer voteID)
+	public void onLoaderDone(Boolean items)
 	{
-		super.onLoaderDone(voteID);
+		super.onLoaderDone(items);
 		voteManager.saveVote(vote);
-
-		Intent intent = new Intent();
-		intent.putExtra(SUCCESS, true);
-		intent.putExtra(EMOTIONS, vote);
-		intent.putExtra(ResultFragment.VOTEID,voteID);
-		SinglePaneActivity.start(ResultFragment.class, getActivity(), intent);
+		if (items)
+		{
+			Intent intent = new Intent();
+			intent.putExtra(SUCCESS, items.booleanValue());
+			intent.putExtra(EMOTIONS, vote);
+			SinglePaneActivity.start(ResultFragment.class, getActivity(), intent);
+		}
+		else
+		{
+			Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
+		}
 	}
 }
