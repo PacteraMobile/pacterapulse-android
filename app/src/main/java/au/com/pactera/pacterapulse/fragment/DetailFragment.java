@@ -226,7 +226,6 @@ public class DetailFragment extends BaseFragment<Boolean>
 			details[i] = seekBars.get(i).getProgress();
 		}
 		JSONArray jsonArray = new JSONArray();
-		JSONObject json = new JSONObject();
 		jsonArray.put(new JSONObject().put(COMMENT, String.format("%d%%", details[0] * 10)).put(CATEGORY, WORKLOAD));
 		jsonArray.put(new JSONObject().put(COMMENT, String.format("%d%%", details[1] * 10)).put(CATEGORY, HEARMORE));
 		jsonArray.put(new JSONObject().put(COMMENT, String.format("%d%%", details[2] * 10)).put(CATEGORY, FEEDBACK));
@@ -236,7 +235,6 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@Override
 	public void showError(Exception e)
 	{
-		Log.d(getTag(),e.toString());
 		Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
 	}
 
