@@ -131,7 +131,7 @@ public class ResultFragment extends BaseFragment<Emotions>
 			Intent intent = new Intent();
 			intent.putExtra(EmotionFragment.EMOTIONS, getArguments().getInt(EmotionFragment.EMOTIONS, 0));
 			intent.putExtra(EmotionFragment.USERNAME, userName);
-			intent.putExtra(VOTEID, getArguments().getInt(VOTEID,0));
+			intent.putExtra(VOTEID, 0);
 			SinglePaneActivity.startForResult(DetailFragment.class, this, intent, reqCode);
 			return true;
 		case R.id.action_logout:

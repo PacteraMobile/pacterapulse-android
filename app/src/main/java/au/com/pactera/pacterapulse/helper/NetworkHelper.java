@@ -25,7 +25,6 @@ import android.util.Log;
 
 import com.github.kevinsawicki.http.HttpRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,48 +47,18 @@ public class NetworkHelper
 	}
 
 	/**
-	 *
-	 * @param voteId
-	 * @param body
-	 * @return
-	 * @throws Exception
-	 */
-	public static boolean putDetails(Integer voteId, JSONArray body) throws Exception
-	{
-		String url = API_PART_VOTE_URL + "/" + voteId;
-		HttpRequest request = new HttpRequest(getAbsoluteUrl(url), HttpRequest.METHOD_PUT);
-		request.header(HttpRequest.HEADER_CONTENT_TYPE, HttpRequest.CONTENT_TYPE_JSON);
-		request.connectTimeout(TIMEOUT);
-		request.readTimeout(TIMEOUT);
-		request.acceptJson();
-		request.acceptCharset("UTF-8");
-		request.useCaches(true);
-		request.send(body.toString());
-		if (!request.ok())
-		{
-			throw new NetworkException();
-		}
-		else
-		{
-			JSONObject json = new JSONObject(request.body());
-			return json.optString("status").equals("OK");
-		}
-	}
-
-	/**
 	 * Post emotionId to server
 	 *
 	 * @param emotionId emotion
 	 * @param context Context
 	 * @throws Exception
 	 */
-	public static int postVote(Integer emotionId, Context context) throws Exception
+	public static boolean postVote(Integer emotionId, Context context) throws Exception
 	{
 		String url = API_PART_VOTE_URL + "/" + UniqueID.id(context) + "/" + emotionId.toString();
 		HttpRequest request = new HttpRequest(getAbsoluteUrl(url), HttpRequest.METHOD_POST);
 		request(request);
-		JSONObject json = new JSONObject(request.body());
-		return json.getJSONObject("emotionVote").optInt("voteId");
+		return true;
 	}
 
 	/**
