@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -53,7 +57,11 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  */
 public class DetailFragment extends BaseFragment<Boolean>
 {
-	static final String SUCCESS = "_SUCCESS";
+	static final String COMMENT = "comment";
+	static final String CATEGORY = "commentCategory";
+	static final String WORKLOAD = "Work overload";
+	static final String HEARMORE = "We would love to hear more";
+	static final String FEEDBACK = "Project feedback and accomplishment";
 	@InjectView(R.id.emotion_icon)
 	ImageView emotionIcon;
 	@InjectView(R.id.userName)
@@ -182,14 +190,8 @@ public class DetailFragment extends BaseFragment<Boolean>
 	@OnClick({R.id.btnSubmit})
 	void onSubmit(View submitButton)
 	{
-		int size = seekBars.size();
-		int[] details = new int[size];
 		if (checkNetwork())
 		{
-			for (int i=0;i<size;i++)
-			{
-				details[i] = seekBars.get(i).getProgress();
-			}
 			refresh();
 		}
 	}
@@ -217,13 +219,24 @@ public class DetailFragment extends BaseFragment<Boolean>
 	public Boolean pendingData(Bundle arg) throws Exception
 	{
 		// TODO: Add the real backend API process once it is ready.
-		Thread.sleep(500);
-		return true;
+		int size = seekBars.size();
+		int[] details = new int[size];
+		for (int i = 0; i < size; i++)
+		{
+			details[i] = seekBars.get(i).getProgress();
+		}
+		JSONArray jsonArray = new JSONArray();
+		JSONObject json = new JSONObject();
+		jsonArray.put(new JSONObject().put(COMMENT, String.format("%d%%", details[0] * 10)).put(CATEGORY, WORKLOAD));
+		jsonArray.put(new JSONObject().put(COMMENT, String.format("%d%%", details[1] * 10)).put(CATEGORY, HEARMORE));
+		jsonArray.put(new JSONObject().put(COMMENT, String.format("%d%%", details[2] * 10)).put(CATEGORY, FEEDBACK));
+		return NetworkHelper.putDetails(getArguments().getInt(ResultFragment.VOTEID), jsonArray);
 	}
 
 	@Override
 	public void showError(Exception e)
 	{
+		Log.d(getTag(),e.toString());
 		Toast.makeText(getActivity().getBaseContext(), R.string.vote_again, Toast.LENGTH_SHORT).show();
 	}
 
