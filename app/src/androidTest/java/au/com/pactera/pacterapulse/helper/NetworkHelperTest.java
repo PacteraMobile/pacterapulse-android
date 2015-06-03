@@ -12,7 +12,7 @@ public class NetworkHelperTest extends InstrumentationTestCase
 
 	public void testPostVote() throws Exception
 	{
-		assertTrue(NetworkHelper.postVote(1, getInstrumentation().getContext()));
+		assertTrue(NetworkHelper.postVote(1, getInstrumentation().getContext()) >= 0);
 	}
 
 	public void testGetResult() throws Exception
