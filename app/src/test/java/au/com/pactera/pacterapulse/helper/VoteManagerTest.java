@@ -19,7 +19,6 @@ public class VoteManagerTest
 	@Test
 	public void testSubmitVote() throws Exception
 	{
-		Assert.
 	}
 
 	@Test
