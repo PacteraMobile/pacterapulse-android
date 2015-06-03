@@ -1,5 +1,9 @@
 language: android
 
+env:
+  matrix:
+    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a
+
 jdk:
  - oraclejdk7
 
@@ -8,11 +12,10 @@ before_install:
 
 # Emulator Management: Create, Start and Wait
 before_script:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  # Create and start emulator
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
-  - curl http://is.gd/android_wait_for_emulator > android-wait-for-emulator
-  - chmod u+x android-wait-for-emulator
-  - ./android-wait-for-emulator
+  - adb wait-for-device
   - adb shell input keyevent 82 &
 
 android:
