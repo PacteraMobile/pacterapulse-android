@@ -21,7 +21,7 @@ android:
     - android-22
     - extra-android-m2repository
 
-script: ./gradlew clean jacocoTestReport coveralls
+script: ./gradlew clean createDebugCoverageReport coveralls
 
 notifications:
   email: true
