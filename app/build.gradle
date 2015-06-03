@@ -16,8 +16,11 @@
  * governing permissions and limitations under the License.
  */
 
+
+
 buildscript {
 	repositories {
+		jcenter()
 		maven { url 'https://maven.fabric.io/public' }
 	}
 
@@ -26,21 +29,17 @@ buildscript {
 	}
 }
 
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-}
 
 repositories {
-	mavenCentral()
-}
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-
-repositories {
+	jcenter()
 	maven { url 'https://maven.fabric.io/public' }
 }
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'jacoco'
+
 
 // Manifest version information!
 def versionMajor = 1
@@ -65,7 +64,6 @@ android {
 	compileSdkVersion 22
 	buildToolsVersion "22.0.1"
 
-
 	packagingOptions {
 		exclude 'META-INF/DEPENDENCIES'
 		exclude 'META-INF/NOTICE'
@@ -87,14 +85,15 @@ android {
 		buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
 		buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
 
-		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunner "au.com.pactera.pacterapulse.JUnitJacocoTestRunner";
 	}
 
 	buildTypes {
 		debug {
 			applicationIdSuffix '.dev'
 			versionNameSuffix '-dev'
-			minifyEnabled false
+			//minifyEnabled false
+			testCoverageEnabled true
 		}
 		release {
 			minifyEnabled true
@@ -102,11 +101,15 @@ android {
 			signingConfig signingConfigs.Pactera
 		}
 	}
+
+	jacoco {
+		version "0.7.4.201502262128"
+	}
 }
 
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
-	compile 'com.android.support:support-v4:22.1.1'
+	compile 'com.android.support:support-v4:22.2.0'
 	compile 'com.jakewharton:butterknife:6.1.0'
 	compile 'com.github.kevinsawicki:http-request:5.6'
 	compile('com.crashlytics.sdk.android:crashlytics:2.2.3@aar') {
@@ -119,10 +122,35 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 
-	androidTestCompile 'com.android.support.test:runner:+'
-	androidTestCompile 'com.android.support.test:rules:+'
-	androidTestCompile 'com.android.support.test.espresso:espresso-core:+'
+	// Espresso Instrumentation Testing
+	androidTestCompile 'com.android.support:support-annotations:22.2.0'
+	androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+	androidTestCompile 'com.android.support.test:runner:0.3'
 
+	// Fixes for Linux and Mac
+	testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
+
+	// Junit
 	testCompile 'junit:junit:4.12'
+
+	// Hamcrest Matchers for Junit
+//	testCompile 'org.hamcrest:hamcrest-integration:1.3'
+
+	// Mockito
 	testCompile 'org.mockito:mockito-core:1.10.19'
+
+	// EasyMock
+	testCompile 'org.easymock:easymock:3.3.1'
+
+	// PowerMock
+	testCompile 'org.powermock:powermock-core:1.6.2'
+	testCompile 'org.powermock:powermock-module-junit4:1.6.2'
+
+	// PowerMock + EasyMock extension
+	testCompile 'org.powermock:powermock-api-easymock:1.6.2'
 }
+
+jacoco {
+	toolVersion = "0.7.4.201502262128"
+}
+
