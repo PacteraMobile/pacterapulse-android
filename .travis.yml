@@ -3,19 +3,44 @@ language: android
 jdk:
  - oraclejdk7
 
-before_install:
- - chmod +x gradlew
+
+# Turn off caching to avoid any caching problems
+cache: false
+sudo: false
+env:
+  global:
+    - ANDROID_API_LEVEL=22
+    - ANDROID_BUILD_TOOLS_VERSION=22.0.1
+    - ANDROID_ABI=google_apis/armeabi-v7a
+    - ADB_INSTALL_TIMEOUT=8 # minutes (2 minutes by default - see #247)
 
 android:
   components:
-    - build-tools-22.0.1
-    - android-22
+    - platform-tools
+    - tools
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+    # For Google Maps API v1
+    - addon-google_apis-google-$ANDROID_API_LEVEL
+    # Google Play Services
+    - extra-google-google_play_services
+    # Support library
+    - extra-android-support
+    # Latest artifacts in local repository
+    - extra-google-m2repository
     - extra-android-m2repository
+    # Specify at least one system image
+    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
 
-script: ./gradlew assemble
+before_script:
+  # Create and start emulator
+  - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:"$ANDROID_API_LEVEL --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+
+script:
+  - ./wait_for_emulator
+  - ./gradlew createDebugCoverageReport coveralls
 
 notifications:
   email: true
   slack: pacteraaus:HMpth3Uwqh8O3AdXo45fKkxJ
-
-sudo: false
