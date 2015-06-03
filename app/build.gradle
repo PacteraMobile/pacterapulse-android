@@ -109,7 +109,7 @@ android {
 	}
 
 	jacoco {
-		version "0.7.4.201502262128"
+		version "0.7.5.201505241946"
 	}
 }
 
@@ -157,6 +157,9 @@ dependencies {
 }
 
 jacoco {
-	toolVersion = "0.7.4.201502262128"
+	toolVersion = "0.7.5.201505241946"
 }
 
+coveralls {
+	jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
+}
