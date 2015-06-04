@@ -20,10 +20,9 @@ package au.com.pactera.pacterapulse.instrument;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.test.suitebuilder.annotation.LargeTest;
-
-import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,6 +36,7 @@ import au.com.pactera.pacterapulse.fragment.IntroductionFragment;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -49,10 +49,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class IntroductionFragmentTest
 {
-	private IntroductionFragment mIntroductionFragment;
-
 	@Rule
 	public ActivityTestRule<MainActivity> mMainActivityRule = new ActivityTestRule<>(MainActivity.class);
+	private FragmentManager fragManager;
+	private FragmentTransaction fragTransaction;
+	private IntroductionFragment mIntroductionFragment;
 
 	@Before
 	public void setUp()
@@ -60,7 +61,8 @@ public class IntroductionFragmentTest
 		mIntroductionFragment = new IntroductionFragment();
 
 		//Start Fragment to be tested
-		FragmentTransaction fragTransaction = mMainActivityRule.getActivity().getSupportFragmentManager().beginTransaction();
+		fragManager = mMainActivityRule.getActivity().getSupportFragmentManager();
+		fragTransaction = fragManager.beginTransaction();
 		fragTransaction.replace(R.id.root_container, mIntroductionFragment);
 		fragTransaction.commit();
 	}
@@ -68,9 +70,8 @@ public class IntroductionFragmentTest
 	@Test
 	public void checkPreconditions()
 	{
-
-		Assert.assertNotNull(withId(R.id.textView));
-		Assert.assertNotNull(withId(R.id.btnAgree));
+		onView(withId(R.id.textView)).check(matches(isDisplayed()));
+		onView(withId(R.id.btnAgree)).check(matches(isDisplayed()));
 	}
 
 	@Test
@@ -80,9 +81,17 @@ public class IntroductionFragmentTest
 		onView(withId(R.id.textView)).check(matches(withText(expectedResult)));
 	}
 
+	/*
+		Functional test to check if next fragment is loaded properly or not
+	*/
 	@Test
 	public void checkButtonClick()
 	{
 		onView(withId(R.id.btnAgree)).perform(click());
+
+		//Check weather next fragment UI elements are displayed properly or not
+		onView(withId(R.id.btnSad)).check(matches(isDisplayed()));
+		onView(withId(R.id.btnNeutral)).check(matches(isDisplayed()));
+		onView(withId(R.id.btnHappy)).check(matches(isDisplayed()));
 	}
 }
