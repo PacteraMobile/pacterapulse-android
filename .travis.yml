@@ -41,7 +41,7 @@ before_script:
 
 script:
 
-  - ./gradlew createDebugCoverageReport coveralls
+  - ./gradlew connectedAndroidTestDebug
 
 notifications:
   email: true
